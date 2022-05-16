@@ -27,6 +27,10 @@ const ActorsPage: React.FC = () => {
     return null;
   });
 
+  const reload = () => {
+    setActors(favoredActors as Actor[]);
+  };
+
   return (
     <Container sx={{ mt: 4 }}>
       <Box sx={{
@@ -61,7 +65,7 @@ const ActorsPage: React.FC = () => {
       <Grid container spacing={2} sx={{ textAlign: 'center' }}>
         {actors ? actors.map((actorProps) => (
           <Grid key={actorProps.id} item sm={4}>
-            <ActorsPageCard {...actorProps} />
+            <ActorsPageCard {...actorProps} reload={reload} />
           </Grid>
         ))
           : (<Typography component="h1" variant="h1">No dassssssssssssssssssssss</Typography>)}

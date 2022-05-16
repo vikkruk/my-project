@@ -53,7 +53,8 @@ const initialValues: State = {
 const mainReducer: Reducer<State, Action> = (state = initialValues, { type, payload }) => {
   if (type === 'ADD_TO_FAVORED') {
     const favoredActor = state.actors.find((actor) => actor.id === payload.actorId);
-    if (favoredActor) {
+    const alreadyFavored = state.favored.find((fav) => fav.id === payload.actorId);
+    if (favoredActor && !alreadyFavored) {
       return {
         ...state,
         favored: [
@@ -62,6 +63,14 @@ const mainReducer: Reducer<State, Action> = (state = initialValues, { type, payl
         ],
       };
     }
+  }
+  if (type === 'DELETE_FROM_FAVORED') {
+    return {
+      ...state,
+      favored: [
+        ...state.favored.filter((fav) => fav.id !== payload.actorId),
+      ],
+    };
   }
   return state;
 };
