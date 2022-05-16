@@ -4,13 +4,17 @@ import { Box, Paper } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { Actor } from '../../types';
+import useRootSelector from '../../store/hooks';
 
-type ActorsPageCardProps = Omit<Actor, 'gender'>;
+type ActorsPageCardProps = Omit<Actor, 'gender'> & {
+  reload: () => void,
+};
 
 const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
-  id, name, surname, img,
+  id, name, surname, img, reload,
 }) => {
   const dispatch = useDispatch();
+  const favored = useRootSelector((state) => state.favored);
 
   const addToFavored = (actorId: string): void => {
     dispatch({
@@ -18,8 +22,18 @@ const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
       payload: { actorId },
     });
   };
-  return (
 
+  const deleteFromFavored = (actorId: string): void => {
+    dispatch({
+      type: 'DELETE_FROM_FAVORED',
+      payload: { actorId },
+    });
+    reload();
+  };
+
+  const isFavored = favored.find((fav) => fav.id === id);
+
+  return (
     <Paper sx={(theme) => theme.mixins.paper}>
       <FavoriteIcon
         color="themeLightColor"
@@ -35,7 +49,8 @@ const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
             color: 'pink',
           },
         }}
-        onClick={() => addToFavored(id)}
+        onClick={isFavored ? () => deleteFromFavored(id)
+          : () => addToFavored(id)}
       />
       <Box src={img} sx={(theme) => theme.mixins.image} component="img" />
       {`${name} ${surname}`}
