@@ -58,7 +58,7 @@ const mainReducer: Reducer<State, Action> = (state = initialValues, { type, payl
         ...state,
         favored: [
           ...state.favored,
-          { id: payload.actorId, name: favoredActor.name, surname: favoredActor.surname },
+          { id: payload.actorId },
         ],
       };
     }

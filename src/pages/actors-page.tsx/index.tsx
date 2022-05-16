@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import {
-  Box, Button, Container, Grid,
+  Box, Button, Container, Grid, Typography,
 } from '@mui/material';
 
 import ActorsPageCard from './actors-page-card';
@@ -19,8 +19,13 @@ const ActorsPage: React.FC = () => {
 
   const allActors = useRootSelector((state) => state.actors);
   const favored = useRootSelector((state) => state.favored);
-  const [actors, setActors] = useState<Actor[]>(allActors);
-  console.log(favored);
+  const [actors, setActors] = useState<Actor[] | null>(allActors);
+
+  const favoredActors = favored.map((fav) => {
+    const favActorData = allActors.find((actor) => actor.id === fav.id);
+    if (favActorData !== undefined) { return favActorData; }
+    return null;
+  });
 
   return (
     <Container sx={{ mt: 4 }}>
@@ -47,18 +52,19 @@ const ActorsPage: React.FC = () => {
               bgcolor: theme.palette.themeGreyColor.main,
             },
           })}
-          // onClick={() => setActors(favored)}
+          onClick={() => setActors(favoredActors as Actor[])}
         >
           My favorite actors
 
         </Button>
       </Box>
       <Grid container spacing={2} sx={{ textAlign: 'center' }}>
-        {actors.map((actorProps) => (
+        {actors ? actors.map((actorProps) => (
           <Grid key={actorProps.id} item sm={4}>
             <ActorsPageCard {...actorProps} />
           </Grid>
-        ))}
+        ))
+          : (<Typography component="h1" variant="h1">No dassssssssssssssssssssss</Typography>)}
       </Grid>
     </Container>
   );

@@ -2,8 +2,6 @@ import { Actor } from '../types';
 
 export type Favored = {
   id: string,
-  name: string,
-  surname: string,
 };
 
 export type State = {
