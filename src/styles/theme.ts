@@ -40,6 +40,7 @@ const theme = createTheme(baseTheme, {
       fontSize: '25px',
       gap: 1,
       color: baseTheme.palette.themeBlueColor.main,
+      position: 'relative',
     },
     image: {
       height: 350,

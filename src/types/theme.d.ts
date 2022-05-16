@@ -34,6 +34,15 @@ declare module '@mui/material/CircularProgress' {
   }
 }
 
+declare module '@mui/material/SvgIcon' {
+  interface SvgIconPropsColorOverrides {
+    themeBlueColor: true,
+    themeGreyColor: true,
+    themeLightColor: true,
+    themeDarkColor: true,
+  }
+}
+
 declare module '@mui/material/styles/createMixins' {
   interface Mixins {
     paper: CSSProperties,

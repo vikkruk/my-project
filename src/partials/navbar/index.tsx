@@ -31,13 +31,20 @@ const NavBar: React.FC = () => {
             <StyledNavLink to="/directors">Directors</StyledNavLink>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-            {(loggedIn && ((user && user.avatar) ? <NavbarLoggedInMenu avatar={`${(user as User).avatar}`} nickname={`${user.nickname}`} /> : (
+            {(loggedIn && ((user && user.avatar) ? (
+              <>
+                <NavbarLoggedInMenu avatar={`${(user as User).avatar}`} nickname={`${user.nickname}`} />
+                <StyledHomeNavLink to="/auth/login" onClick={logout}>Logout</StyledHomeNavLink>
+                {' '}
+              </>
+            ) : (
               <>
                 <Typography fontWeight={600}>{user?.email}</Typography>
                 <Avatar>{user?.email.slice(0, 2)}</Avatar>
+                <StyledHomeNavLink to="/auth/login" onClick={logout}>Logout</StyledHomeNavLink>
               </>
             ))) || (<StyledNavLink to="/auth/login">Login</StyledNavLink>)}
-            <StyledHomeNavLink to="/auth/login" onClick={logout}>Logout</StyledHomeNavLink>
+
           </Box>
 
         </Toolbar>
