@@ -1,0 +1,67 @@
+{
+  "actors": [
+    {
+      "id": "1",
+      "name": "Tommy",
+      "surname": "Wiseau",
+      "img": "https://imgix.ranker.com/user_node_img/50097/1001926658/original/what-a-story-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces",
+      "gender": "male"
+    },
+    {
+      "id": "2",
+      "name": "Megan",
+      "surname": "Fox",
+      "img": "https://judiciaryreport.com/images/megan-fox-9-17-11-5.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "3",
+      "name": "Chuck",
+      "surname": "Norris",
+      "img": "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/1-chuck-norris-in-walker-texas-ranger-1993--album.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "4",
+      "name": "Paris",
+      "surname": "Hilton",
+      "img": "https://wild941.com/wp-content/uploads/sites/81/2017/08/GettyImages-624089084-1024x1024.jpg",
+      "gender": "female"
+    },
+    {
+      "id": "5",
+      "name": "Steven",
+      "surname": "Seagal",
+      "img": "https://teddyfeed.com/wp-content/uploads/2021/04/70efdf2ec9b086079795c442636b55fb-14-768x960.jpg",
+      "gender": "male"
+    },
+    {
+      "id": "6",
+      "name": "Lindsay",
+      "surname": "Lohan",
+      "img": "https://dazedimg-dazedgroup.netdna-ssl.com/1024/azure/dazed-prod/1300/5/1305305.jpg",
+      "gender": "female"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "nickname": "Kubrick2001",
+      "email": "kubrick2001@gmail.com",
+      "password": "space2001",
+      "avatar": "https://www.stanleykubrick.de/wp-content/uploads/2014/01/633-3375_IMG-150x150.jpg"
+    },
+    {
+      "id": "2",
+      "nickname": "celluloid_blaster",
+      "email": "celblast@gmail.com",
+      "password": "cinema101",
+      "avatar": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2Ey9pRlKRB0%2Fhqdefault.jpg&f=1&nofb=1"
+    },
+    {
+      "email": "aaa@gmail.com",
+      "password": "Vilnius123",
+      "id": "05R-7d4"
+    }
+  ]
+}
