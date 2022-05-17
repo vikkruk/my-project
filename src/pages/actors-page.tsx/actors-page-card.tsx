@@ -6,12 +6,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Actor } from '../../types';
 import useRootSelector from '../../store/hooks';
 
-type ActorsPageCardProps = Omit<Actor, 'gender'> & {
-  reload: () => void,
-};
+type ActorsPageCardProps = Omit<Actor, 'gender'>;
 
 const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
-  id, name, surname, img, reload,
+  id, name, surname, img,
 }) => {
   const dispatch = useDispatch();
   const favored = useRootSelector((state) => state.favored);
@@ -28,11 +26,10 @@ const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
       type: 'DELETE_FROM_FAVORED',
       payload: { actorId },
     });
-    reload();
   };
 
   const isFavored = favored.find((fav) => fav.id === id);
-
+  console.log(isFavored);
   return (
     <Paper sx={(theme) => theme.mixins.paper}>
       <FavoriteIcon

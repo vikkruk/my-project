@@ -18,18 +18,22 @@ const ActorsPage: React.FC = () => {
   // }, []);
 
   const allActors = useRootSelector((state) => state.actors);
-  const favored = useRootSelector((state) => state.favored);
-  const [actors, setActors] = useState<Actor[] | null>(allActors);
+  const favoredActorsIds = useRootSelector((state) => state.favored);
+  const [actors, setActors] = useState<Actor[]>(allActors);
+  const [showFavored, setShowFavored] = useState<boolean>(false);
 
-  const favoredActors = favored.map((fav) => {
-    const favActorData = allActors.find((actor) => actor.id === fav.id);
-    if (favActorData !== undefined) { return favActorData; }
-    return null;
-  });
-
-  const reload = () => {
-    setActors(favoredActors as Actor[]);
-  };
+  useEffect(() => {
+    if (showFavored) {
+      const favoredActors = favoredActorsIds.map((fav) => {
+        const favActorData = allActors.find((actor) => actor.id === fav.id);
+        if (favActorData !== undefined) { return favActorData; }
+        return null;
+      }).filter((x) => x) as Actor[];
+      setActors(favoredActors);
+    } else {
+      setActors(allActors);
+    }
+  }, [showFavored, allActors, favoredActorsIds]);
 
   return (
     <Container sx={{ mt: 4 }}>
@@ -44,7 +48,7 @@ const ActorsPage: React.FC = () => {
               bgcolor: theme.palette.themeGreyColor.main,
             },
           })}
-          onClick={() => setActors(allActors)}
+          onClick={() => setShowFavored(false)}
         >
           All
 
@@ -56,7 +60,7 @@ const ActorsPage: React.FC = () => {
               bgcolor: theme.palette.themeGreyColor.main,
             },
           })}
-          onClick={() => setActors(favoredActors as Actor[])}
+          onClick={() => setShowFavored(true)}
         >
           My favorite actors
 
@@ -65,7 +69,7 @@ const ActorsPage: React.FC = () => {
       <Grid container spacing={2} sx={{ textAlign: 'center' }}>
         {actors ? actors.map((actorProps) => (
           <Grid key={actorProps.id} item sm={4}>
-            <ActorsPageCard {...actorProps} reload={reload} />
+            <ActorsPageCard {...actorProps} />
           </Grid>
         ))
           : (<Typography component="h1" variant="h1">No dassssssssssssssssssssss</Typography>)}
