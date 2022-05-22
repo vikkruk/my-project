@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/default-param-last */
 import { combineReducers } from 'redux';
 import actorsReducer from './features/actors/actors-reducer';
 import authReducer from './features/auth/auth-reducer';

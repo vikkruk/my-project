@@ -1,8 +1,8 @@
-import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import pause from '../../../helpers/pause';
 import { Credentials, User, UserRegistration } from '../../../types';
 import { AppAction } from '../../types';
+import { createNavigationSetNextAction } from '../navigation/navigation-action-creators';
 import AuthService, { AuthPromise } from './auth-service';
 import {
   AuthClearErrorAction, AuthFailureAction, AuthLoadingAction, AuthLogoutAction, AuthSuccessAction,
@@ -35,6 +35,7 @@ export const authenticate = async (credentials: Credentials, next: string, authM
     dispatch(authLoadingAction);
     await pause(700);
     const user = await authMethod(credentials);
+    dispatch(createNavigationSetNextAction(next));
     dispatch(createAuthSuccessAction(user));
     dispatch(authClearErrorAction);
   } catch (error) {

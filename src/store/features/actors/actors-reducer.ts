@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/default-param-last */
 import { Reducer } from 'redux';
 import { ActorsAction, ActorsState } from './types';
 
-/* eslint-disable @typescript-eslint/default-param-last */
 const initialState: ActorsState = {
   actors: [],
   favored: [],
