@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FormikConfig, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
 
 import AuthForm from '../../components/auth-form';
-import AuthContext from '../../features/auth-context';
 import { UserRegistration } from '../../types';
+import { useRootSelector, useRootDispatch } from '../../store/hooks';
+import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
+import { createRegisterAction } from '../../store/features/auth/auth-action-creators';
 
 type RegisterValues = UserRegistration;
 
@@ -34,10 +36,11 @@ const validationSchema = Yup.object({
 });
 
 const RegisterPage: React.FC = () => {
-  const { loading, register } = useContext(AuthContext);
+  const loading = useRootSelector(selectAuthLoading);
+  const dispatch = useRootDispatch();
 
   const handleRegister: RegisterFormikConfig['onSubmit'] = ({ email, password, repeatPassword }) => {
-    register({ email, password, repeatPassword });
+    dispatch(createRegisterAction({ email, password, repeatPassword }, '/'));
   };
 
   const {

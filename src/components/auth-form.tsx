@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Alert,
   Box,
@@ -8,7 +8,9 @@ import {
   Typography,
 } from '@mui/material';
 
-import AuthContext from '../features/auth-context';
+import { useRootSelector, useRootDispatch } from '../store/hooks';
+import { selectAuthError, selectAuthLoading } from '../store/features/auth/auth-selectors';
+import { authClearErrorAction } from '../store/features/auth/auth-action-creators';
 
 type AuthFormProps = {
   formTitle: string,
@@ -20,7 +22,13 @@ type AuthFormProps = {
 const AuthForm: React.FC<AuthFormProps> = ({
   children, formTitle, buttonTitle, buttonActive, onSubmit,
 }) => {
-  const { error, loading, clearError } = useContext(AuthContext);
+  const error = useRootSelector(selectAuthError);
+  const loading = useRootSelector(selectAuthLoading);
+  const dispatch = useRootDispatch();
+
+  const clearError = () => {
+    dispatch(authClearErrorAction);
+  };
 
   return (
     <Paper

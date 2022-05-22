@@ -1,0 +1,54 @@
+import { Reducer } from 'redux';
+import { ActorsAction, ActorsState } from './types';
+
+/* eslint-disable @typescript-eslint/default-param-last */
+const initialState: ActorsState = {
+  actors: [],
+  favored: [],
+  error: null,
+};
+
+const actorsReducer: Reducer<ActorsState, ActorsAction> = (state = initialState, action) => {
+  switch (action.type) {
+    case 'ACTORS_FETCH_SUCCESS': {
+      return {
+        ...state,
+        actors: action.payload.actors,
+      };
+    }
+    case 'ACTORS_FETCH_FAILURE': {
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+    }
+
+    case 'ACTORS_ADD_FAVORED': {
+      const favoredActor = state.actors.find((actor) => actor.id === action.payload.actorId);
+      const alreadyFavored = state.favored.find((fav) => fav.id === action.payload.actorId);
+      if (favoredActor && !alreadyFavored) {
+        return {
+          ...state,
+          favored: [
+            ...state.favored,
+            { id: action.payload.actorId },
+          ],
+        };
+      }
+      return state;
+    }
+
+    case 'ACTORS_DELETE_FAVORED': {
+      return {
+        ...state,
+        favored: [
+          ...state.favored.filter((fav) => fav.id !== action.payload.actorId),
+        ],
+      };
+    }
+
+    default: return state;
+  }
+};
+
+export default actorsReducer;

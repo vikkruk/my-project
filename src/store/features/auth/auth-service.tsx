@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { Credentials, TemporaryUser, User } from '../types';
+import { Credentials, TemporaryUser, User } from '../../../types';
 
 export type AuthPromise = (credentials: Credentials) => Promise<User>;
 

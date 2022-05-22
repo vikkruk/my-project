@@ -1,15 +1,15 @@
+import { ThunkDispatch } from 'redux-thunk';
 import { Actor } from '../types';
+import { ActorsAction, ActorsState } from './features/actors/types';
+import { AuthAction, AuthState } from './features/auth/types';
+import { NavigationAction, NavigationState } from './features/navigation/types';
 
-export type Favored = {
-  id: string,
+export type RootState = {
+  auth: AuthState,
+  actors: ActorsState,
+  navigation: NavigationState,
 };
 
-export type State = {
-  actors: Actor[],
-  favored: Favored[],
-};
+export type AppAction = AuthAction | ActorsAction | NavigationAction;
 
-export type Action = {
-  type: string,
-  payload: any,
-};
+export type AppDispatch = ThunkDispatch<RootState, undefined, AppAction>;

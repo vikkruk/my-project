@@ -1,28 +1,24 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import {
   Box, Button, Container, Grid, Typography,
 } from '@mui/material';
 
 import ActorsPageCard from './actors-page-card';
 import { Actor } from '../../types';
-import useRootSelector from '../../store/hooks';
+import { useRootDispatch, useRootSelector } from '../../store/hooks';
+import { actorsFetchAction } from '../../store/features/actors/actors-action-creators';
+import { selectActorsAll, selectActorsFavored } from '../../store/features/actors/actors-selectors';
 
 const ActorsPage: React.FC = () => {
-  // const [actors, setActors] = useState<Actor[]>([]);
-
-  // useEffect(() => {
-  //   axios.get<Actor[]>('http://localhost:8000/actors')
-  //     .then((response) => setActors(response.data))
-  //     .catch((error) => { throw new Error(error); });
-  // }, []);
-
-  const allActors = useRootSelector((state) => state.actors);
-  const favoredActorsIds = useRootSelector((state) => state.favored);
+  const dispatch = useRootDispatch();
+  const allActors = useRootSelector(selectActorsAll);
+  const favoredActorsIds = useRootSelector(selectActorsFavored);
   const [actors, setActors] = useState<Actor[]>(allActors);
   const [showFavored, setShowFavored] = useState<boolean>(false);
 
   useEffect(() => {
+    dispatch(actorsFetchAction);
+
     if (showFavored) {
       const favoredActors = favoredActorsIds.map((fav) => {
         const favActorData = allActors.find((actor) => actor.id === fav.id);

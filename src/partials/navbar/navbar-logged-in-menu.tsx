@@ -1,7 +1,5 @@
 import { Avatar, Box, Typography } from '@mui/material';
-import React, { useContext } from 'react';
-import AuthContext from '../../features/auth-context';
-import StyledHomeNavLink from '../../components/styled-home-navlink';
+import React from 'react';
 
 type NavbarLoggedInMenuProps = {
   avatar: string,

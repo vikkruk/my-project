@@ -6,12 +6,18 @@ import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
 
 import StyledNavLink from '../../components/styled-navlink';
 import StyledHomeNavLink from '../../components/styled-home-navlink';
-import AuthContext from '../../features/auth-context';
 import NavbarLoggedInMenu from './navbar-logged-in-menu';
 import { User } from '../../types';
+import { useRootSelector, useRootDispatch } from '../../store/hooks';
+import { selectAuthLoggedIn, selectAuthUser } from '../../store/features/auth/auth-selectors';
+import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
 
 const NavBar: React.FC = () => {
-  const { loggedIn, user, logout } = useContext(AuthContext);
+  const loggedIn = useRootSelector(selectAuthLoggedIn);
+  const user = useRootSelector(selectAuthUser);
+  const dispatch = useRootDispatch();
+
+  const logout = () => dispatch(authLogoutAction);
 
   return (
     <AppBar position="static" sx={(theme) => ({ bgcolor: theme.palette.themeBlueColor.main })}>
