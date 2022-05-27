@@ -38,7 +38,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         margin: 'auto',
         mt: 20,
         p: 10,
-        color: theme.palette.themeGreyColor.main,
+        color: theme.palette.primary.main,
         backgroundColor: theme.palette.common.white,
         position: 'relative',
       })}
@@ -62,7 +62,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         <>
           <CircularProgress
             size={60}
-            color="themeBlueColor"
+            color="primary"
             sx={{
               alignSelf: 'center',
               height: 200,
@@ -73,7 +73,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           />
           <CircularProgress
             size={40}
-            color="themeLightColor"
+            color="secondary"
             sx={{
               alignSelf: 'center',
               height: 200,
@@ -97,7 +97,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         {children}
         <Button
           type="submit"
-          color="themeBlueColor"
+          color="primary"
           sx={{
             fontSize: 20,
             fontWeight: 600,

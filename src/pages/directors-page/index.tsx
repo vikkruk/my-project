@@ -7,7 +7,7 @@ const DirectorsPage: React.FC = () => (
   }}
   >
     <Button
-      color="themeBlueColor"
+      color="primary"
       sx={(theme) => theme.mixins.redirectButton}
       variant="outlined"
       component="a"
@@ -17,7 +17,7 @@ const DirectorsPage: React.FC = () => (
       Just go to IMDB
     </Button>
     <Button
-      color="themeGreyColor"
+      color="info"
       sx={(theme) => theme.mixins.redirectButton}
       variant="outlined"
       component="a"
@@ -27,7 +27,7 @@ const DirectorsPage: React.FC = () => (
       Or Letterboxd
     </Button>
     <Button
-      color="themeDarkColor"
+      color="warning"
       sx={(theme) => theme.mixins.redirectButton}
       variant="outlined"
       component="a"

@@ -1,27 +1,17 @@
-import { createTheme } from '@mui/material';
+import { createTheme, PaletteColor } from '@mui/material';
+
+const defaultTheme = createTheme();
+
+const createColor = (color: string): PaletteColor => defaultTheme.palette.augmentColor({ color: { main: color } });
 
 const baseTheme = createTheme({
   palette: {
-    themeBlueColor: {
-      main: '#3A3845',
-    },
-    themeGreyColor: {
-      main: '#826F66',
-    },
-    themeLightColor: {
-      main: '#F7CCAC',
-    },
-    themeDarkColor: {
-      main: '#C69B7B',
-    },
-    primary: {
-      main: '#3A3845',
-      light: '#6ef4f4',
-      dark: '#136666',
-    },
+    primary: createColor('#3A3845'),
+    secondary: createColor('#F7CCAC'),
+    info: createColor('#826F66'),
     common: {
       white: '#fbfbfb',
-      black: '#212121',
+      black: '#C69B7B',
     },
     background: {
       default: '#F7CCAC',
@@ -39,7 +29,7 @@ const theme = createTheme(baseTheme, {
       flexDirection: 'column',
       fontSize: '25px',
       gap: 1,
-      color: baseTheme.palette.themeBlueColor.main,
+      color: baseTheme.palette.primary,
       position: 'relative',
     },
     image: {

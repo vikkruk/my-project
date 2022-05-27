@@ -10,23 +10,30 @@ export type ActorsState = {
   error: string | null,
 };
 
+export enum ActorsActionType {
+  ACTORS_FETCH_SUCCESS = 'ACTORS_FETCH_SUCCESS',
+  ACTORS_FETCH_FAILURE = 'ACTORS_FETCH_FAILURE',
+  ACTORS_ADD_FAVORED = 'ACTORS_ADD_FAVORED',
+  ACTORS_DELETE_FAVORED = 'ACTORS_DELETE_FAVORED',
+}
+
 export type ActorsFetchSuccessAction = {
-  type: 'ACTORS_FETCH_SUCCESS',
+  type: ActorsActionType.ACTORS_FETCH_SUCCESS,
   payload: { actors: Actor[] }
 };
 
 export type ActorsFetchFailureAction = {
-  type: 'ACTORS_FETCH_FAILURE',
+  type: ActorsActionType.ACTORS_FETCH_FAILURE,
   payload: { error: string },
 };
 
 export type ActorsAddFavoredAction = {
-  type: 'ACTORS_ADD_FAVORED',
+  type: ActorsActionType.ACTORS_ADD_FAVORED,
   payload: { actorId: string },
 };
 
 export type ActorsDeleteFavoredAction = {
-  type: 'ACTORS_DELETE_FAVORED',
+  type: ActorsActionType.ACTORS_DELETE_FAVORED,
   payload: { actorId: string }
 };
 

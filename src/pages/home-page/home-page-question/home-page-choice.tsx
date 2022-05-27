@@ -46,7 +46,7 @@ const HomePageQuestionChoice: React.FC<HomePageQuestionChoiceProps> = ({
           content: '""',
           top: 0,
           left: 0,
-          backgroundColor: theme.palette.themeGreyColor.main,
+          backgroundColor: theme.palette.info.main,
           height: '100%',
           width: '100%',
           opacity: '0.48',

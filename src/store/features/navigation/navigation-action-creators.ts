@@ -1,10 +1,10 @@
-import { NavigationClearNextAction, NavigationSetNextAction } from './types';
+import { NavigationActionType, NavigationClearNextAction, NavigationSetNextAction } from './navigation-types';
 
 export const createNavigationSetNextAction = (next: string): NavigationSetNextAction => ({
-  type: 'NAVIGATION_SET_NEXT',
+  type: NavigationActionType.NAVIGATION_SET_NEXT,
   payload: { next },
 });
 
 export const createNavigationClearNextAction: NavigationClearNextAction = {
-  type: 'NAVIGATION_CLEAR_NEXT',
+  type: NavigationActionType.NAVIGATION_CLEAR_NEXT,
 };

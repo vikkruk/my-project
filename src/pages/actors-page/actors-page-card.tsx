@@ -32,7 +32,7 @@ const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
         isFavored
           ? (
             <HeartBrokenIcon
-              color="themeLightColor"
+              color="secondary"
               sx={{
                 fontSize: 40,
                 position: 'absolute',
@@ -50,7 +50,7 @@ const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
           )
           : (
             <FavoriteIcon
-              color="themeLightColor"
+              color="secondary"
               sx={{
                 fontSize: 40,
                 position: 'absolute',

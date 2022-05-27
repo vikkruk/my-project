@@ -3,26 +3,30 @@ import { Dispatch } from 'redux';
 import { Actor } from '../../../types';
 import { AppAction } from '../../types';
 import {
-  ActorsAddFavoredAction, ActorsDeleteFavoredAction, ActorsFetchFailureAction, ActorsFetchSuccessAction,
-} from './types';
+  ActorsActionType,
+  ActorsAddFavoredAction,
+  ActorsDeleteFavoredAction,
+  ActorsFetchFailureAction,
+  ActorsFetchSuccessAction,
+} from './actors-types';
 
 export const createActorsFetchSuccess = (actors: Actor[]): ActorsFetchSuccessAction => ({
-  type: 'ACTORS_FETCH_SUCCESS',
+  type: ActorsActionType.ACTORS_FETCH_SUCCESS,
   payload: { actors },
 });
 
 export const createActorsFetchFailure = (error: string): ActorsFetchFailureAction => ({
-  type: 'ACTORS_FETCH_FAILURE',
+  type: ActorsActionType.ACTORS_FETCH_FAILURE,
   payload: { error },
 });
 
 export const createActorsAddFavored = (actorId: string): ActorsAddFavoredAction => ({
-  type: 'ACTORS_ADD_FAVORED',
+  type: ActorsActionType.ACTORS_ADD_FAVORED,
   payload: { actorId },
 });
 
 export const createActorsDeleteFavored = (actorId: string): ActorsDeleteFavoredAction => ({
-  type: 'ACTORS_DELETE_FAVORED',
+  type: ActorsActionType.ACTORS_DELETE_FAVORED,
   payload: { actorId },
 });
 

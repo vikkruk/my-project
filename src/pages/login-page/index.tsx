@@ -42,9 +42,8 @@ const LoginPage: React.FC = () => {
   const [searchParams] = useSearchParams();
 
   const handleLogin: LoginFormikConfig['onSubmit'] = ({ email, password }) => {
-    const next = searchParams.get('next') ?? '/';
+    const next = searchParams.get('next') ?? '/actors';
     dispatch(createLoginAction({ email, password }, next));
-    console.log(next);
   };
 
   const {

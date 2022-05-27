@@ -8,12 +8,12 @@ const StyledNavLink = styled(NavLink)(({ theme }) => ({
   transition: 'all 0.3s ease-in-out',
 
   '&:hover': {
-    color: theme.palette.themeLightColor.main,
+    color: theme.palette.secondary.main,
   },
 
   '&.active': {
-    boxShadow: `inset 0 -4px 1px 0 ${theme.palette.themeLightColor.main}`,
-    backgroundColor: theme.palette.themeGreyColor.main,
+    boxShadow: `inset 0 -4px 1px 0 ${theme.palette.secondary.main}`,
+    backgroundColor: theme.palette.info.main,
     borderRadius: 10,
   },
 }));

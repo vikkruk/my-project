@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Reducer } from 'redux';
-import { NavigationAction, NavigationState } from './types';
+import { NavigationAction, NavigationActionType, NavigationState } from './navigation-types';
 
 const initialValues: NavigationState = {
   next: null,
@@ -8,13 +8,13 @@ const initialValues: NavigationState = {
 
 const navigationReducer: Reducer<NavigationState, NavigationAction> = (state = initialValues, action) => {
   switch (action.type) {
-    case 'NAVIGATION_SET_NEXT': {
+    case NavigationActionType.NAVIGATION_SET_NEXT: {
       return {
         ...state,
         next: action.payload.next,
       };
     }
-    case 'NAVIGATION_CLEAR_NEXT': {
+    case NavigationActionType.NAVIGATION_CLEAR_NEXT: {
       return {
         ...state,
         next: null,

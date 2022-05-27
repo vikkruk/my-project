@@ -17,9 +17,16 @@ const choiceFunction = (emotion: string) => {
 
 const HomePageQuestion: React.FC = () => (
 
-  <Box sx={(theme) => ({
-    bgcolor: theme.palette.themeGreyColor.main, color: theme.palette.common.white, boxShadow: '0 0px 1px 2px grey', width: '100%', height: 400, position: 'relative', overflow: 'hidden',
-  })}
+  <Box
+    sx={(theme) => ({
+      bgcolor: theme.palette.info.main,
+      color: theme.palette.common.white,
+      boxShadow: '0 0px 1px 2px grey',
+      width: '100%',
+      height: 400,
+      position: 'relative',
+      overflow: 'hidden',
+    })}
   >
     <Box
       id="question"
@@ -41,7 +48,14 @@ const HomePageQuestion: React.FC = () => (
         },
       }}
     >
-      <Typography component="h2" variant="h4" sx={{ mt: 6 }}>What kind of movie endings do you prefer?</Typography>
+      <Typography
+        component="h2"
+        variant="h4"
+        sx={{ mt: 6 }}
+      >
+        What kind of movie endings do you prefer?
+
+      </Typography>
       <Box sx={{
         mb: 5, display: 'flex', justifyContent: 'center', gap: 3,
       }}
@@ -51,15 +65,15 @@ const HomePageQuestion: React.FC = () => (
             () => choiceFunction('#happy')
           }
           sx={(theme) => ({
-            bgcolor: theme.palette.themeLightColor.main,
-            color: theme.palette.themeBlueColor.main,
+            bgcolor: theme.palette.secondary.main,
+            color: theme.palette.primary.main,
             p: 2,
             gap: 1,
             transition: 'all 0.3s',
 
             ':hover': {
-              bgcolor: theme.palette.themeBlueColor.main,
-              color: theme.palette.themeLightColor.main,
+              bgcolor: theme.palette.primary.main,
+              color: theme.palette.secondary.main,
             },
 
           })}
@@ -71,15 +85,15 @@ const HomePageQuestion: React.FC = () => (
         <Button
           onClick={() => choiceFunction('#sad')}
           sx={(theme) => ({
-            bgcolor: theme.palette.themeLightColor.main,
-            color: theme.palette.themeBlueColor.main,
+            bgcolor: theme.palette.secondary.main,
+            color: theme.palette.primary.main,
             p: 2,
             gap: 1,
             transition: 'all 0.3s',
 
             ':hover': {
-              bgcolor: theme.palette.themeBlueColor.main,
-              color: theme.palette.themeLightColor.main,
+              bgcolor: theme.palette.primary.main,
+              color: theme.palette.secondary.main,
             },
           })}
         >
@@ -91,8 +105,18 @@ const HomePageQuestion: React.FC = () => (
       </Box>
     </Box>
 
-    <HomePageQuestionChoice image={sadImg} transform="1200px" id="sad" text="Pathetic" />
-    <HomePageQuestionChoice image={happyImg} transform="-1200px" id="happy" text="Ridiculous" />
+    <HomePageQuestionChoice
+      image={sadImg}
+      transform="1200px"
+      id="sad"
+      text="Pathetic"
+    />
+    <HomePageQuestionChoice
+      image={happyImg}
+      transform="-1200px"
+      id="happy"
+      text="Ridiculous"
+    />
   </Box>
 );
 

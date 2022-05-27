@@ -18,7 +18,9 @@ const ActorsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(actorsFetchAction);
+  }, []);
 
+  useEffect(() => {
     if (showFavored) {
       const favoredActors = favoredActorsIds.map((fav) => {
         const favActorData = allActors.find((actor) => actor.id === fav.id);
@@ -41,7 +43,7 @@ const ActorsPage: React.FC = () => {
           variant="contained"
           sx={(theme) => ({
             ':hover': {
-              bgcolor: theme.palette.themeGreyColor.main,
+              bgcolor: theme.palette.info.main,
             },
           })}
           onClick={() => setShowFavored(false)}
@@ -53,7 +55,7 @@ const ActorsPage: React.FC = () => {
           variant="contained"
           sx={(theme) => ({
             ':hover': {
-              bgcolor: theme.palette.themeGreyColor.main,
+              bgcolor: theme.palette.info.main,
             },
           })}
           onClick={() => setShowFavored(true)}

@@ -20,13 +20,13 @@ const NavBar: React.FC = () => {
   const logout = () => dispatch(authLogoutAction);
 
   return (
-    <AppBar position="static" sx={(theme) => ({ bgcolor: theme.palette.themeBlueColor.main })}>
+    <AppBar position="static" sx={(theme) => ({ bgcolor: theme.palette.primary.main })}>
       <Container sx={{ px: { xs: 0, sm: 0 } }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography
             component="p"
             variant="h4"
-            sx={(theme) => ({ color: theme.palette.themeLightColor.main, fontWeight: 600 })}
+            sx={(theme) => ({ color: theme.palette.secondary.main, fontWeight: 600 })}
           >
             <AccessibleForwardIcon sx={{ mr: 3, fontSize: 30 }} />
             <StyledHomeNavLink to="/">GMW</StyledHomeNavLink>
