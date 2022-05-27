@@ -1,13 +1,13 @@
 import { Dispatch } from 'redux';
-import pause from '../../../helpers/pause';
 import { Credentials, User, UserRegistration } from '../../../types';
 import { AppAction } from '../../types';
-import { createNavigationSetNextAction } from '../navigation/navigation-action-creators';
-import AuthService, { AuthPromise } from './auth-service';
 import {
   AuthActionType,
   AuthClearErrorAction, AuthFailureAction, AuthLoadingAction, AuthLogoutAction, AuthSuccessAction,
 } from './auth-types';
+import pause from '../../../helpers/pause';
+import { createNavigationSetNextAction } from '../navigation/navigation-action-creators';
+import AuthService, { AuthPromise } from './auth-service';
 
 export const authLoadingAction: AuthLoadingAction = {
   type: AuthActionType.AUTH_LOADING,

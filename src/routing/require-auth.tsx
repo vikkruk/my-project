@@ -1,6 +1,5 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-
 import { useRootSelector } from '../store/hooks';
 import { selectAuthLoggedIn } from '../store/features/auth/auth-selectors';
 

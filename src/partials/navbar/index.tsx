@@ -3,11 +3,10 @@ import {
   AppBar, Avatar, Box, Container, Toolbar, Typography,
 } from '@mui/material';
 import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
-
+import { User } from '../../types';
 import StyledNavLink from '../../components/styled-navlink';
 import StyledHomeNavLink from '../../components/styled-home-navlink';
 import NavbarLoggedInMenu from './navbar-logged-in-menu';
-import { User } from '../../types';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { selectAuthLoggedIn, selectAuthUser } from '../../store/features/auth/auth-selectors';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';

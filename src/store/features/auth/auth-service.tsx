@@ -1,7 +1,5 @@
-import axios from 'axios';
-import ApiService from '../../../services/api-servise';
-
 import { Credentials, TemporaryUser, User } from '../../../types';
+import ApiService from '../../../services/api-service';
 
 export type AuthPromise = (credentials: Credentials) => Promise<User>;
 

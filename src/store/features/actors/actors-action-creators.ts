@@ -1,6 +1,4 @@
-import axios from 'axios';
 import { Dispatch } from 'redux';
-import ApiService from '../../../services/api-servise';
 import { Actor } from '../../../types';
 import { AppAction } from '../../types';
 import {
@@ -10,8 +8,7 @@ import {
   ActorsFetchFailureAction,
   ActorsFetchSuccessAction,
 } from './actors-types';
-
-const API_SERVER = process.env.REACT_APP_API_SERVER;
+import ApiService from '../../../services/api-service';
 
 export const createActorsFetchSuccess = (actors: Actor[]): ActorsFetchSuccessAction => ({
   type: ActorsActionType.ACTORS_FETCH_SUCCESS,
@@ -35,7 +32,7 @@ export const createActorsDeleteFavored = (actorId: string): ActorsDeleteFavoredA
 
 export const actorsFetchAction = async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
-    const { data } = await axios.get(`${API_SERVER}/actors`);
+    const { data } = await ApiService.get('/actors');
     dispatch(createActorsFetchSuccess(data));
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);

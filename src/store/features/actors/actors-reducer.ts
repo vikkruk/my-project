@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Reducer } from 'redux';
-import { ActorsAction, ActorsActionType, ActorsState } from './actors-types';
+import { ActorsState, ActorsAction, ActorsActionType } from './actors-types';
 
 const initialState: ActorsState = {
   actors: [],
