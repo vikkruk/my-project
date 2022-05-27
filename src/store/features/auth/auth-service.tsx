@@ -1,4 +1,5 @@
 import axios from 'axios';
+import ApiService from '../../../services/api-servise';
 
 import { Credentials, TemporaryUser, User } from '../../../types';
 
@@ -7,7 +8,7 @@ export type AuthPromise = (credentials: Credentials) => Promise<User>;
 namespace AuthService {
 
   export const login: AuthPromise = async ({ email, password }) => {
-    const { data: users } = await axios.get<TemporaryUser[]>(`http://localhost:8000/users?email=${email}`);
+    const { data: users } = await ApiService.get<TemporaryUser[]>(`/users?email=${email}`);
 
     if (users.length === 0) {
       throw new Error('User with this email does not exist');
@@ -27,13 +28,13 @@ namespace AuthService {
   };
 
   export const register: AuthPromise = async ({ email, password }) => {
-    const { data: allUsers } = await axios.get<User[]>('http://localhost:8000/users');
+    const { data: allUsers } = await ApiService.get<User[]>('/users');
     const userWithThisEmail = allUsers.filter((user) => user.email === email);
 
     if (userWithThisEmail.length > 0) {
       throw new Error('User with this email already exists');
     }
-    const { data: newUser } = await axios.post<TemporaryUser>('http://localhost:8000/users', { email, password });
+    const { data: newUser } = await ApiService.post<TemporaryUser>('/users', { email, password });
 
     return {
       id: newUser.id,

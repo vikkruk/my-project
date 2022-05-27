@@ -22,7 +22,10 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "typeRoots": ["src/types"]
+    "types": ["node"],
+    "typeRoots": [
+      "../node_modules/@types",
+      "src/types"]
   },
   "include": [
     "src"

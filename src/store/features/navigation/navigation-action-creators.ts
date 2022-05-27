@@ -5,6 +5,6 @@ export const createNavigationSetNextAction = (next: string): NavigationSetNextAc
   payload: { next },
 });
 
-export const createNavigationClearNextAction: NavigationClearNextAction = {
+export const navigationClearNextAction: NavigationClearNextAction = {
   type: NavigationActionType.NAVIGATION_CLEAR_NEXT,
 };

@@ -18,6 +18,7 @@ const ActorsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(actorsFetchAction);
+    console.log(process.env.REACT_APP_API_SERVER);
   }, []);
 
   useEffect(() => {
