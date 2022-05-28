@@ -31,6 +31,7 @@ const theme = createTheme(baseTheme, {
       gap: 1,
       color: baseTheme.palette.primary,
       position: 'relative',
+      width: 280,
     },
     image: {
       height: 350,

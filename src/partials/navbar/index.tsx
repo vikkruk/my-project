@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   AppBar, Avatar, Box, Container, Toolbar, Typography,
 } from '@mui/material';
-import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
 import { User } from '../../types';
 import StyledNavLink from '../../components/styled-navlink';
 import StyledHomeNavLink from '../../components/styled-home-navlink';
@@ -27,7 +26,6 @@ const NavBar: React.FC = () => {
             variant="h4"
             sx={(theme) => ({ color: theme.palette.secondary.main, fontWeight: 600 })}
           >
-            <AccessibleForwardIcon sx={{ mr: 3, fontSize: 30 }} />
             <StyledHomeNavLink to="/">GMW</StyledHomeNavLink>
 
           </Typography>

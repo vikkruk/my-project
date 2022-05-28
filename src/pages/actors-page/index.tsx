@@ -18,7 +18,6 @@ const ActorsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(actorsFetchAction);
-    console.log(process.env.REACT_APP_API_SERVER);
   }, []);
 
   useEffect(() => {
@@ -36,9 +35,14 @@ const ActorsPage: React.FC = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Box sx={{
-        width: '100%', display: 'flex', justifyContent: 'center', mb: 2, gap: 1,
-      }}
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          mb: 2,
+          gap: 1,
+        }}
       >
         <Button
           variant="contained"
@@ -65,9 +69,24 @@ const ActorsPage: React.FC = () => {
 
         </Button>
       </Box>
-      <Grid container spacing={2} sx={{ textAlign: 'center' }}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          textAlign: 'center',
+          justifyContent: { xs: 'center' },
+        }}
+        className="test"
+      >
         {actors ? actors.map((actorProps) => (
-          <Grid key={actorProps.id} item sm={4}>
+          <Grid
+            key={actorProps.id}
+            item
+            sm={6}
+            md={4}
+            lg={3}
+            sx={{ display: 'flex', justifyContent: 'center' }}
+          >
             <ActorsPageCard {...actorProps} />
           </Grid>
         ))
