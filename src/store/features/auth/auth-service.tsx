@@ -22,6 +22,7 @@ namespace AuthService {
       nickname: user.nickname,
       email: user.email,
       avatar: user.avatar,
+      favoredActors: user.favoredActors,
     };
   };
 

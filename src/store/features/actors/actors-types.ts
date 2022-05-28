@@ -1,8 +1,4 @@
-import { Actor } from '../../../types';
-
-export type Favored = {
-  id: string,
-};
+import { Actor, Favored } from '../../../types';
 
 export type ActorsState = {
   actors: Actor[],
@@ -13,6 +9,7 @@ export type ActorsState = {
 export enum ActorsActionType {
   ACTORS_FETCH_SUCCESS = 'ACTORS_FETCH_SUCCESS',
   ACTORS_FETCH_FAILURE = 'ACTORS_FETCH_FAILURE',
+  ACTORS_FAVORED_FETCH_SUCCESS = 'ACTORS_FAVORED_FETCH_SUCCESS',
   ACTORS_ADD_FAVORED = 'ACTORS_ADD_FAVORED',
   ACTORS_DELETE_FAVORED = 'ACTORS_DELETE_FAVORED',
 }
@@ -27,6 +24,11 @@ export type ActorsFetchFailureAction = {
   payload: { error: string },
 };
 
+export type ActorsFavoredFetchSuccessAction = {
+  type: ActorsActionType.ACTORS_FAVORED_FETCH_SUCCESS,
+  payload: { favoredActors: Favored[] }
+};
+
 export type ActorsAddFavoredAction = {
   type: ActorsActionType.ACTORS_ADD_FAVORED,
   payload: { actorId: string },
@@ -37,4 +39,4 @@ export type ActorsDeleteFavoredAction = {
   payload: { actorId: string }
 };
 
-export type ActorsAction = ActorsFetchSuccessAction | ActorsFetchFailureAction | ActorsAddFavoredAction | ActorsDeleteFavoredAction;
+export type ActorsAction = ActorsFetchSuccessAction | ActorsFetchFailureAction | ActorsAddFavoredAction | ActorsDeleteFavoredAction | ActorsFavoredFetchSuccessAction;

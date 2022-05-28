@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Reducer } from 'redux';
+import { v4 as createId } from 'uuid';
 import { ActorsState, ActorsAction, ActorsActionType } from './actors-types';
 
 const initialState: ActorsState = {
@@ -23,15 +24,27 @@ const actorsReducer: Reducer<ActorsState, ActorsAction> = (state = initialState,
       };
     }
 
+    case ActorsActionType.ACTORS_FAVORED_FETCH_SUCCESS: {
+      return {
+        ...state,
+        favored: action.payload.favoredActors,
+      };
+    }
+
     case ActorsActionType.ACTORS_ADD_FAVORED: {
       const favoredActor = state.actors.find((actor) => actor.id === action.payload.actorId);
-      const alreadyFavored = state.favored.find((fav) => fav.id === action.payload.actorId);
+      const alreadyFavored = state.favored.find((fav) => fav.actorId === action.payload.actorId);
+
       if (favoredActor && !alreadyFavored) {
+        const newFavoredActor = {
+          id: createId(),
+          actorId: action.payload.actorId,
+        };
         return {
           ...state,
           favored: [
             ...state.favored,
-            { id: action.payload.actorId },
+            newFavoredActor,
           ],
         };
       }
@@ -42,7 +55,7 @@ const actorsReducer: Reducer<ActorsState, ActorsAction> = (state = initialState,
       return {
         ...state,
         favored: [
-          ...state.favored.filter((fav) => fav.id !== action.payload.actorId),
+          ...state.favored.filter((fav) => fav.actorId !== action.payload.actorId),
         ],
       };
     }

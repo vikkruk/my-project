@@ -6,24 +6,29 @@ import {
 import ActorsPageCard from './actors-page-card';
 import { Actor } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { actorsFetchAction } from '../../store/features/actors/actors-action-creators';
+import { actorsFetchFavoredAction, actorsFetchAction } from '../../store/features/actors/actors-action-creators';
 import { selectActorsAll, selectActorsFavored } from '../../store/features/actors/actors-selectors';
+import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 
 const ActorsPage: React.FC = () => {
   const dispatch = useRootDispatch();
   const allActors = useRootSelector(selectActorsAll);
+  const loggedIn = useRootSelector(selectAuthLoggedIn);
   const favoredActorsIds = useRootSelector(selectActorsFavored);
   const [actors, setActors] = useState<Actor[]>(allActors);
   const [showFavored, setShowFavored] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(actorsFetchAction);
-  }, []);
+    if (loggedIn) {
+      dispatch(actorsFetchFavoredAction);
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
     if (showFavored) {
       const favoredActors = favoredActorsIds.map((fav) => {
-        const favActorData = allActors.find((actor) => actor.id === fav.id);
+        const favActorData = allActors.find((actor) => actor.id === fav.actorId);
         if (favActorData !== undefined) { return favActorData; }
         return null;
       }).filter((x) => x) as Actor[];
@@ -32,7 +37,6 @@ const ActorsPage: React.FC = () => {
       setActors(allActors);
     }
   }, [showFavored, allActors, favoredActorsIds]);
-
   return (
     <Container sx={{ mt: 4 }}>
       <Box

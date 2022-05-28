@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { Actor } from '../../../types';
+import { Actor, Favored, User } from '../../../types';
 import { AppAction } from '../../types';
 import {
   ActorsActionType,
@@ -7,8 +7,10 @@ import {
   ActorsDeleteFavoredAction,
   ActorsFetchFailureAction,
   ActorsFetchSuccessAction,
+  ActorsFavoredFetchSuccessAction,
 } from './actors-types';
 import ApiService from '../../../services/api-service';
+import { getLocalStorage, setLocalStorage } from '../../../helpers/local-storage-helpers';
 
 export const createActorsFetchSuccess = (actors: Actor[]): ActorsFetchSuccessAction => ({
   type: ActorsActionType.ACTORS_FETCH_SUCCESS,
@@ -18,6 +20,11 @@ export const createActorsFetchSuccess = (actors: Actor[]): ActorsFetchSuccessAct
 export const createActorsFetchFailure = (error: string): ActorsFetchFailureAction => ({
   type: ActorsActionType.ACTORS_FETCH_FAILURE,
   payload: { error },
+});
+
+export const createActorsFavoredFetchSuccess = (favoredActors: Favored[]): ActorsFavoredFetchSuccessAction => ({
+  type: ActorsActionType.ACTORS_FAVORED_FETCH_SUCCESS,
+  payload: { favoredActors },
 });
 
 export const createActorsAddFavored = (actorId: string): ActorsAddFavoredAction => ({
@@ -37,5 +44,14 @@ export const actorsFetchAction = async (dispatch: Dispatch<AppAction>): Promise<
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
     dispatch(createActorsFetchFailure(errorMsg));
+  }
+};
+
+export const actorsFetchFavoredAction = (dispatch: Dispatch<AppAction>): void => {
+  const user = getLocalStorage<User>('user');
+  console.log(user);
+  if (user !== null) {
+    const favoredActors = user.favoredActors || [];
+    dispatch(createActorsFavoredFetchSuccess(favoredActors));
   }
 };

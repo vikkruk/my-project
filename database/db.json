@@ -49,14 +49,42 @@
       "nickname": "Kubrick2001",
       "email": "kubrick2001@gmail.com",
       "password": "Space2001",
-      "avatar": "https://www.stanleykubrick.de/wp-content/uploads/2014/01/633-3375_IMG-150x150.jpg"
+      "avatar": "https://www.stanleykubrick.de/wp-content/uploads/2014/01/633-3375_IMG-150x150.jpg",
+      "favoredActors": [
+        {
+          "id": "fef46083-7e91-488e-9757-308311d35b17",
+          "actorId": "3"
+        },
+        {
+          "id": "8bc14acf-efc9-43d1-bf54-161392444554",
+          "actorId": "2"
+        },
+        {
+          "id": "6ecbdac7-7bee-4ec1-8647-6bf7b85658a0",
+          "actorId": "5"
+        }
+      ]
     },
     {
       "id": "2",
       "nickname": "celluloid_blaster",
       "email": "celblast@gmail.com",
       "password": "Cinema101",
-      "avatar": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2Ey9pRlKRB0%2Fhqdefault.jpg&f=1&nofb=1"
+      "avatar": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2Ey9pRlKRB0%2Fhqdefault.jpg&f=1&nofb=1",
+      "favoredActors": [
+        {
+          "id": "fef46083-7e91-488e-9757-308311d35b17",
+          "actorId": "3"
+        },
+        {
+          "id": "8bc14acf-efc9-43d1-bf54-161392444554",
+          "actorId": "2"
+        },
+        {
+          "id": "6ecbdac7-7bee-4ec1-8647-6bf7b85658a0",
+          "actorId": "5"
+        }
+      ]
     }
   ]
 }
