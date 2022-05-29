@@ -1,6 +1,7 @@
 {
   "actors": [
-    { "id": "1",
+    {
+      "id": "1",
       "name": "Tommy",
       "surname": "Wiseau",
       "img": "https://imgix.ranker.com/user_node_img/50097/1001926658/original/what-a-story-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces",
@@ -41,22 +42,90 @@
       "img": "https://dazedimg-dazedgroup.netdna-ssl.com/1024/azure/dazed-prod/1300/5/1305305.jpg",
       "gender": "female"
     }
-
   ],
   "users": [
+    {
+      "id": "0",
+      "nickname": "god",
+      "email": "god@god.god",
+      "password": "God12345",
+      "avatar": "https://pngimg.com/uploads/god/god_PNG17.png",
+      "roles": [
+        "777",
+        "1"
+      ],
+      "favoredActors": [
+        {
+          "id": "611d063b-8467-4e4f-a42c-fbe62c986d67",
+          "actorId": "2"
+        },
+        {
+          "id": "06f448bc-613e-41e2-80e8-07f36e242341",
+          "actorId": "3"
+        }
+      ]
+    },
     {
       "id": "1",
       "nickname": "Kubrick2001",
       "email": "kubrick2001@gmail.com",
-      "password": "space2001",
-      "avatar": "https://www.stanleykubrick.de/wp-content/uploads/2014/01/633-3375_IMG-150x150.jpg"
+      "password": "Space2001",
+      "avatar": "https://www.stanleykubrick.de/wp-content/uploads/2014/01/633-3375_IMG-150x150.jpg",
+      "roles": [
+        "1"
+      ],
+      "favoredActors": [
+        {
+          "id": "fef46083-7e91-488e-9757-308311d35b17",
+          "actorId": "3"
+        },
+        {
+          "id": "8bc14acf-efc9-43d1-bf54-161392444554",
+          "actorId": "2"
+        },
+        {
+          "id": "6ecbdac7-7bee-4ec1-8647-6bf7b85658a0",
+          "actorId": "5"
+        }
+      ]
     },
     {
       "id": "2",
       "nickname": "celluloid_blaster",
       "email": "celblast@gmail.com",
-      "password": "cinema101",
-      "avatar": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2Ey9pRlKRB0%2Fhqdefault.jpg&f=1&nofb=1"
+      "password": "Cinema101",
+      "avatar": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2Ey9pRlKRB0%2Fhqdefault.jpg&f=1&nofb=1",
+      "roles": [
+        "1"
+      ],
+      "favoredActors": [
+        {
+          "id": "10428cbd-8c5a-4cde-9b0e-c5c72002a4ee",
+          "actorId": "2"
+        },
+        {
+          "id": "341059d5-7cdf-464d-9784-85954cbccaf0",
+          "actorId": "3"
+        },
+        {
+          "id": "42abcb20-5b72-4042-b876-82f6a8cfbceb",
+          "actorId": "6"
+        },
+        {
+          "id": "abaa58fe-119a-495d-addf-f2b77244a1e0",
+          "actorId": "5"
+        }
+      ]
+    }
+  ],
+  "userRoles": [
+    {
+      "id": "777",
+      "title": "admin"
+    },
+    {
+      "id": "1",
+      "title": "user"
     }
   ]
 }
