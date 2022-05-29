@@ -67,8 +67,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
               alignSelf: 'center',
               height: 200,
               position: 'absolute',
-              top: 70,
-              right: 110,
+              top: { xs: 25, md: 70 },
+              right: { xs: 35, md: 110 },
             }}
           />
           <CircularProgress
@@ -78,8 +78,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
               alignSelf: 'center',
               height: 200,
               position: 'absolute',
-              top: 80,
-              right: 120,
+              top: { xs: 35, md: 80 },
+              right: { xs: 45, md: 120 },
             }}
           />
         </>
