@@ -36,7 +36,6 @@ namespace AuthService {
       nickname: user.nickname,
       email: user.email,
       avatar: user.avatar,
-      admin: false,
       roles: [],
       favoredActors: user.favoredActors,
     };
@@ -49,12 +48,11 @@ namespace AuthService {
     if (userWithThisEmail.length > 0) {
       throw new Error('User with this email already exists');
     }
-    const { data: newUser } = await ApiService.post<TemporaryUser>('/users', { email, password });
+    const { data: newUser } = await ApiService.post<TemporaryUser>('/users', { email, password, roles: ['1'] });
 
     return {
       id: newUser.id,
       email: newUser.email,
-      roles: ['1'],
     };
   };
 

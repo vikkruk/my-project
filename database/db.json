@@ -51,7 +51,7 @@
       "password": "God12345",
       "avatar": "https://pngimg.com/uploads/god/god_PNG17.png",
       "roles": [
-        "0",
+        "777",
         "1"
       ],
       "favoredActors": [
@@ -110,13 +110,25 @@
         {
           "id": "6ecbdac7-7bee-4ec1-8647-6bf7b85658a0",
           "actorId": "5"
+        },
+        {
+          "id": "cbea9727-7ac5-4660-8431-24f7c7db43c9",
+          "actorId": "6"
         }
       ]
+    },
+    {
+      "email": "kalpokas@gmail.com",
+      "password": "Kalpa123",
+      "roles": [
+        "1"
+      ],
+      "id": "5oTSUq9"
     }
   ],
   "userRoles": [
     {
-      "id": "0",
+      "id": "777",
       "title": "admin"
     },
     {

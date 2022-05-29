@@ -34,6 +34,7 @@ const NavBar: React.FC = () => {
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             <StyledNavLink to="/actors">Actors</StyledNavLink>
             <StyledNavLink to="/directors">Directors</StyledNavLink>
+            {loggedIn && <StyledNavLink to="/profile">Profile</StyledNavLink>}
             {admin && <StyledNavLink to="/admin">Admin</StyledNavLink>}
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>

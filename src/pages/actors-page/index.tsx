@@ -98,7 +98,6 @@ const ActorsPage: React.FC = () => {
           textAlign: 'center',
           justifyContent: { xs: 'center' },
         }}
-        className="test"
       >
         {actors ? actors.map((actorProps) => (
           <Grid
@@ -112,7 +111,7 @@ const ActorsPage: React.FC = () => {
             <ActorsPageCard {...actorProps} />
           </Grid>
         ))
-          : (<Typography component="h1" variant="h1">No dassssssssssssssssssssss</Typography>)}
+          : (<Typography component="h1" variant="h1">No actors in the database</Typography>)}
       </Grid>
     </Container>
   );

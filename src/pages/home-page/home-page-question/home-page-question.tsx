@@ -8,7 +8,7 @@ import HomePageQuestionChoice from './home-page-choice';
 import sadImg from './images/sadend.jpg';
 import happyImg from './images/happyend.jpg';
 
-const choiceFunction = (emotion: string) => {
+const choiceFunction = (emotion: string): void => {
   const choiceSection = document.querySelector(emotion) as HTMLDivElement;
   const question = document.querySelector('#question') as HTMLDivElement;
   choiceSection.classList.add('choice');
