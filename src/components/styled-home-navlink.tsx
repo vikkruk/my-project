@@ -1,5 +1,5 @@
-import { styled } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { styled } from '@mui/material';
 
 const StyledHomeNavLink = styled(NavLink)(({ theme }) => ({
   textDecoration: 'none',

@@ -4,12 +4,13 @@ import { AuthAction, AuthActionType, AuthState } from './auth-types';
 import { setLocalStorage, getLocalStorage } from '../../../helpers/local-storage-helpers';
 
 const USER_KEY = process.env.REACT_APP_USER_KEY_IN_LOCAL_STORAGE;
+const ADMIN_KEY = process.env.REACT_APP_ADMIN_KEY_IN_LOCAL_STORAGE;
 
 const initialValues: AuthState = {
   user: getLocalStorage(USER_KEY),
   error: null,
   loading: false,
-  admin: false,
+  admin: Boolean(getLocalStorage(ADMIN_KEY)),
 };
 
 const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, action) => {
@@ -46,6 +47,7 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
     }
 
     case AuthActionType.AUTH_ADMIN_LOGIN: {
+      localStorage.setItem(ADMIN_KEY, 'true');
       return {
         ...state,
         admin: true,
@@ -54,6 +56,7 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
 
     case AuthActionType.AUTH_LOGOUT: {
       localStorage.removeItem(USER_KEY);
+      localStorage.removeItem(ADMIN_KEY);
       return {
         ...state,
         user: null,

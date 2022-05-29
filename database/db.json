@@ -56,12 +56,12 @@
       ],
       "favoredActors": [
         {
-          "id": "aa4cdc77-7265-4bb2-abfa-f801984ea381",
+          "id": "611d063b-8467-4e4f-a42c-fbe62c986d67",
           "actorId": "2"
         },
         {
-          "id": "17d2ae83-2c5b-4184-9c6b-d9964e86fbe1",
-          "actorId": "1"
+          "id": "06f448bc-613e-41e2-80e8-07f36e242341",
+          "actorId": "3"
         }
       ]
     },
@@ -100,30 +100,22 @@
       ],
       "favoredActors": [
         {
-          "id": "fef46083-7e91-488e-9757-308311d35b17",
-          "actorId": "3"
-        },
-        {
-          "id": "8bc14acf-efc9-43d1-bf54-161392444554",
+          "id": "10428cbd-8c5a-4cde-9b0e-c5c72002a4ee",
           "actorId": "2"
         },
         {
-          "id": "6ecbdac7-7bee-4ec1-8647-6bf7b85658a0",
-          "actorId": "5"
+          "id": "341059d5-7cdf-464d-9784-85954cbccaf0",
+          "actorId": "3"
         },
         {
-          "id": "cbea9727-7ac5-4660-8431-24f7c7db43c9",
+          "id": "42abcb20-5b72-4042-b876-82f6a8cfbceb",
           "actorId": "6"
+        },
+        {
+          "id": "abaa58fe-119a-495d-addf-f2b77244a1e0",
+          "actorId": "5"
         }
       ]
-    },
-    {
-      "email": "kalpokas@gmail.com",
-      "password": "Kalpa123",
-      "roles": [
-        "1"
-      ],
-      "id": "5oTSUq9"
     }
   ],
   "userRoles": [

@@ -25,7 +25,7 @@ const HomePageHeader: React.FC = () => (
       variant="h4"
       sx={(theme) => ({ color: theme.palette.info.main })}
     >
-      Cause we&apos;re boring like that.
+      Cause we&apos;re boring like that
 
     </Typography>
 

@@ -2,17 +2,31 @@ import React from 'react';
 import { Box, Paper } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
-
 import { Actor } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { createActorsAddFavored, createActorsDeleteFavored } from '../../store/features/actors/actors-action-creators';
 import { selectActorsFavored } from '../../store/features/actors/actors-selectors';
 import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 
-type ActorsPageCardProps = Omit<Actor, 'gender'>;
+type ActorsPageCardProps = Omit<Actor, 'gender'> & {
+  profile: boolean
+};
+
+const heartIconStyle = {
+  fontSize: 40,
+  position: 'absolute',
+  top: 5,
+  right: 5,
+  transition: 'all 0.3s linear',
+
+  ':hover': {
+    transform: 'scale(1.1)',
+    color: '#BA0021',
+  },
+};
 
 const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
-  id, name, surname, img,
+  id, name, surname, img, profile,
 }) => {
   const dispatch = useRootDispatch();
   const favored = useRootSelector(selectActorsFavored);
@@ -30,22 +44,13 @@ const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
   return (
     <Paper sx={(theme) => theme.mixins.paper}>
 
-      {loggedIn
+      {(loggedIn && !profile)
         && (isFavored
           ? (
             <HeartBrokenIcon
               color="secondary"
               sx={{
-                fontSize: 40,
-                position: 'absolute',
-                top: 5,
-                right: 5,
-                transition: 'transform 0.3s linear',
-
-                ':hover': {
-                  transform: 'scale(1.1)',
-                  color: 'pink',
-                },
+                ...heartIconStyle,
               }}
               onClick={() => deleteFromFavored(id)}
             />
@@ -54,16 +59,7 @@ const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
             <FavoriteIcon
               color="secondary"
               sx={{
-                fontSize: 40,
-                position: 'absolute',
-                top: 5,
-                right: 5,
-                transition: 'transform 0.3s linear',
-
-                ':hover': {
-                  transform: 'scale(1.1)',
-                  color: 'pink',
-                },
+                ...heartIconStyle,
               }}
               onClick={() => addToFavored(id)}
             />

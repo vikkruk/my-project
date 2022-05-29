@@ -3,14 +3,13 @@ import {
   Alert,
   Box,
   Button,
-  CircularProgress,
   Paper,
   Typography,
 } from '@mui/material';
-
 import { useRootSelector, useRootDispatch } from '../store/hooks';
 import { selectAuthError, selectAuthLoading } from '../store/features/auth/auth-selectors';
 import { authClearErrorAction } from '../store/features/auth/auth-action-creators';
+import FormLoadingAnimation from './form-loading-animation';
 
 type AuthFormProps = {
   formTitle: string,
@@ -58,32 +57,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         {error}
       </Alert>
       )}
-      {loading && (
-        <>
-          <CircularProgress
-            size={60}
-            color="primary"
-            sx={{
-              alignSelf: 'center',
-              height: 200,
-              position: 'absolute',
-              top: { xs: 25, md: 70 },
-              right: { xs: 35, md: 110 },
-            }}
-          />
-          <CircularProgress
-            size={40}
-            color="secondary"
-            sx={{
-              alignSelf: 'center',
-              height: 200,
-              position: 'absolute',
-              top: { xs: 35, md: 80 },
-              right: { xs: 45, md: 120 },
-            }}
-          />
-        </>
-      )}
+      {loading && (<FormLoadingAnimation />)}
       <Box
         component="form"
         sx={{

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Button, Container, Grid, Typography,
+  Box,
+  Container,
+  Grid,
+  Typography,
 } from '@mui/material';
-
 import ActorsPageCard from './actors-page-card';
 import { Actor, User } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
@@ -11,6 +13,7 @@ import { selectActorsAll, selectActorsFavored } from '../../store/features/actor
 import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 import { getLocalStorage, setLocalStorage } from '../../helpers/local-storage-helpers';
 import ApiService from '../../services/api-service';
+import ActorsPageFilterButton from './actors-page-filter-button';
 
 const USER_KEY_IN_LOCAL_STORAGE = process.env.REACT_APP_USER_KEY_IN_LOCAL_STORAGE;
 
@@ -66,40 +69,18 @@ const ActorsPage: React.FC = () => {
           gap: 1,
         }}
       >
-        <Button
-          variant="contained"
-          sx={(theme) => ({
-            ':hover': {
-              bgcolor: theme.palette.info.main,
-            },
-          })}
-          onClick={() => setShowFavored(false)}
-        >
-          All
-
-        </Button>
-        <Button
-          variant="contained"
-          sx={(theme) => ({
-            ':hover': {
-              bgcolor: theme.palette.info.main,
-            },
-          })}
-          onClick={() => setShowFavored(true)}
-        >
-          My favorite actors
-
-        </Button>
+        <ActorsPageFilterButton title="All" onClick={() => setShowFavored(false)} />
+        <ActorsPageFilterButton title="My favorite actors" onClick={() => setShowFavored(true)} />
       </Box>
       <Grid
         container
         spacing={2}
         sx={{
           textAlign: 'center',
-          justifyContent: { xs: 'center' },
+          justifyContent: { xs: 'center', md: 'flex-start' },
         }}
       >
-        {actors ? actors.map((actorProps) => (
+        {actors.length > 0 ? actors.map((actorProps) => (
           <Grid
             key={actorProps.id}
             item
@@ -108,10 +89,18 @@ const ActorsPage: React.FC = () => {
             lg={3}
             sx={{ display: 'flex', justifyContent: 'center' }}
           >
-            <ActorsPageCard {...actorProps} />
+            <ActorsPageCard {...actorProps} profile={false} />
           </Grid>
         ))
-          : (<Typography component="h1" variant="h1">No actors in the database</Typography>)}
+          : (
+            <Typography
+              component="h3"
+              variant="h5"
+              sx={{ m: 'auto', mt: 3 }}
+            >
+              You have no favorite actors
+            </Typography>
+          )}
       </Grid>
     </Container>
   );

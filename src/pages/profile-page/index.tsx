@@ -70,28 +70,30 @@ const ProfilePage: React.FC = () => {
             container
             sx={{
               textAlign: 'center',
-              justifyContent: { xs: 'center' },
+              justifyContent: { xs: 'center', md: 'flex-start' },
               width: '100%',
               display: 'flex',
-              gap: 3,
               m: 'auto',
             }}
           >
-            {favoredActors ? favoredActors.map((actorProps) => (
+            {favoredActors.length > 0 ? favoredActors.map((actorProps) => (
               <Grid
                 key={actorProps.id}
                 item
+                xs={12}
                 sm={6}
-                md={4}
-                lg={3}
+                md={3}
+                xl={2}
                 sx={{
-                  display: 'flex', justifyContent: 'center', transform: 'scale(0.8)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transform: 'scale(0.6)',
                 }}
               >
-                <ActorsPageCard {...actorProps} />
+                <ActorsPageCard {...actorProps} profile />
               </Grid>
             ))
-              : (<Typography component="h1" variant="h1">No actors in the database</Typography>)}
+              : (<Typography component="h3" variant="h5">You have no favorite actors</Typography>)}
           </Grid>
         </Box>
       </Paper>

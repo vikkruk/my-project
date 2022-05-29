@@ -40,8 +40,18 @@ const NavBar: React.FC = () => {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
             {(loggedIn && ((user && user.avatar) ? (
               <>
-                <NavbarLoggedInMenu avatar={`${(user as User).avatar}`} nickname={`${user.nickname}`} />
-                <StyledHomeNavLink to="/auth/login" sx={{ display: { xs: 'none', md: 'block' } }} onClick={logout}>Logout</StyledHomeNavLink>
+                <NavbarLoggedInMenu
+                  avatar={`${(user as User).avatar}`}
+                  nickname={`${user.nickname}`}
+                />
+                <StyledHomeNavLink
+                  to="/auth/login"
+                  sx={{ display: { xs: 'none', md: 'block' } }}
+                  onClick={logout}
+                >
+                  Logout
+
+                </StyledHomeNavLink>
                 {' '}
               </>
             ) : (
@@ -50,7 +60,8 @@ const NavBar: React.FC = () => {
                 <Avatar>{user?.email.slice(0, 2)}</Avatar>
                 <StyledHomeNavLink sx={{ display: { xs: 'none', md: 'block' } }} to="/auth/login" onClick={logout}>Logout</StyledHomeNavLink>
               </>
-            ))) || (<StyledNavLink to="/auth/login">Login</StyledNavLink>)}
+            )))
+            || (<StyledNavLink to="/auth/login">Login</StyledNavLink>)}
 
           </Box>
 
