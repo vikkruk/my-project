@@ -62,7 +62,7 @@ const ProfilePage: React.FC = () => {
           {user?.nickname || user?.email}
         </Typography>
 
-        <Box>
+        <Box sx={{ width: '100%' }}>
           <Typography variant="h5" fontWeight={600}>
             My Favorite Actors:
           </Typography>
@@ -71,9 +71,8 @@ const ProfilePage: React.FC = () => {
             sx={{
               textAlign: 'center',
               justifyContent: { xs: 'center', md: 'flex-start' },
-              width: '100%',
-              display: 'flex',
               m: 'auto',
+              gap: { xl: 5 },
             }}
           >
             {favoredActors.length > 0 ? favoredActors.map((actorProps) => (
@@ -85,9 +84,8 @@ const ProfilePage: React.FC = () => {
                 md={3}
                 xl={2}
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  transform: 'scale(0.6)',
+                  transform: 'scale(0.7)',
+                  height: 300,
                 }}
               >
                 <ActorsPageCard {...actorProps} profile />

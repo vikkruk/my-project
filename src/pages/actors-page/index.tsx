@@ -80,7 +80,7 @@ const ActorsPage: React.FC = () => {
           justifyContent: { xs: 'center', md: 'flex-start' },
         }}
       >
-        {actors.length > 0 ? actors.map((actorProps) => (
+        {actors ? actors.map((actorProps) => (
           <Grid
             key={actorProps.id}
             item

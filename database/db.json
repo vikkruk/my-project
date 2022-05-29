@@ -56,12 +56,24 @@
       ],
       "favoredActors": [
         {
-          "id": "611d063b-8467-4e4f-a42c-fbe62c986d67",
-          "actorId": "2"
+          "id": "ff466f32-0bc2-4837-b2f9-5c8e0f15269f",
+          "actorId": "5"
         },
         {
-          "id": "06f448bc-613e-41e2-80e8-07f36e242341",
-          "actorId": "3"
+          "id": "9fc8f1ed-f94e-4113-ba86-1b8038002b08",
+          "actorId": "6"
+        },
+        {
+          "id": "2e1dc687-8fcd-415b-be2b-fd4122630b2a",
+          "actorId": "4"
+        },
+        {
+          "id": "935acdb7-7737-41cd-a41e-058baf051484",
+          "actorId": "1"
+        },
+        {
+          "id": "120e7976-f6ae-4be2-86f3-d308ae283418",
+          "actorId": "2"
         }
       ]
     },
