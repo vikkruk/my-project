@@ -10,9 +10,13 @@ const HomePageHeader: React.FC = () => (
     <Typography
       component="h1"
       variant="h3"
-      sx={(theme) => ({ my: 2, color: theme.palette.primary.main })}
+      sx={(theme) => ({
+        my: 2,
+        color: theme.palette.primary.main,
+        fontWeight: 900,
+      })}
     >
-      Do you like to watch movies and burn your life away?
+      Generic Movies Website
 
     </Typography>
     <Box component="img" src={MovieImg} sx={{ height: 200 }} />
@@ -21,7 +25,7 @@ const HomePageHeader: React.FC = () => (
       variant="h4"
       sx={(theme) => ({ color: theme.palette.info.main })}
     >
-      This just might be the place for you!
+      Cause we&apos;re boring like that.
 
     </Typography>
 

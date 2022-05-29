@@ -9,6 +9,7 @@ const initialValues: AuthState = {
   user: getLocalStorage(USER_KEY),
   error: null,
   loading: false,
+  admin: false,
 };
 
 const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, action) => {
@@ -44,11 +45,19 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
       };
     }
 
+    case AuthActionType.AUTH_ADMIN_LOGIN: {
+      return {
+        ...state,
+        admin: true,
+      };
+    }
+
     case AuthActionType.AUTH_LOGOUT: {
       localStorage.removeItem(USER_KEY);
       return {
         ...state,
         user: null,
+        admin: false,
       };
     }
     default: return state;

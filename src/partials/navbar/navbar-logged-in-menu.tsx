@@ -12,7 +12,7 @@ const NavbarLoggedInMenu: React.FC<NavbarLoggedInMenuProps> = ({ avatar, nicknam
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-      <Typography fontWeight={600}>{nickname}</Typography>
+      <Typography fontWeight={600} sx={{ display: { xs: 'none', md: 'block' } }}>{nickname}</Typography>
       <Avatar
         alt="user-avatar"
         src={avatar}

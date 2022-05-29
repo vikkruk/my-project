@@ -1,12 +1,16 @@
-import { Credentials, TemporaryUser, User } from '../../../types';
+import {
+  Credentials, TemporaryUser, User, UserRole,
+} from '../../../types';
 import ApiService from '../../../services/api-service';
 
-export type AuthPromise = (credentials: Credentials) => Promise<User>;
+export type AuthPromise = (credentials: Credentials) => Promise<User & { roles?: string[] }>;
 
 namespace AuthService {
 
   export const login: AuthPromise = async ({ email, password }) => {
     const { data: users } = await ApiService.get<TemporaryUser[]>(`/users?email=${email}`);
+    const { data: roles } = await ApiService.get<UserRole[]>('/userRoles');
+    const adminRoleId = roles.filter((role) => role.title === 'admin')[0].id;
 
     if (users.length === 0) {
       throw new Error('User with this email does not exist');
@@ -17,11 +21,23 @@ namespace AuthService {
       throw new Error('Password you entered is not correct');
     }
 
+    if (user.roles.includes(adminRoleId)) {
+      return {
+        id: user.id,
+        nickname: user.nickname,
+        email: user.email,
+        avatar: user.avatar,
+        roles: ['0'],
+        favoredActors: user.favoredActors,
+      };
+    }
     return {
       id: user.id,
       nickname: user.nickname,
       email: user.email,
       avatar: user.avatar,
+      admin: false,
+      roles: [],
       favoredActors: user.favoredActors,
     };
   };
@@ -38,6 +54,7 @@ namespace AuthService {
     return {
       id: newUser.id,
       email: newUser.email,
+      roles: ['1'],
     };
   };
 

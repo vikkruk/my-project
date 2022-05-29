@@ -10,20 +10,33 @@ const ProfilePage: React.FC = () => {
 
   return (
     <Container>
-      <Paper>
-        <Typography>
-          {user?.nickname}
-        </Typography>
+      <Paper sx={{
+        my: 2,
+        p: 5,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+      >
         <Box
           component="img"
           src={user?.avatar}
           sx={{
             width: 200,
             height: 200,
+            m: 2,
             objectFit: 'cover',
             borderRadius: '100%',
           }}
         />
+        <Typography
+          variant="h5"
+          sx={{
+            m: 5,
+          }}
+        >
+          {user?.nickname}
+        </Typography>
       </Paper>
     </Container>
   );

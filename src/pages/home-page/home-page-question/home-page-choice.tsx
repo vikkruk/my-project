@@ -37,7 +37,7 @@ const HomePageQuestionChoice: React.FC<HomePageQuestionChoiceProps> = ({
         justifyContent: 'center',
         alignItems: 'center',
         color: 'white',
-        width: '500px',
+        maxWidth: '500px',
         mx: 'auto',
         boxShadow: '0 0 1px 1px grey',
 

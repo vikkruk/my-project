@@ -4,6 +4,7 @@ type TemporaryUser = {
   email: string,
   password: string,
   avatar?: string,
+  roles: string[],
   favoredActors?: Favored[],
 };
 

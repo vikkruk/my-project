@@ -45,11 +45,35 @@
   ],
   "users": [
     {
+      "id": "0",
+      "nickname": "god",
+      "email": "god@god.god",
+      "password": "God12345",
+      "avatar": "https://pngimg.com/uploads/god/god_PNG17.png",
+      "roles": [
+        "0",
+        "1"
+      ],
+      "favoredActors": [
+        {
+          "id": "aa4cdc77-7265-4bb2-abfa-f801984ea381",
+          "actorId": "2"
+        },
+        {
+          "id": "17d2ae83-2c5b-4184-9c6b-d9964e86fbe1",
+          "actorId": "1"
+        }
+      ]
+    },
+    {
       "id": "1",
       "nickname": "Kubrick2001",
       "email": "kubrick2001@gmail.com",
       "password": "Space2001",
       "avatar": "https://www.stanleykubrick.de/wp-content/uploads/2014/01/633-3375_IMG-150x150.jpg",
+      "roles": [
+        "1"
+      ],
       "favoredActors": [
         {
           "id": "fef46083-7e91-488e-9757-308311d35b17",
@@ -71,6 +95,9 @@
       "email": "celblast@gmail.com",
       "password": "Cinema101",
       "avatar": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2Ey9pRlKRB0%2Fhqdefault.jpg&f=1&nofb=1",
+      "roles": [
+        "1"
+      ],
       "favoredActors": [
         {
           "id": "fef46083-7e91-488e-9757-308311d35b17",
@@ -85,6 +112,16 @@
           "actorId": "5"
         }
       ]
+    }
+  ],
+  "userRoles": [
+    {
+      "id": "0",
+      "title": "admin"
+    },
+    {
+      "id": "1",
+      "title": "user"
     }
   ]
 }

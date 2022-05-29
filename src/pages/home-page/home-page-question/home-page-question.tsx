@@ -22,8 +22,9 @@ const HomePageQuestion: React.FC = () => (
       bgcolor: theme.palette.info.main,
       color: theme.palette.common.white,
       boxShadow: '0 0px 1px 2px grey',
-      width: '100%',
+      maxWidth: '500px',
       height: 400,
+      m: 'auto',
       position: 'relative',
       overflow: 'hidden',
     })}
@@ -51,7 +52,7 @@ const HomePageQuestion: React.FC = () => (
       <Typography
         component="h2"
         variant="h4"
-        sx={{ mt: 6 }}
+        sx={{ mt: 6, textAlign: 'center' }}
       >
         What kind of movie endings do you prefer?
 

@@ -3,11 +3,13 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavbarLayout from './layouts/navbar-layout';
 import ActorsPage from './pages/actors-page';
+import AdminPage from './pages/admin-page';
 import DirectorsPage from './pages/directors-page';
 import HomePage from './pages/home-page';
 import LoginPage from './pages/login-page';
 import ProfilePage from './pages/profile-page';
 import RegisterPage from './pages/register-page';
+import RequireAdmin from './routing/require-admin';
 import RequireAuth from './routing/require-auth';
 import RequireVisitor from './routing/require-visitor';
 import store from './store/index';
@@ -35,6 +37,16 @@ const App: React.FC = () => (
                 <RegisterPage />
               </RequireVisitor>
           )}
+          />
+          <Route
+            path="admin"
+            element={
+          (
+            <RequireAdmin>
+              <AdminPage />
+            </RequireAdmin>
+          )
+          }
           />
           <Route
             path="profile"

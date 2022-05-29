@@ -3,7 +3,12 @@ import { Credentials, User, UserRegistration } from '../../../types';
 import { AppAction } from '../../types';
 import {
   AuthActionType,
-  AuthClearErrorAction, AuthFailureAction, AuthLoadingAction, AuthLogoutAction, AuthSuccessAction,
+  AuthAdminLoginAction,
+  AuthClearErrorAction,
+  AuthFailureAction,
+  AuthLoadingAction,
+  AuthLogoutAction,
+  AuthSuccessAction,
 } from './auth-types';
 import pause from '../../../helpers/pause';
 import { createNavigationSetNextAction } from '../navigation/navigation-action-creators';
@@ -21,6 +26,10 @@ export const authLogoutAction: AuthLogoutAction = {
   type: AuthActionType.AUTH_LOGOUT,
 };
 
+export const authAdminLogin: AuthAdminLoginAction = {
+  type: AuthActionType.AUTH_ADMIN_LOGIN,
+};
+
 export const createAuthSuccessAction = (user: User): AuthSuccessAction => ({
   type: AuthActionType.AUTH_SUCCESS,
   payload: { user },
@@ -36,6 +45,10 @@ export const authenticate = async (credentials: Credentials, next: string, authM
     dispatch(authLoadingAction);
     await pause(700);
     const user = await authMethod(credentials);
+    if (user.roles !== undefined && user.roles.length === 1) {
+      dispatch(authAdminLogin);
+      delete user.roles;
+    }
     dispatch(createNavigationSetNextAction(next));
     dispatch(createAuthSuccessAction(user));
     dispatch(authClearErrorAction);
@@ -45,10 +58,10 @@ export const authenticate = async (credentials: Credentials, next: string, authM
   }
 };
 
-export const createLoginAction = (credentials: Credentials, next: string) => async (dispatch: Dispatch<AppAction>) => {
+export const createLoginAction = (credentials: Credentials, next: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   await authenticate(credentials, next, AuthService.login, dispatch);
 };
 
-export const createRegisterAction = (credentials: UserRegistration, next: string) => async (dispatch: Dispatch<AppAction>) => {
+export const createRegisterAction = (credentials: UserRegistration, next: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   await authenticate(credentials, next, AuthService.register, dispatch);
 };

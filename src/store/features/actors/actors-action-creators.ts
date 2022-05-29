@@ -10,7 +10,7 @@ import {
   ActorsFavoredFetchSuccessAction,
 } from './actors-types';
 import ApiService from '../../../services/api-service';
-import { getLocalStorage, setLocalStorage } from '../../../helpers/local-storage-helpers';
+import { getLocalStorage } from '../../../helpers/local-storage-helpers';
 
 export const createActorsFetchSuccess = (actors: Actor[]): ActorsFetchSuccessAction => ({
   type: ActorsActionType.ACTORS_FETCH_SUCCESS,
@@ -49,7 +49,6 @@ export const actorsFetchAction = async (dispatch: Dispatch<AppAction>): Promise<
 
 export const actorsFetchFavoredAction = (dispatch: Dispatch<AppAction>): void => {
   const user = getLocalStorage<User>('user');
-  console.log(user);
   if (user !== null) {
     const favoredActors = user.favoredActors || [];
     dispatch(createActorsFavoredFetchSuccess(favoredActors));
