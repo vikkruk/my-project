@@ -32,7 +32,7 @@ const ActorsPage: React.FC = () => {
   useEffect(() => {
     const currentUser = getLocalStorage<User>(USER_KEY_IN_LOCAL_STORAGE);
     if (loggedIn) {
-      setLocalStorage('user', {
+      setLocalStorage(USER_KEY_IN_LOCAL_STORAGE, {
         ...currentUser,
         favoredActors: favoredActorsIds,
       });

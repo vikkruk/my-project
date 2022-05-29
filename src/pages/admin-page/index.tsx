@@ -26,7 +26,8 @@ const validationSchema = Yup.object({
   surname: Yup.string()
     .required('Enter actor\'s surname'),
   img: Yup.string()
-    .required('Enter a link to actor\'s photo'),
+    .required('Enter a link to actor\'s photo')
+    .url(),
   gender: Yup.string()
     .required('Enter actor\'s gender'),
 });

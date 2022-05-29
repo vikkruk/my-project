@@ -58,21 +58,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
         {error}
       </Alert>
       )}
-      {/* {success && (
-        <Alert
-          sx={{
-            position: 'absolute',
-            width: '100%',
-            top: 0,
-            left: 0,
-          }}
-          onClose={clearSuccess}
-          severity="success"
-          color="success"
-        >
-          {error}
-        </Alert>
-      )} */}
       {loading && (
         <>
           <CircularProgress
