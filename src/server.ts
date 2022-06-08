@@ -1,24 +1,22 @@
 import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import artistsRouter from './routers/artists-router';
 import artistRolesRouter from './routers/artist-roles-router';
+import config from './config';
+import authRouter from './routers/auth-router';
 
-dotenv.config();
 const server = express();
-
-const DB_CONNECTION_URL = process.env.REACT_APP_DB_CONNECTION_URL;
-if (DB_CONNECTION_URL === undefined) throw new Error('Set up environment variables!');
 
 server.use(morgan(':method :url :status'));
 server.use(express.static('public'));
 server.use(express.json());
 server.use('/api/artists', artistsRouter);
 server.use('/api/artist-roles', artistRolesRouter);
+server.use('/api/auth', authRouter);
 
 mongoose.connect(
-  DB_CONNECTION_URL,
+  config.db.connectionURL,
   {
     retryWrites: true,
     w: 'majority',
