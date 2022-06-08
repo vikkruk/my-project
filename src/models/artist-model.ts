@@ -1,6 +1,22 @@
-import { model, Schema } from 'mongoose';
+import {
+  Document, Model, model, Schema, Types,
+} from 'mongoose';
 
-const artistSchema = new Schema({
+type Artist = {
+  name: string,
+  surname: string,
+  img: string,
+  gender: string,
+  roles: Types.ObjectId[],
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ArtistDocument = Document<Types.ObjectId, unknown, Artist> & Artist & {
+  _id: Types.ObjectId;
+};
+
+const artistSchema = new Schema<Artist, Model<Artist>>({
   name: {
     type: String,
     required: true,
@@ -21,7 +37,6 @@ const artistSchema = new Schema({
 
     type: [{ type: Schema.Types.ObjectId, ref: 'ArtistRole' }],
     default: [],
-    required: true,
 
   },
 }, {

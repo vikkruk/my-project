@@ -40,5 +40,7 @@ module.exports = {
     'no-restricted-exports': [0],
     'react/require-default-props': [0],
     '@typescript-eslint/no-namespace': [0],
+    '@typescript-eslint/indent': [0],
+    'no-underscore-dangle': [0]
   },
 };

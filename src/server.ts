@@ -15,7 +15,7 @@ server.use(morgan(':method :url :status'));
 server.use(express.static('public'));
 server.use(express.json());
 server.use('/api/artists', artistsRouter);
-server.use('/api/artistRoles', artistRolesRouter);
+server.use('/api/artist-roles', artistRolesRouter);
 
 mongoose.connect(
   DB_CONNECTION_URL,
