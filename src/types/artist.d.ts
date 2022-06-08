@@ -1,4 +1,4 @@
-type Actor = {
+type Artist = {
   id: string,
   name: string,
   surname: string,
@@ -6,4 +6,4 @@ type Actor = {
   gender: string,
 };
 
-export default Actor;
+export default Artist;

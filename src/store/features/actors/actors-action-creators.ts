@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { Actor, Favored, User } from '../../../types';
+import { Artist, Favored, User } from '../../../types';
 import { AppAction } from '../../types';
 import {
   ActorsActionType,
@@ -12,7 +12,7 @@ import {
 import ApiService from '../../../services/api-service';
 import { getLocalStorage } from '../../../helpers/local-storage-helpers';
 
-export const createActorsFetchSuccess = (actors: Actor[]): ActorsFetchSuccessAction => ({
+export const createActorsFetchSuccess = (actors: Artist[]): ActorsFetchSuccessAction => ({
   type: ActorsActionType.ACTORS_FETCH_SUCCESS,
   payload: { actors },
 });
@@ -39,7 +39,8 @@ export const createActorsDeleteFavored = (actorId: string): ActorsDeleteFavoredA
 
 export const actorsFetchAction = async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
-    const { data } = await ApiService.get('/actors');
+    const { data } = await ApiService.get('/people?roles_like=3');
+    console.log(data);
     dispatch(createActorsFetchSuccess(data));
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);

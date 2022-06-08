@@ -22,7 +22,7 @@ const NavBar: React.FC = () => {
   return (
     <AppBar position="static" sx={(theme) => ({ bgcolor: theme.palette.primary.main })}>
       <Container sx={{ px: { xs: 0, sm: 0 } }}>
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
           <NavbarDropDownMenu />
           <Typography
             component="p"
@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
           >
             <StyledHomeNavLink to="/">GMW</StyledHomeNavLink>
           </Typography>
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'space-around', gap: 2 }}>
             <StyledNavLink to="/actors">Actors</StyledNavLink>
             <StyledNavLink to="/directors">Directors</StyledNavLink>
             {loggedIn && <StyledNavLink to="/profile">Profile</StyledNavLink>}

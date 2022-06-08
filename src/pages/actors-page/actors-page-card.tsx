@@ -2,13 +2,13 @@ import React from 'react';
 import { Box, Paper } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
-import { Actor } from '../../types';
+import { Artist } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { createActorsAddFavored, createActorsDeleteFavored } from '../../store/features/actors/actors-action-creators';
 import { selectActorsFavored } from '../../store/features/actors/actors-selectors';
 import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 
-type ActorsPageCardProps = Omit<Actor, 'gender'> & {
+type ActorsPageCardProps = Omit<Artist, 'gender'> & {
   profile: boolean
 };
 

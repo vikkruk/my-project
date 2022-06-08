@@ -1,7 +1,7 @@
-import { Actor, Favored } from '../../../types';
+import { Artist, Favored } from '../../../types';
 
 export type ActorsState = {
-  actors: Actor[],
+  actors: Artist[],
   favored: Favored[],
   error: string | null,
 };
@@ -16,7 +16,7 @@ export enum ActorsActionType {
 
 export type ActorsFetchSuccessAction = {
   type: ActorsActionType.ACTORS_FETCH_SUCCESS,
-  payload: { actors: Actor[] }
+  payload: { actors: Artist[] }
 };
 
 export type ActorsFetchFailureAction = {

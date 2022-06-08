@@ -6,11 +6,11 @@ import { selectAuthUser } from '../../store/features/auth/auth-selectors';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectActorsFavored, selectActorsAll } from '../../store/features/actors/actors-selectors';
 import ActorsPageCard from '../actors-page/actors-page-card';
-import { Actor } from '../../types';
+import { Artist } from '../../types';
 import { actorsFetchAction, actorsFetchFavoredAction } from '../../store/features/actors/actors-action-creators';
 
 const ProfilePage: React.FC = () => {
-  const [favoredActors, setFavoredActors] = useState<Actor[]>([]);
+  const [favoredActors, setFavoredActors] = useState<Artist[]>([]);
   const dispatch = useRootDispatch();
   const user = useRootSelector(selectAuthUser);
   const actors = useRootSelector(selectActorsAll);
@@ -28,7 +28,7 @@ const ProfilePage: React.FC = () => {
       const favActorData = actors.find((actor) => actor.id === fav.actorId);
       if (favActorData !== undefined) { return favActorData; }
       return null;
-    }).filter((x) => x) as Actor[];
+    }).filter((x) => x) as Artist[];
     setFavoredActors(favActors);
   }, [favored]);
 

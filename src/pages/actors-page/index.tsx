@@ -6,7 +6,7 @@ import {
   Typography,
 } from '@mui/material';
 import ActorsPageCard from './actors-page-card';
-import { Actor, User } from '../../types';
+import { Artist, User } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { actorsFetchFavoredAction, actorsFetchAction } from '../../store/features/actors/actors-action-creators';
 import { selectActorsAll, selectActorsFavored } from '../../store/features/actors/actors-selectors';
@@ -22,7 +22,7 @@ const ActorsPage: React.FC = () => {
   const allActors = useRootSelector(selectActorsAll);
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const favoredActorsIds = useRootSelector(selectActorsFavored);
-  const [actors, setActors] = useState<Actor[]>(allActors);
+  const [actors, setActors] = useState<Artist[]>(allActors);
   const [showFavored, setShowFavored] = useState<boolean>(false);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const ActorsPage: React.FC = () => {
         const favActorData = allActors.find((actor) => actor.id === fav.actorId);
         if (favActorData !== undefined) { return favActorData; }
         return null;
-      }).filter((x) => x) as Actor[];
+      }).filter((x) => x) as Artist[];
       setActors(favoredActors);
     } else {
       setActors(allActors);
