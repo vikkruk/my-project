@@ -1,47 +1,124 @@
 import { RequestHandler } from 'express';
-import { Error } from 'mongoose';
-import ArtistModel from '../models/artist-model';
+import { Error, UpdateQuery } from 'mongoose';
+import ArtistModel, { Artist } from '../models/artist-model';
+import createArtistViewModel, { ArtistViewModel } from '../view-model-creators/create-artist-view-model';
 
-export const getArtists: RequestHandler = async (req, res) => {
-  const artists = await ArtistModel.find();
+type SingularArtistRequestHandlerResponse = { artist: ArtistViewModel } | ErrorResponseBody;
 
-  res.status(200).json(artists);
+type GetArtistsRequestHandler = RequestHandler<
+  unknown,
+  { artists: ArtistViewModel[] }
+>;
+
+export const getArtists: GetArtistsRequestHandler = async (req, res) => {
+  const artistDocs = await ArtistModel.find();
+
+  res.status(200).json({
+    artists: artistDocs.map((artistDoc) => createArtistViewModel(artistDoc)),
+  });
 };
 
-export const getArtist: RequestHandler = async (req, res) => {
+type GetArtistRequestHandler = RequestHandler<
+  { id: string },
+  SingularArtistRequestHandlerResponse
+>;
+
+export const getArtist: GetArtistRequestHandler = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const artist = await ArtistModel.findById(id);
-    res.status(200).json(artist);
+    const artistDoc = await ArtistModel.findById(id);
+    if (artistDoc === null) {
+      throw new Error(`Couldn't find artist with id ${id}`);
+    }
+    res.status(200).json({
+      artist: createArtistViewModel(artistDoc),
+    });
   } catch (error) {
     res.status(404).json({
-      error: `Artist with id ${id} was not found`,
+      error: error instanceof Error
+        ? error.message
+        : 'Error occured while getting the artist'
+      ,
     });
   }
 };
 
-export const createArtist: RequestHandler = async (req, res) => {
+type CreateArtistRequestHandler = RequestHandler<
+  unknown,
+  SingularArtistRequestHandlerResponse,
+  Artist
+>;
+
+export const createArtist: CreateArtistRequestHandler = async (req, res) => {
   const artistProps = req.body;
   try {
-    const createdArtist = await ArtistModel.create(artistProps);
-    res.status(201).json(createdArtist);
+    const createdArtistDoc = await ArtistModel.create(artistProps);
+    res.status(201).json({
+      artist: createArtistViewModel(createdArtistDoc),
+    });
   } catch (error) {
-    const err = error instanceof Error.ValidationError ? error.message : 'Server error';
-    res.status(400).json({ err });
+    res.status(400).json({
+      error: error instanceof Error.ValidationError
+        ? error.message
+        : 'Couldn\'t create artist',
+    });
   }
 };
 
-export const updateArtist: RequestHandler = async (req, res) => {
+type UpdateArtistRequestHandler = RequestHandler<
+  { id: string },
+  SingularArtistRequestHandlerResponse,
+  UpdateQuery<Artist> | undefined
+>;
+
+export const updateArtist: UpdateArtistRequestHandler = async (req, res) => {
   const artistProps = req.body;
   const { id } = req.params;
 
   try {
-    const updatedArtist = await ArtistModel.findByIdAndUpdate(id, artistProps);
-    res.status(200).json(updatedArtist);
+    const updatedArtistDoc = await ArtistModel.findByIdAndUpdate(
+      id,
+      artistProps,
+      { new: true },
+    );
+    if (updatedArtistDoc === null) {
+      throw new Error(`Couldn't update artist with id ${id}`);
+    }
+    res.status(200).json({
+      artist: createArtistViewModel(updatedArtistDoc),
+    });
   } catch (error) {
     res.status(404).json({
-      error: 'Artist couldn\'t be updated',
+      error: error instanceof Error
+        ? error.message
+        : 'Couldn\'t update the artist'
+      ,
+    });
+  }
+};
+
+type DeleteArtistRequestHandler = RequestHandler<
+  { id: string },
+  SingularArtistRequestHandlerResponse
+>;
+
+export const deleteArtist: DeleteArtistRequestHandler = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedArtistDoc = await ArtistModel.findByIdAndDelete(id);
+    if (deletedArtistDoc === null) {
+      throw new Error(`Couldn't delete artist with id ${id}`);
+    }
+    res.status(200).json({
+      artist: createArtistViewModel(deletedArtistDoc),
+    });
+  } catch (error) {
+    res.status(404).json({
+      error: error instanceof Error
+        ? error.message
+        : 'Error occured while deleting the artist',
     });
   }
 };

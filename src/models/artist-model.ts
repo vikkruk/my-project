@@ -1,8 +1,12 @@
 import {
-  Document, Model, model, Schema, Types,
+  Document,
+  Model,
+  model,
+  Schema,
+  Types,
 } from 'mongoose';
 
-type Artist = {
+export type Artist = {
   name: string,
   surname: string,
   img: string,
