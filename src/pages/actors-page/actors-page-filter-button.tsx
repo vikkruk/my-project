@@ -3,10 +3,11 @@ import { Button } from '@mui/material';
 
 type ActorsPageFilterButtonProps = {
   title: string,
+  loggedIn?: boolean,
   onClick: () => void,
 };
 
-const ActorsPageFilterButton: React.FC<ActorsPageFilterButtonProps> = ({ title, onClick }) => (
+const ActorsPageFilterButton: React.FC<ActorsPageFilterButtonProps> = ({ title, loggedIn, onClick }) => (
   <Button
     variant="contained"
     sx={(theme) => ({
@@ -15,6 +16,7 @@ const ActorsPageFilterButton: React.FC<ActorsPageFilterButtonProps> = ({ title, 
       },
     })}
     onClick={onClick}
+    disabled={loggedIn}
   >
     {title}
 

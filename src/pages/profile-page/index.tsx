@@ -14,7 +14,7 @@ const ProfilePage: React.FC = () => {
   const dispatch = useRootDispatch();
   const user = useRootSelector(selectAuthUser);
   const actors = useRootSelector(selectActorsAll);
-  const favored = useRootSelector(selectActorsFavored);
+  const favoredActorsIds = useRootSelector(selectActorsFavored);
 
   useEffect(() => {
     (async () => {
@@ -24,13 +24,13 @@ const ProfilePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const favActors = favored.map((fav) => {
+    const favActors = favoredActorsIds.map((fav) => {
       const favActorData = actors.find((actor) => actor.id === fav.actorId);
       if (favActorData !== undefined) { return favActorData; }
       return null;
     }).filter((x) => x) as Artist[];
     setFavoredActors(favActors);
-  }, [favored]);
+  }, [favoredActorsIds]);
 
   return (
     <Container>

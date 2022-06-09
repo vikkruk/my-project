@@ -39,8 +39,7 @@ export const createActorsDeleteFavored = (actorId: string): ActorsDeleteFavoredA
 
 export const actorsFetchAction = async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
-    const { data } = await ApiService.get('/people?roles_like=3');
-    console.log(data);
+    const { data } = await ApiService.get<Artist[]>('/people?roles_like=3');
     dispatch(createActorsFetchSuccess(data));
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);

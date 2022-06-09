@@ -70,7 +70,11 @@ const ActorsPage: React.FC = () => {
         }}
       >
         <ActorsPageFilterButton title="All" onClick={() => setShowFavored(false)} />
-        <ActorsPageFilterButton title="My favorite actors" onClick={() => setShowFavored(true)} />
+        <ActorsPageFilterButton
+          title="My favorite actors"
+          onClick={() => setShowFavored(true)}
+          loggedIn={!loggedIn}
+        />
       </Box>
       <Grid
         container
