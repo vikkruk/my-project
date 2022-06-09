@@ -7,11 +7,19 @@ type SingularArtistRequestHandlerResponse = { artist: ArtistViewModel } | ErrorR
 
 type GetArtistsRequestHandler = RequestHandler<
   unknown,
-  { artists: ArtistViewModel[] }
+  { artists: ArtistViewModel[] },
+  unknown,
+  { role?: 'actor' | 'director' | 'writer' }
 >;
 
 export const getArtists: GetArtistsRequestHandler = async (req, res) => {
-  const artistDocs = await ArtistModel.find();
+  const { role } = req.query;
+  let artistDocs;
+  if (role === undefined) {
+    artistDocs = await ArtistModel.find();
+  } else {
+    artistDocs = await ArtistModel.find({ role });
+  }
 
   res.status(200).json({
     artists: artistDocs.map((artistDoc) => createArtistViewModel(artistDoc)),

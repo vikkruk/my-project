@@ -4,6 +4,7 @@ type Artist = {
   surname: string,
   img: string,
   gender: string,
+  roles: string[],
 };
 
 export default Artist;
