@@ -3,9 +3,9 @@ import ApiService from './api-service';
 
 const addPersonData = async ({
   name, surname, img, gender,
-}: PersonData, personRole: 'actor' | 'director'): Promise<void> => {
+}: PersonData, personRole: 'people'): Promise<void> => {
   try {
-    await ApiService.post(`/${personRole}s`, {
+    await ApiService.post(`/${personRole}`, {
       name, surname, img, gender,
     });
   } catch (error) {

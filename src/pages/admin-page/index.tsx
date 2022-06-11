@@ -2,7 +2,6 @@ import React from 'react';
 import { FormikConfig, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { useRootSelector } from '../../store/hooks';
 import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
 import AuthForm from '../../components/auth-form';
@@ -34,15 +33,14 @@ const validationSchema = Yup.object({
 
 const AdminPage: React.FC = () => {
   const loading = useRootSelector(selectAuthLoading);
-  const navigate = useNavigate();
 
   const handleAddData: RegisterFormikConfig['onSubmit'] = async ({
     name, surname, img, gender,
-  }) => {
+  }, { resetForm }) => {
     await AdminAddDataService.addPersonData({
       name, surname, img, gender,
-    }, 'actor');
-    navigate('/actors');
+    }, 'people');
+    resetForm();
   };
 
   const {
