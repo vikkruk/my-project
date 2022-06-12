@@ -32,10 +32,11 @@ const NavBar: React.FC = () => {
             <StyledHomeNavLink to="/">GMW</StyledHomeNavLink>
           </Typography>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'space-around', gap: 2 }}>
+            {admin && <StyledNavLink to="/admin">Admin</StyledNavLink>}
+            {loggedIn && <StyledNavLink to="/profile">Profile</StyledNavLink>}
             <StyledNavLink to="/actors">Actors</StyledNavLink>
             <StyledNavLink to="/directors">Directors</StyledNavLink>
-            {loggedIn && <StyledNavLink to="/profile">Profile</StyledNavLink>}
-            {admin && <StyledNavLink to="/admin">Admin</StyledNavLink>}
+            <StyledNavLink to="/movies">Movies</StyledNavLink>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
             {(loggedIn && ((user && user.avatar) ? (

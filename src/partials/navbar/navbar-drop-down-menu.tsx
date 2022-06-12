@@ -119,6 +119,14 @@ const NavbarDropDownMenu: React.FC = () => {
                   </MenuItem>
                   <MenuItem onClick={(e) => {
                     handleClose(e);
+                    navigate('/movies');
+                  }}
+                  >
+                    Movies
+
+                  </MenuItem>
+                  <MenuItem onClick={(e) => {
+                    handleClose(e);
                     logout();
                   }}
                   >

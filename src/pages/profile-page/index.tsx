@@ -4,21 +4,28 @@ import {
 } from '@mui/material';
 import { selectAuthUser } from '../../store/features/auth/auth-selectors';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { selectActorsFavored, selectActorsAll } from '../../store/features/artists/artists-selectors';
+import {
+ selectActorsFavored, selectActorsAll, selectDirectorsAll, selectDirectorsFavored,
+} from '../../store/features/artists/artists-selectors';
 import PersonCard from '../../components/person-card';
 import { Artist } from '../../types';
 import { artistsFetchAction, artistsFetchFavoredAction } from '../../store/features/artists/artists-action-creators';
 
 const ProfilePage: React.FC = () => {
   const [favoredActors, setFavoredActors] = useState<Artist[]>([]);
+  const [favoredDirectors, setFavoredDirectors] = useState<Artist[]>([]);
   const dispatch = useRootDispatch();
   const user = useRootSelector(selectAuthUser);
   const actors = useRootSelector(selectActorsAll);
+  const directors = useRootSelector(selectDirectorsAll);
   const favoredActorsIds = useRootSelector(selectActorsFavored);
+  const favoredDirectorsIds = useRootSelector(selectDirectorsFavored);
   useEffect(() => {
     (async () => {
       await dispatch(artistsFetchAction('actor'));
       await dispatch(artistsFetchFavoredAction('actor'));
+      await dispatch(artistsFetchAction('director'));
+      await dispatch(artistsFetchFavoredAction('director'));
     })();
   }, []);
 
@@ -29,7 +36,13 @@ const ProfilePage: React.FC = () => {
       return null;
     }).filter((x) => x) as Artist[];
     setFavoredActors(favActors);
-  }, [favoredActorsIds]);
+    const favDirectors = favoredDirectorsIds.map((fav) => {
+      const favDirectorData = directors.find((director) => director.id === fav.artistId);
+      if (favDirectorData !== undefined) { return favDirectorData; }
+      return null;
+    }).filter((x) => x) as Artist[];
+    setFavoredDirectors(favDirectors);
+  }, [favoredActorsIds, favoredDirectorsIds]);
 
   return (
     <Container>
@@ -45,8 +58,8 @@ const ProfilePage: React.FC = () => {
           component="img"
           src={user?.avatar}
           sx={{
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
             m: 2,
             objectFit: 'cover',
             borderRadius: '100%',
@@ -91,6 +104,38 @@ const ProfilePage: React.FC = () => {
               </Grid>
             ))
               : (<Typography component="h3" variant="h5">You have no favorite actors</Typography>)}
+          </Grid>
+        </Box>
+        <Box sx={{ width: '100%', mt: 6 }}>
+          <Typography variant="h5" fontWeight={600}>
+            My Favorite Directors:
+          </Typography>
+          <Grid
+            container
+            sx={{
+              textAlign: 'center',
+              justifyContent: { xs: 'center', md: 'flex-start' },
+              m: 'auto',
+              gap: { xl: 5 },
+            }}
+          >
+            {favoredDirectors.length > 0 ? favoredDirectors.map((directorProps) => (
+              <Grid
+                key={directorProps.id}
+                item
+                xs={12}
+                sm={6}
+                md={3}
+                xl={2}
+                sx={{
+                  transform: 'scale(0.7)',
+                  height: 300,
+                }}
+              >
+                <PersonCard {...directorProps} profile type="director" />
+              </Grid>
+            ))
+              : (<Typography component="h3" variant="h5">You have no favorite directors</Typography>)}
           </Grid>
         </Box>
       </Paper>

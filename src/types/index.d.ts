@@ -1,5 +1,6 @@
 export { default as Artist } from './artist';
 export { default as ArtistRole } from './artist-role';
+export { default as Movie } from './movie';
 export { default as PersonData } from './person-data';
 export { default as Favored } from './favored';
 export { default as User } from './user';

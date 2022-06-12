@@ -7,6 +7,7 @@ import AdminPage from './pages/admin-page';
 import DirectorsPage from './pages/directors-page';
 import HomePage from './pages/home-page';
 import LoginPage from './pages/login-page';
+import MoviesPage from './pages/movies-page';
 import ProfilePage from './pages/profile-page';
 import RegisterPage from './pages/register-page';
 import RequireAdmin from './routing/require-admin';
@@ -22,6 +23,7 @@ const App: React.FC = () => (
           <Route index element={<HomePage />} />
           <Route path="actors" element={<ActorsPage />} />
           <Route path="directors" element={<DirectorsPage />} />
+          <Route path="movies" element={<MoviesPage />} />
           <Route
             path="auth/login"
             element={(
