@@ -8,7 +8,7 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, CardMedia, Container } from '@mui/material';
-import { Movie } from '../types';
+import { Movie } from '../../types';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -43,11 +43,12 @@ const MovieCard: React.FC<Movie> = ({
   return (
     <Container sx={{ p: 2 }}>
 
-      <Card>
+      <Card sx={{ width: '100%' }}>
         <Box sx={{
           display: 'flex',
           flexDirection: { xs: 'column', lg: 'row' },
           alignItems: 'center',
+          justifyContent: 'space-between',
           width: '100%',
         }}
         >
@@ -55,7 +56,12 @@ const MovieCard: React.FC<Movie> = ({
             <Box
               component="img"
               sx={{
-              width: { xs: 250, md: 400, lg: 500 },
+              width: {
+                xs: 150,
+                sm: 250,
+                md: 400,
+                lg: 500,
+              },
               height: '100%',
               objectFit: 'cover',
               borderRadius: 1,
@@ -66,8 +72,18 @@ const MovieCard: React.FC<Movie> = ({
               src={poster}
             />
           </CardMedia>
-          <CardContent>
-            <Typography variant="h4" color="primary">
+          <CardContent sx={{ m: 'auto' }}>
+            <Typography
+              variant="h4"
+              color="primary"
+              sx={{
+                fontSize: {
+                  xs: '1.2rem',
+                  sm: '1.8rem',
+                  md: '2rem',
+                },
+              }}
+            >
               {title}
             </Typography>
             <Typography variant="h5" color="primary">
@@ -86,7 +102,7 @@ const MovieCard: React.FC<Movie> = ({
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
+          <CardContent sx={{ width: '100%' }}>
             <Typography paragraph>{directors.length > 1 ? 'Directors' : 'Director'}</Typography>
 
             {directors.map((director) => (

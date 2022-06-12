@@ -3,7 +3,7 @@ import {
  Box, Grid, Paper, Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import MovieCard from '../../components/movie-card';
+import MovieCard from './movie-card';
 import { moviesFetchAction } from '../../store/features/movies/movies-action-creators';
 import selectMoviesAll from '../../store/features/movies/movies-selectors';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
@@ -49,7 +49,7 @@ const [movies, setMovies] = useState<Movie[]>([]);
             variant="h5"
             sx={{ m: 'auto', mt: 3 }}
           >
-            You have no favorite actors
+            Could not fetch movies
           </Typography>
           )}
       </Grid>

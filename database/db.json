@@ -442,7 +442,20 @@
         "777",
         "1"
       ],
-      "favored": {}
+      "favored": {
+        "actors": [
+          {
+            "id": "30c4bf73-c6cb-42a0-a7f0-1cf35fc69ba2",
+            "artistId": "19"
+          }
+        ],
+        "directors": [
+          {
+            "id": "9ed035a5-48d2-4bb7-bfda-3efaac723b94",
+            "artistId": "25"
+          }
+        ]
+      }
     },
     {
       "id": "1",
