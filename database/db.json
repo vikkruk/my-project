@@ -442,28 +442,18 @@
         "777",
         "1"
       ],
-      "favoredActors": [
-        {
-          "id": "ff466f32-0bc2-4837-b2f9-5c8e0f15269f",
-          "actorId": "5"
-        },
-        {
-          "id": "9fc8f1ed-f94e-4113-ba86-1b8038002b08",
-          "actorId": "6"
-        },
-        {
-          "id": "2e1dc687-8fcd-415b-be2b-fd4122630b2a",
-          "actorId": "4"
-        },
-        {
-          "id": "935acdb7-7737-41cd-a41e-058baf051484",
-          "actorId": "1"
-        },
-        {
-          "id": "120e7976-f6ae-4be2-86f3-d308ae283418",
-          "actorId": "2"
-        }
-      ]
+      "favored": {
+        "actors": [
+          {
+            "id": "56e827b9-e003-4f2b-8596-1b07df5327d0",
+            "artistId": "2"
+          },
+          {
+            "id": "0b448112-f856-48c6-bf67-2094adb6f3a9",
+            "artistId": "3"
+          }
+        ]
+      }
     },
     {
       "id": "1",
@@ -518,20 +508,7 @@
       "roles": [
         "1"
       ],
-      "favoredActors": [
-        {
-          "id": "341059d5-7cdf-464d-9784-85954cbccaf0",
-          "actorId": "3"
-        },
-        {
-          "id": "6f7b2a84-901a-40fc-b85d-74c080b15ec5",
-          "actorId": "7"
-        },
-        {
-          "id": "9dd3300f-0a0c-4533-bce5-2485474258ed",
-          "actorId": "8"
-        }
-      ]
+      "favoredActors": []
     }
   ],
   "userRoles": [

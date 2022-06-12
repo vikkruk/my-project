@@ -50,7 +50,7 @@ export const actorsFetchAction = async (dispatch: Dispatch<AppAction>): Promise<
 export const actorsFetchFavoredAction = (dispatch: Dispatch<AppAction>): void => {
   const user = getLocalStorage<User>('user');
   if (user !== null) {
-    const favoredActors = user.favoredActors || [];
+    const favoredActors = user.favored?.actors || [];
     dispatch(createActorsFavoredFetchSuccess(favoredActors));
   }
 };

@@ -5,7 +5,9 @@ import { ActorsState, ActorsAction, ActorsActionType } from './actors-types';
 
 const initialState: ActorsState = {
   actors: [],
-  favored: [],
+  directors: [],
+  favoredActors: [],
+  favoredDirectors: [],
   error: null,
 };
 
@@ -27,23 +29,23 @@ const actorsReducer: Reducer<ActorsState, ActorsAction> = (state = initialState,
     case ActorsActionType.ACTORS_FAVORED_FETCH_SUCCESS: {
       return {
         ...state,
-        favored: action.payload.favoredActors,
+        favoredActors: action.payload.favoredActors,
       };
     }
 
     case ActorsActionType.ACTORS_ADD_FAVORED: {
       const favoredActor = state.actors.find((actor) => actor.id === action.payload.actorId);
-      const alreadyFavored = state.favored.find((fav) => fav.actorId === action.payload.actorId);
+      const alreadyFavored = state.favoredActors.find((fav) => fav.artistId === action.payload.actorId);
 
       if (favoredActor && !alreadyFavored) {
         const newFavoredActor = {
           id: createId(),
-          actorId: action.payload.actorId,
+          artistId: action.payload.actorId,
         };
         return {
           ...state,
-          favored: [
-            ...state.favored,
+          favoredActors: [
+            ...state.favoredActors,
             newFavoredActor,
           ],
         };
@@ -54,8 +56,8 @@ const actorsReducer: Reducer<ActorsState, ActorsAction> = (state = initialState,
     case ActorsActionType.ACTORS_DELETE_FAVORED: {
       return {
         ...state,
-        favored: [
-          ...state.favored.filter((fav) => fav.actorId !== action.payload.actorId),
+        favoredActors: [
+          ...state.favoredActors.filter((fav) => fav.artistId !== action.payload.actorId),
         ],
       };
     }

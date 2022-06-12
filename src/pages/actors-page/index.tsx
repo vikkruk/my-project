@@ -5,7 +5,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import ActorsPageCard from './actors-page-card';
+import PersonCard from '../../components/person-card';
 import { Artist, User } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { actorsFetchFavoredAction, actorsFetchAction } from '../../store/features/actors/actors-action-creators';
@@ -13,7 +13,7 @@ import { selectActorsAll, selectActorsFavored } from '../../store/features/actor
 import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 import { getLocalStorage, setLocalStorage } from '../../helpers/local-storage-helpers';
 import ApiService from '../../services/api-service';
-import ActorsPageFilterButton from './actors-page-filter-button';
+import FilterButton from '../../components/filter-button';
 
 const USER_KEY_IN_LOCAL_STORAGE = process.env.REACT_APP_USER_KEY_IN_LOCAL_STORAGE;
 
@@ -30,6 +30,7 @@ const ActorsPage: React.FC = () => {
     if (loggedIn) {
       dispatch(actorsFetchFavoredAction);
     }
+    console.log(favoredActorsIds);
   }, [loggedIn]);
 
   useEffect(() => {
@@ -37,18 +38,23 @@ const ActorsPage: React.FC = () => {
     if (loggedIn) {
       setLocalStorage(USER_KEY_IN_LOCAL_STORAGE, {
         ...currentUser,
-        favoredActors: favoredActorsIds,
+        favored: {
+          actors: favoredActorsIds,
+        },
       });
       if (currentUser !== null) {
         ApiService.patch(`users/${currentUser.id}`, {
-          favoredActors: favoredActorsIds,
+          favored: {
+            actors: favoredActorsIds,
+          },
+
         });
       }
     }
 
     if (showFavored) {
       const favoredActors = favoredActorsIds.map((fav) => {
-        const favActorData = allActors.find((actor) => actor.id === fav.actorId);
+        const favActorData = allActors.find((actor) => actor.id === fav.artistId);
         if (favActorData !== undefined) { return favActorData; }
         return null;
       }).filter((x) => x) as Artist[];
@@ -69,8 +75,8 @@ const ActorsPage: React.FC = () => {
           gap: 1,
         }}
       >
-        <ActorsPageFilterButton title="All" onClick={() => setShowFavored(false)} />
-        <ActorsPageFilterButton
+        <FilterButton title="All" onClick={() => setShowFavored(false)} />
+        <FilterButton
           title="My favorite actors"
           onClick={() => setShowFavored(true)}
           loggedIn={!loggedIn}
@@ -93,7 +99,7 @@ const ActorsPage: React.FC = () => {
             lg={3}
             sx={{ display: 'flex', justifyContent: 'center' }}
           >
-            <ActorsPageCard {...actorProps} profile={false} />
+            <PersonCard {...actorProps} profile={false} type="actor" />
           </Grid>
         ))
           : (

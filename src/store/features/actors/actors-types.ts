@@ -2,7 +2,9 @@ import { Artist, Favored } from '../../../types';
 
 export type ActorsState = {
   actors: Artist[],
-  favored: Favored[],
+  directors: Artist[],
+  favoredActors: Favored[],
+  favoredDirectors: Favored[],
   error: string | null,
 };
 

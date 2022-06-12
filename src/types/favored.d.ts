@@ -1,6 +1,6 @@
 type Favored = {
   id: string,
-  actorId: string,
+  artistId: string,
 };
 
 export default Favored;

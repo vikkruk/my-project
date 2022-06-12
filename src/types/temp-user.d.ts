@@ -5,7 +5,10 @@ type TemporaryUser = {
   password: string,
   avatar?: string,
   roles: string[],
-  favoredActors?: Favored[],
+  favored: {
+    actors: Favored[],
+    directors: Favored[]
+  }
 };
 
 export default TemporaryUser;

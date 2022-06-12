@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button } from '@mui/material';
 
-type ActorsPageFilterButtonProps = {
+type FilterButtonProps = {
   title: string,
   loggedIn?: boolean,
   onClick: () => void,
 };
 
-const ActorsPageFilterButton: React.FC<ActorsPageFilterButtonProps> = ({ title, loggedIn, onClick }) => (
+const FilterButton: React.FC<FilterButtonProps> = ({ title, loggedIn, onClick }) => (
   <Button
     variant="contained"
     sx={(theme) => ({
@@ -23,4 +23,4 @@ const ActorsPageFilterButton: React.FC<ActorsPageFilterButtonProps> = ({ title, 
   </Button>
 );
 
-export default ActorsPageFilterButton;
+export default FilterButton;

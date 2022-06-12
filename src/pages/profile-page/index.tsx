@@ -5,7 +5,7 @@ import {
 import { selectAuthUser } from '../../store/features/auth/auth-selectors';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectActorsFavored, selectActorsAll } from '../../store/features/actors/actors-selectors';
-import ActorsPageCard from '../actors-page/actors-page-card';
+import PersonCard from '../../components/person-card';
 import { Artist } from '../../types';
 import { actorsFetchAction, actorsFetchFavoredAction } from '../../store/features/actors/actors-action-creators';
 
@@ -25,7 +25,7 @@ const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     const favActors = favoredActorsIds.map((fav) => {
-      const favActorData = actors.find((actor) => actor.id === fav.actorId);
+      const favActorData = actors.find((actor) => actor.id === fav.artistId);
       if (favActorData !== undefined) { return favActorData; }
       return null;
     }).filter((x) => x) as Artist[];
@@ -88,7 +88,7 @@ const ProfilePage: React.FC = () => {
                   height: 300,
                 }}
               >
-                <ActorsPageCard {...actorProps} profile />
+                <PersonCard {...actorProps} profile type="actor" />
               </Grid>
             ))
               : (<Typography component="h3" variant="h5">You have no favorite actors</Typography>)}

@@ -2,14 +2,15 @@ import React from 'react';
 import { Box, Paper } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
-import { Artist } from '../../types';
-import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { createActorsAddFavored, createActorsDeleteFavored } from '../../store/features/actors/actors-action-creators';
-import { selectActorsFavored } from '../../store/features/actors/actors-selectors';
-import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
+import { Artist } from '../types';
+import { useRootDispatch, useRootSelector } from '../store/hooks';
+import { createActorsAddFavored, createActorsDeleteFavored } from '../store/features/actors/actors-action-creators';
+import { selectActorsFavored } from '../store/features/actors/actors-selectors';
+import { selectAuthLoggedIn } from '../store/features/auth/auth-selectors';
 
-type ActorsPageCardProps = Omit<Artist, 'gender'> & {
+type PersonCardProps = Omit<Artist, 'gender'> & {
   profile: boolean
+  type: string,
 };
 
 const heartIconStyle = {
@@ -25,8 +26,8 @@ const heartIconStyle = {
   },
 };
 
-const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
-  id, name, surname, img, profile,
+const PersonCard: React.FC<PersonCardProps> = ({
+  id, name, surname, img, profile, type,
 }) => {
   const dispatch = useRootDispatch();
   const favored = useRootSelector(selectActorsFavored);
@@ -40,7 +41,7 @@ const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
     dispatch(createActorsDeleteFavored(actorId));
   };
 
-  const isFavored = favored.find((fav) => fav.actorId === id);
+  const isFavored = favored.find((fav) => fav.artistId === id);
   return (
     <Paper sx={(theme) => theme.mixins.paper}>
 
@@ -75,4 +76,4 @@ const ActorsPageCard: React.FC<ActorsPageCardProps> = ({
   );
 };
 
-export default ActorsPageCard;
+export default PersonCard;

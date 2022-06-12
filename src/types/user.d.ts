@@ -5,7 +5,10 @@ type User = {
   nickname?: string,
   email: string,
   avatar?: string,
-  favoredActors?: Favored[],
+  favored?: {
+    actors: Favored[],
+    directors: Favored[],
+  },
 };
 
 export default User;

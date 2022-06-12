@@ -28,7 +28,7 @@ namespace AuthService {
         email: user.email,
         avatar: user.avatar,
         roles: ['0'],
-        favoredActors: user.favoredActors,
+        favored: user.favored,
       };
     }
     return {
@@ -37,7 +37,7 @@ namespace AuthService {
       email: user.email,
       avatar: user.avatar,
       roles: [],
-      favoredActors: user.favoredActors,
+      favored: user.favored,
     };
   };
 
