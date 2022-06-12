@@ -5,7 +5,7 @@ type User = {
   nickname?: string,
   email: string,
   avatar?: string,
-  favored?: {
+  favored: {
     actors: Favored[],
     directors: Favored[],
   },

@@ -4,10 +4,10 @@ import {
 } from '@mui/material';
 import { selectAuthUser } from '../../store/features/auth/auth-selectors';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { selectActorsFavored, selectActorsAll } from '../../store/features/actors/actors-selectors';
+import { selectActorsFavored, selectActorsAll } from '../../store/features/artists/artists-selectors';
 import PersonCard from '../../components/person-card';
 import { Artist } from '../../types';
-import { actorsFetchAction, actorsFetchFavoredAction } from '../../store/features/actors/actors-action-creators';
+import { artistsFetchAction, artistsFetchFavoredAction } from '../../store/features/artists/artists-action-creators';
 
 const ProfilePage: React.FC = () => {
   const [favoredActors, setFavoredActors] = useState<Artist[]>([]);
@@ -15,11 +15,10 @@ const ProfilePage: React.FC = () => {
   const user = useRootSelector(selectAuthUser);
   const actors = useRootSelector(selectActorsAll);
   const favoredActorsIds = useRootSelector(selectActorsFavored);
-
   useEffect(() => {
     (async () => {
-      await dispatch(actorsFetchAction);
-      await dispatch(actorsFetchFavoredAction);
+      await dispatch(artistsFetchAction('actor'));
+      await dispatch(artistsFetchFavoredAction('actor'));
     })();
   }, []);
 

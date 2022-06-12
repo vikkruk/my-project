@@ -53,6 +53,10 @@ namespace AuthService {
     return {
       id: newUser.id,
       email: newUser.email,
+      favored: {
+        actors: [],
+        directors: [],
+      },
     };
   };
 

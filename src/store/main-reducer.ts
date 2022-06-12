@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import actorsReducer from './features/actors/actors-reducer';
+import artistsReducer from './features/artists/artists-reducer';
 import authReducer from './features/auth/auth-reducer';
 import navigationReducer from './features/navigation/navigation-reducer';
 
 const mainReducer = combineReducers({
   auth: authReducer,
-  actors: actorsReducer,
+  artists: artistsReducer,
   navigation: navigationReducer,
 });
 

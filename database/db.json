@@ -442,18 +442,7 @@
         "777",
         "1"
       ],
-      "favored": {
-        "actors": [
-          {
-            "id": "56e827b9-e003-4f2b-8596-1b07df5327d0",
-            "artistId": "2"
-          },
-          {
-            "id": "0b448112-f856-48c6-bf67-2094adb6f3a9",
-            "artistId": "3"
-          }
-        ]
-      }
+      "favored": {}
     },
     {
       "id": "1",
@@ -505,10 +494,37 @@
       "email": "celblast@gmail.com",
       "password": "Cinema101",
       "avatar": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2Ey9pRlKRB0%2Fhqdefault.jpg&f=1&nofb=1",
-      "roles": [
-        "1"
-      ],
-      "favoredActors": []
+      "roles": [],
+      "favored": {
+        "directors": [
+          {
+            "id": "e98dba49-cabc-4f80-95ec-eed71b690c70",
+            "artistId": "11"
+          },
+          {
+            "id": "29392632-f85d-4e9b-a62c-21c0a8ae3bd4",
+            "artistId": "10"
+          },
+          {
+            "id": "c0f014cc-4b84-4bb8-95b7-ef1498a598d5",
+            "artistId": "18"
+          }
+        ],
+        "actors": [
+          {
+            "id": "0f53a0eb-8866-4913-82a3-28189564ec04",
+            "artistId": "12"
+          },
+          {
+            "id": "e67c149f-848d-4f1b-b357-8fe73c245b3b",
+            "artistId": "13"
+          },
+          {
+            "id": "91cd0a0d-40d0-444e-9768-c6def9a50e96",
+            "artistId": "15"
+          }
+        ]
+      }
     }
   ],
   "userRoles": [

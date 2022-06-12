@@ -8,8 +8,8 @@ import {
 import PersonCard from '../../components/person-card';
 import { Artist, User } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { actorsFetchFavoredAction, actorsFetchAction } from '../../store/features/actors/actors-action-creators';
-import { selectActorsAll, selectActorsFavored } from '../../store/features/actors/actors-selectors';
+import { artistsFetchFavoredAction, artistsFetchAction } from '../../store/features/artists/artists-action-creators';
+import { selectActorsAll, selectActorsFavored } from '../../store/features/artists/artists-selectors';
 import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 import { getLocalStorage, setLocalStorage } from '../../helpers/local-storage-helpers';
 import ApiService from '../../services/api-service';
@@ -26,25 +26,26 @@ const ActorsPage: React.FC = () => {
   const [showFavored, setShowFavored] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(actorsFetchAction);
+    dispatch(artistsFetchAction('actor'));
     if (loggedIn) {
-      dispatch(actorsFetchFavoredAction);
+      dispatch(artistsFetchFavoredAction('actor'));
     }
-    console.log(favoredActorsIds);
   }, [loggedIn]);
 
   useEffect(() => {
     const currentUser = getLocalStorage<User>(USER_KEY_IN_LOCAL_STORAGE);
-    if (loggedIn) {
+    if (loggedIn && currentUser) {
       setLocalStorage(USER_KEY_IN_LOCAL_STORAGE, {
         ...currentUser,
         favored: {
+          ...currentUser.favored,
           actors: favoredActorsIds,
         },
       });
       if (currentUser !== null) {
         ApiService.patch(`users/${currentUser.id}`, {
           favored: {
+            ...currentUser.favored,
             actors: favoredActorsIds,
           },
 
