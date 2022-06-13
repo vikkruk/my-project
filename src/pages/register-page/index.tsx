@@ -7,7 +7,7 @@ import AuthForm from '../../components/auth-form';
 import { UserRegistration } from '../../types';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
-import { createRegisterAction } from '../../store/features/auth/auth-action-creators';
+import { createRegisterActionThunk } from '../../store/features/auth/auth-action-creators';
 
 type RegisterValues = UserRegistration;
 
@@ -40,7 +40,7 @@ const RegisterPage: React.FC = () => {
   const dispatch = useRootDispatch();
 
   const handleRegister: RegisterFormikConfig['onSubmit'] = ({ email, password, repeatPassword }) => {
-    dispatch(createRegisterAction({ email, password, repeatPassword }, '/'));
+    dispatch(createRegisterActionThunk({ email, password }, '/'));
   };
 
   const {

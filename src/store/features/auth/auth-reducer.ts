@@ -37,6 +37,7 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
     }
 
     case AuthActionType.AUTH_FAILURE: {
+      localStorage.removeItem(TOKEN_KEY);
       return {
         ...state,
         error: action.payload.error,

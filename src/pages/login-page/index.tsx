@@ -8,7 +8,7 @@ import AuthForm from '../../components/auth-form';
 import StyledHomeNavLink from '../../components/styled-home-navlink';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
-import { createLoginAction } from '../../store/features/auth/auth-action-creators';
+import { createLoginActionThunk } from '../../store/features/auth/auth-action-creators';
 
 type LoginValues = {
   email: string,
@@ -43,7 +43,7 @@ const LoginPage: React.FC = () => {
 
   const handleLogin: LoginFormikConfig['onSubmit'] = ({ email, password }) => {
     const next = searchParams.get('next') ?? '/actors';
-    dispatch(createLoginAction({ email, password }, next));
+    dispatch(createLoginActionThunk({ email, password }, next));
   };
 
   const {

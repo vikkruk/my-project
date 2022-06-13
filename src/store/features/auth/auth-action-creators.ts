@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { Credentials, User, UserRegistration } from '../../../types';
-import { AppAction } from '../../types';
+import { AppAction, RootState } from '../../types';
 import {
   AuthActionType,
   AuthAdminLoginAction,
@@ -12,7 +12,7 @@ import {
 } from './auth-types';
 import pause from '../../../helpers/pause';
 import { createNavigationSetNextAction } from '../navigation/navigation-action-creators';
-import AuthService, { AuthPromise, AuthResponseBody } from '../../../services/auth-service';
+import AuthService, { AuthResponseBody } from '../../../services/auth-service';
 
 export const authLoadingAction: AuthLoadingAction = {
   type: AuthActionType.AUTH_LOADING,
@@ -40,12 +40,18 @@ export const createAuthFailureAction = (error: string): AuthFailureAction => ({
   payload: { error },
 });
 
-export const authenticate = async (credentials: Credentials, next: string, authMethod: AuthPromise, dispatch: Dispatch<AppAction>): Promise<void> => {
+export const authenticate = async (
+  authMethod: () => Promise<AuthResponseBody>,
+  dispatch: Dispatch<AppAction>,
+  next?: string,
+): Promise<void> => {
   try {
     dispatch(authLoadingAction);
     await pause(700);
-    const authResponseBody = await authMethod(credentials);
-    dispatch(createNavigationSetNextAction(next));
+    const authResponseBody = await authMethod();
+    if (next !== undefined) {
+      dispatch(createNavigationSetNextAction(next));
+    }
     dispatch(createAuthSuccessAction(authResponseBody));
     dispatch(authClearErrorAction);
   } catch (error) {
@@ -53,11 +59,17 @@ export const authenticate = async (credentials: Credentials, next: string, authM
     dispatch(createAuthFailureAction(errorMsg));
   }
 };
-
-export const createLoginAction = (credentials: Credentials, next: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
-  await authenticate(credentials, next, AuthService.login, dispatch);
+export const createAuthenticateActionThunk = (token: string) => async (
+  dispatch: Dispatch<AppAction>,
+): Promise<void> => {
+  await pause(2000);
+  await authenticate(async () => AuthService.authenticate(token), dispatch);
 };
 
-export const createRegisterAction = (credentials: UserRegistration, next: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
-  await authenticate(credentials, next, AuthService.register, dispatch);
+export const createLoginActionThunk = (credentials: Credentials, next: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+  await authenticate(async () => AuthService.login(credentials), dispatch, next);
+};
+
+export const createRegisterActionThunk = (credentials: Credentials, next: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+  await authenticate(async () => AuthService.register(credentials), dispatch, next);
 };

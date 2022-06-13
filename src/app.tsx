@@ -1,5 +1,4 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavbarLayout from './layouts/navbar-layout';
 import ActorsPage from './pages/actors-page';
@@ -13,11 +12,24 @@ import RegisterPage from './pages/register-page';
 import RequireAdmin from './routing/require-admin';
 import RequireAuth from './routing/require-auth';
 import RequireVisitor from './routing/require-visitor';
-import store from './store/index';
+import { useRootDispatch, useRootSelector } from './store/hooks';
+import { selectAuthToken, selectAuthLoggedIn } from './store/features/auth/auth-selectors';
+import { createAuthenticateActionThunk } from './store/features/auth/auth-action-creators';
 
-const App: React.FC = () => (
-  <BrowserRouter>
-    <Provider store={store}>
+const App: React.FC = () => {
+  const dispatch = useRootDispatch();
+  const loggedIn = useRootSelector(selectAuthLoggedIn);
+  const token = useRootSelector(selectAuthToken);
+  if (token && !loggedIn) {
+    dispatch(createAuthenticateActionThunk(token));
+    return (
+      <>
+        Autentifikuojama...
+      </>
+);
+  }
+  return (
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<NavbarLayout />}>
           <Route index element={<HomePage />} />
@@ -60,9 +72,9 @@ const App: React.FC = () => (
           />
         </Route>
       </Routes>
-    </Provider>
-  </BrowserRouter>
+    </BrowserRouter>
 
 );
+};
 
 export default App;

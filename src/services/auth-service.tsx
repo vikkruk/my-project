@@ -8,11 +8,10 @@ export type AuthResponseBody = {
   user: User,
   token: string,
 };
-export type AuthPromise = (credentials: Credentials) => Promise<AuthResponseBody>;
 
 namespace AuthService {
 
-  export const login: AuthPromise = async (credentials: Credentials) => {
+  export const login = async (credentials: Credentials): Promise<AuthResponseBody> => {
     try {
       const response = await ApiServiceBE.post<AuthResponseBody>('/api/auth/login', credentials);
       return response.data;
@@ -42,8 +41,13 @@ namespace AuthService {
     // };
   };
 
-  export const register: AuthPromise = async ({ email, password }) => {
-throw new Error('Testuojames, neskubam');
-};
+  export const register = async (credentials: Credentials): Promise<AuthResponseBody> => {
+    throw new Error('Testuojames, neskubam');
+  };
+
+  export const authenticate = async (token: string): Promise<AuthResponseBody> => {
+    throw new Error('Testuojames, neskubam');
+  };
 }
+
 export default AuthService;
