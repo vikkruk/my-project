@@ -30,6 +30,7 @@ const HomePageQuestionChoice: React.FC<HomePageQuestionChoiceProps> = ({
       sx={(theme) => ({
         backgroundImage: `url(${image})`,
         backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
         backgroundPosition: '40% 20%',
         height: 400,
         position: 'relative',
@@ -37,8 +38,8 @@ const HomePageQuestionChoice: React.FC<HomePageQuestionChoiceProps> = ({
         justifyContent: 'center',
         alignItems: 'center',
         color: 'white',
-        maxWidth: '500px',
         mx: 'auto',
+        width: '100%',
         boxShadow: '0 0 1px 1px grey',
 
         '::after': {
@@ -54,7 +55,7 @@ const HomePageQuestionChoice: React.FC<HomePageQuestionChoiceProps> = ({
 
       })}
     >
-      <Typography sx={{ fontSize: '50px', zIndex: 1 }}>{text}</Typography>
+      <Typography sx={{ fontSize: { xs: '25px', sm: '35px', md: '50px' }, zIndex: 1 }}>{text}</Typography>
     </Box>
   </Box>
 );

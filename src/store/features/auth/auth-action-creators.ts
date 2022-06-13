@@ -62,7 +62,6 @@ export const authenticate = async (
 export const createAuthenticateActionThunk = (token: string) => async (
   dispatch: Dispatch<AppAction>,
 ): Promise<void> => {
-  await pause(2000);
   await authenticate(async () => AuthService.authenticate(token), dispatch);
 };
 

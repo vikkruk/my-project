@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Box,
-  Button,
   Typography,
 } from '@mui/material';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import HomePageQuestionChoice from './home-page-choice';
+import HomePageQuestionButton from './home-page-question-button';
 import happyImg from './images/happyend.jpg';
 import sadImg from './images/sadend.jpg';
 
@@ -21,10 +21,9 @@ const HomePageQuestion: React.FC = () => (
 
   <Box
     sx={(theme) => ({
-      bgcolor: theme.palette.info.main,
-      color: theme.palette.common.white,
-      boxShadow: '0 0px 1px 2px grey',
-      maxWidth: '500px',
+      color: theme.palette.primary.main,
+      boxShadow: '0 1px 1px 2px grey',
+      width: { xs: 280, sm: 600 },
       height: 400,
       m: 'auto',
       position: 'relative',
@@ -63,48 +62,12 @@ const HomePageQuestion: React.FC = () => (
         mb: 5, display: 'flex', justifyContent: 'center', gap: 3,
       }}
       >
-        <Button
-          onClick={
-            () => choiceFunction('#happy')
-          }
-          sx={(theme) => ({
-            bgcolor: theme.palette.secondary.main,
-            color: theme.palette.primary.main,
-            p: 2,
-            gap: 1,
-            transition: 'all 0.3s',
-
-            ':hover': {
-              bgcolor: theme.palette.primary.main,
-              color: theme.palette.secondary.main,
-            },
-
-          })}
-        >
-          Happy ending
+        <HomePageQuestionButton onClick={() => choiceFunction('#happy')} text="Happy ending">
           <SentimentSatisfiedAltIcon />
-          {' '}
-        </Button>
-        <Button
-          onClick={() => choiceFunction('#sad')}
-          sx={(theme) => ({
-            bgcolor: theme.palette.secondary.main,
-            color: theme.palette.primary.main,
-            p: 2,
-            gap: 1,
-            transition: 'all 0.3s',
-
-            ':hover': {
-              bgcolor: theme.palette.primary.main,
-              color: theme.palette.secondary.main,
-            },
-          })}
-        >
-          Sad ending
-          {' '}
+        </HomePageQuestionButton>
+        <HomePageQuestionButton onClick={() => choiceFunction('#sad')} text="Sad ending">
           <SentimentVeryDissatisfiedIcon />
-          {' '}
-        </Button>
+        </HomePageQuestionButton>
       </Box>
     </Box>
 

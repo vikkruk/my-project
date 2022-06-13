@@ -1,6 +1,6 @@
 import React from 'react';
 import HomePageHeader from './home-page-header';
-import HomePageQuestion from './home-page-question/home-page-question';
+import HomePageQuestion from './home-page-question';
 
 const HomePage: React.FC = () => (
   <>
