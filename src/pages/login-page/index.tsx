@@ -3,12 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 import { FormikConfig, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Typography } from '@mui/material';
-
 import AuthForm from '../../components/auth-form';
 import StyledHomeNavLink from '../../components/styled-home-navlink';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
 import { createLoginActionThunk } from '../../store/features/auth/auth-action-creators';
+import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
 
 type LoginValues = {
   email: string,

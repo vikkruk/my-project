@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import NavbarLayout from './layouts/navbar-layout';
+import { useRootDispatch, useRootSelector } from './store/hooks';
+import { selectAuthToken, selectAuthLoggedIn } from './store/features/auth/auth-selectors';
+import { createAuthenticateActionThunk } from './store/features/auth/auth-action-creators';
 import ActorsPage from './pages/actors-page';
 import AdminPage from './pages/admin-page';
 import DirectorsPage from './pages/directors-page';
@@ -9,12 +11,10 @@ import LoginPage from './pages/login-page';
 import MoviesPage from './pages/movies-page';
 import ProfilePage from './pages/profile-page';
 import RegisterPage from './pages/register-page';
+import NavbarLayout from './layouts/navbar-layout';
 import RequireAdmin from './routing/require-admin';
 import RequireAuth from './routing/require-auth';
 import RequireVisitor from './routing/require-visitor';
-import { useRootDispatch, useRootSelector } from './store/hooks';
-import { selectAuthToken, selectAuthLoggedIn } from './store/features/auth/auth-selectors';
-import { createAuthenticateActionThunk } from './store/features/auth/auth-action-creators';
 
 const App: React.FC = () => {
   const dispatch = useRootDispatch();

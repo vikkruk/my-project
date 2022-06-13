@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Container, Grid, Paper, Typography,
+  Box,
+  Container,
+  Grid,
+  Paper,
+  Typography,
 } from '@mui/material';
-import { selectAuthUser } from '../../store/features/auth/auth-selectors';
-import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import {
- selectActorsFavored, selectActorsAll, selectDirectorsAll, selectDirectorsFavored,
-} from '../../store/features/artists/artists-selectors';
 import PersonCard from '../../components/person-card';
 import { Artist } from '../../types';
+import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { artistsFetchAction, artistsFetchFavoredAction } from '../../store/features/artists/artists-action-creators';
+import { selectAuthUser } from '../../store/features/auth/auth-selectors';
+import {
+ selectActorsFavored,
+ selectActorsAll,
+ selectDirectorsAll,
+ selectDirectorsFavored,
+} from '../../store/features/artists/artists-selectors';
 
 const ProfilePage: React.FC = () => {
   const [favoredActors, setFavoredActors] = useState<Artist[]>([]);

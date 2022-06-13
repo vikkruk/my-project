@@ -3,11 +3,11 @@ import { Box, Paper } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import { Artist } from '../types';
+import { ArtistsPageType } from '../store/features/artists/artists-types';
 import { useRootDispatch, useRootSelector } from '../store/hooks';
 import { createArtistsAddFavored, createArtistsDeleteFavored } from '../store/features/artists/artists-action-creators';
 import { selectActorsFavored, selectDirectorsFavored } from '../store/features/artists/artists-selectors';
 import { selectAuthLoggedIn } from '../store/features/auth/auth-selectors';
-import { ArtistsPageType } from '../store/features/artists/artists-types';
 
 type PersonCardProps = Omit<Artist, 'gender'> & {
   profile: boolean

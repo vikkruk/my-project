@@ -1,5 +1,9 @@
-import { Box, Container, Typography } from '@mui/material';
 import React from 'react';
+import {
+  Box,
+  Container,
+  Typography,
+} from '@mui/material';
 import MovieImg from './images/movie.svg';
 
 const HomePageHeader: React.FC = () => (

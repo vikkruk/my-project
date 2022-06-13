@@ -1,6 +1,4 @@
 import { Dispatch } from 'redux';
-import { Credentials, User, UserRegistration } from '../../../types';
-import { AppAction, RootState } from '../../types';
 import {
   AuthActionType,
   AuthAdminLoginAction,
@@ -10,9 +8,11 @@ import {
   AuthLogoutAction,
   AuthSuccessAction,
 } from './auth-types';
-import pause from '../../../helpers/pause';
+import { AppAction } from '../../types';
+import { Credentials } from '../../../types';
 import { createNavigationSetNextAction } from '../navigation/navigation-action-creators';
 import AuthService, { AuthResponseBody } from '../../../services/auth-service';
+import pause from '../../../helpers/pause';
 
 export const authLoadingAction: AuthLoadingAction = {
   type: AuthActionType.AUTH_LOADING,

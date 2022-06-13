@@ -6,14 +6,14 @@ import {
   Typography,
 } from '@mui/material';
 import PersonCard from '../../components/person-card';
+import FilterButton from '../../components/filter-button';
 import { Artist, User } from '../../types';
+import ApiService from '../../services/api-service';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
+import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 import { artistsFetchFavoredAction, artistsFetchAction } from '../../store/features/artists/artists-action-creators';
 import { selectDirectorsAll, selectDirectorsFavored } from '../../store/features/artists/artists-selectors';
-import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 import { getLocalStorage, setLocalStorage } from '../../helpers/local-storage-helpers';
-import ApiService from '../../services/api-service';
-import FilterButton from '../../components/filter-button';
 
 const USER_KEY_IN_LOCAL_STORAGE = process.env.REACT_APP_USER_KEY_IN_LOCAL_STORAGE;
 if (USER_KEY_IN_LOCAL_STORAGE === undefined) {

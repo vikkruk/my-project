@@ -5,10 +5,10 @@ import {
  Typography,
 } from '@mui/material';
 import MovieCard from './movie-card';
+import { Movie } from '../../types';
+import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { moviesFetchAction } from '../../store/features/movies/movies-action-creators';
 import selectMoviesAll from '../../store/features/movies/movies-selectors';
-import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { Movie } from '../../types';
 
 const MoviesPage: React.FC = () => {
 const dispatch = useRootDispatch();

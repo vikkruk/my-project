@@ -1,7 +1,4 @@
-import { AxiosError } from 'axios';
-import {
-  Credentials, User, UserRole,
-} from '../types';
+import { Credentials, User } from '../types';
 import ApiService, { ApiServiceBE, isResponseError } from './api-service';
 
 export type AuthResponseBody = {

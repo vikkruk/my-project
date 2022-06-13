@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -8,10 +9,9 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import { Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
-import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
+import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 
 const NavbarDropDownMenu: React.FC = () => {
   const [open, setOpen] = React.useState(false);

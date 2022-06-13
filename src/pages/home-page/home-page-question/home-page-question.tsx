@@ -1,12 +1,14 @@
-import {
-  Box, Button, Typography,
-} from '@mui/material';
 import React from 'react';
+import {
+  Box,
+  Button,
+  Typography,
+} from '@mui/material';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import HomePageQuestionChoice from './home-page-choice';
-import sadImg from './images/sadend.jpg';
 import happyImg from './images/happyend.jpg';
+import sadImg from './images/sadend.jpg';
 
 const choiceFunction = (emotion: string): void => {
   const choiceSection = document.querySelector(emotion) as HTMLDivElement;

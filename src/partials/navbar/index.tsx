@@ -1,15 +1,20 @@
 import React from 'react';
 import {
-  AppBar, Avatar, Box, Container, Toolbar, Typography,
+  AppBar,
+  Avatar,
+  Box,
+  Container,
+  Toolbar,
+  Typography,
 } from '@mui/material';
-import { User } from '../../types';
+import NavbarLoggedInMenu from './navbar-logged-in-menu';
+import NavbarDropDownMenu from './navbar-drop-down-menu';
 import StyledNavLink from '../../components/styled-navlink';
 import StyledHomeNavLink from '../../components/styled-home-navlink';
-import NavbarLoggedInMenu from './navbar-logged-in-menu';
+import { User } from '../../types';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
-import { selectAuthLoggedIn, selectAuthUser } from '../../store/features/auth/auth-selectors';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
-import NavbarDropDownMenu from './navbar-drop-down-menu';
+import { selectAuthLoggedIn, selectAuthUser } from '../../store/features/auth/auth-selectors';
 
 const NavBar: React.FC = () => {
   const loggedIn = useRootSelector(selectAuthLoggedIn);

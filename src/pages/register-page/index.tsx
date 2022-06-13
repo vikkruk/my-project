@@ -2,12 +2,11 @@ import React from 'react';
 import { FormikConfig, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
-
 import AuthForm from '../../components/auth-form';
 import { UserRegistration } from '../../types';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
-import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
 import { createRegisterActionThunk } from '../../store/features/auth/auth-action-creators';
+import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
 
 type RegisterValues = UserRegistration;
 
@@ -39,7 +38,7 @@ const RegisterPage: React.FC = () => {
   const loading = useRootSelector(selectAuthLoading);
   const dispatch = useRootDispatch();
 
-  const handleRegister: RegisterFormikConfig['onSubmit'] = ({ email, password, repeatPassword }) => {
+  const handleRegister: RegisterFormikConfig['onSubmit'] = ({ email, password }) => {
     dispatch(createRegisterActionThunk({ email, password }, '/'));
   };
 

@@ -7,7 +7,11 @@ import Collapse from '@mui/material/Collapse';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Box, CardMedia, Container } from '@mui/material';
+import {
+ Box,
+  CardMedia,
+  Container,
+} from '@mui/material';
 import { Movie } from '../../types';
 
 interface ExpandMoreProps extends IconButtonProps {
