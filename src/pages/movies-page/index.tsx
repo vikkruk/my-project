@@ -1,8 +1,9 @@
-import { LocalConvenienceStoreOutlined } from '@mui/icons-material';
-import {
- Box, Grid, Paper, Typography,
-} from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import {
+ Box,
+ Grid,
+ Typography,
+} from '@mui/material';
 import MovieCard from './movie-card';
 import { moviesFetchAction } from '../../store/features/movies/movies-action-creators';
 import selectMoviesAll from '../../store/features/movies/movies-selectors';
