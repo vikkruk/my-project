@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -38,7 +38,7 @@ const MovieCard: React.FC<Movie> = ({
  actors,
  genres,
 }) => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -46,7 +46,6 @@ const MovieCard: React.FC<Movie> = ({
 
   return (
     <Container sx={{ p: 2 }}>
-
       <Card sx={{ width: '100%' }}>
         <Box sx={{
           display: 'flex',
@@ -72,11 +71,10 @@ const MovieCard: React.FC<Movie> = ({
               mt: { xs: 1, lg: 0 },
               justifySelf: 'flex-start',
             }}
-              height="400"
               src={poster}
             />
           </CardMedia>
-          <CardContent sx={{ m: 'auto' }}>
+          <CardContent sx={{ m: 'auto', display: { xs: 'none', md: 'initial' } }}>
             <Typography
               variant="h4"
               color="primary"
@@ -93,9 +91,33 @@ const MovieCard: React.FC<Movie> = ({
             <Typography variant="h5" color="primary">
               {year}
             </Typography>
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="h5" color="primary">
+                {directors.length > 1 ? 'Directors' : 'Director'}
+              </Typography>
+              <Box>
+                {directors.map((director) => (
+                  <Typography paragraph key={director}>
+                    {director}
+                  </Typography>
+            ))}
+              </Box>
+            </Box>
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="h5" color="primary">
+                {actors.length > 1 ? 'Actors' : 'Actor'}
+              </Typography>
+              <Box>
+                {actors.map((actor) => (
+                  <Typography paragraph key={actor}>
+                    {actor}
+                  </Typography>
+            ))}
+              </Box>
+            </Box>
           </CardContent>
         </Box>
-        <CardActions disableSpacing>
+        <CardActions disableSpacing sx={{ display: { xs: 'block', md: 'none' } }}>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -106,7 +128,7 @@ const MovieCard: React.FC<Movie> = ({
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent sx={{ width: '100%' }}>
+          <CardContent sx={{ width: '100%', display: { xs: 'initial', md: 'none' } }}>
             <Typography paragraph>{directors.length > 1 ? 'Directors' : 'Director'}</Typography>
 
             {directors.map((director) => (
