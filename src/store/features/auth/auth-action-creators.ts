@@ -12,7 +12,7 @@ import {
 } from './auth-types';
 import pause from '../../../helpers/pause';
 import { createNavigationSetNextAction } from '../navigation/navigation-action-creators';
-import AuthService, { AuthPromise } from './auth-service';
+import AuthService, { AuthPromise, AuthResponseBody } from '../../../services/auth-service';
 
 export const authLoadingAction: AuthLoadingAction = {
   type: AuthActionType.AUTH_LOADING,
@@ -30,9 +30,9 @@ export const authAdminLogin: AuthAdminLoginAction = {
   type: AuthActionType.AUTH_ADMIN_LOGIN,
 };
 
-export const createAuthSuccessAction = (user: User): AuthSuccessAction => ({
+export const createAuthSuccessAction = (authResponseBody: AuthResponseBody): AuthSuccessAction => ({
   type: AuthActionType.AUTH_SUCCESS,
-  payload: { user },
+  payload: authResponseBody,
 });
 
 export const createAuthFailureAction = (error: string): AuthFailureAction => ({
@@ -44,13 +44,9 @@ export const authenticate = async (credentials: Credentials, next: string, authM
   try {
     dispatch(authLoadingAction);
     await pause(700);
-    const user = await authMethod(credentials);
-    if (user.roles !== undefined && user.roles.length === 1) {
-      dispatch(authAdminLogin);
-      delete user.roles;
-    }
+    const authResponseBody = await authMethod(credentials);
     dispatch(createNavigationSetNextAction(next));
-    dispatch(createAuthSuccessAction(user));
+    dispatch(createAuthSuccessAction(authResponseBody));
     dispatch(authClearErrorAction);
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);

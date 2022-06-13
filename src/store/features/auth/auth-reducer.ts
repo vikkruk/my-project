@@ -3,14 +3,17 @@ import { Reducer } from 'redux';
 import { AuthAction, AuthActionType, AuthState } from './auth-types';
 import { setLocalStorage, getLocalStorage } from '../../../helpers/local-storage-helpers';
 
-const USER_KEY = process.env.REACT_APP_USER_KEY_IN_LOCAL_STORAGE;
-const ADMIN_KEY = process.env.REACT_APP_ADMIN_KEY_IN_LOCAL_STORAGE;
+const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY_IN_LOCAL_STORAGE;
+
+if (TOKEN_KEY === undefined) {
+  throw new Error('Please declare REACT_APP_TOKEN_KEY_IN_LOCAL_STORAGE in/.env');
+}
 
 const initialValues: AuthState = {
-  user: getLocalStorage(USER_KEY),
+  token: getLocalStorage(TOKEN_KEY),
+  user: null,
   error: null,
   loading: false,
-  admin: Boolean(getLocalStorage(ADMIN_KEY)),
 };
 
 const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, action) => {
@@ -20,19 +23,14 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
         ...state,
         error: null,
         loading: true,
+        token: null,
       };
     }
-    case AuthActionType.AUTH_CLEAR_ERROR: {
-      return {
-        ...state,
-        error: null,
-      };
-    }
-
     case AuthActionType.AUTH_SUCCESS: {
-      setLocalStorage(USER_KEY, action.payload.user);
+      setLocalStorage(TOKEN_KEY, action.payload.token);
       return {
         ...state,
+        token: action.payload.token,
         user: action.payload.user,
         loading: false,
       };
@@ -42,25 +40,23 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
       return {
         ...state,
         error: action.payload.error,
+        user: null,
+        token: null,
         loading: false,
       };
     }
-
-    case AuthActionType.AUTH_ADMIN_LOGIN: {
-      localStorage.setItem(ADMIN_KEY, 'true');
+    case AuthActionType.AUTH_CLEAR_ERROR: {
       return {
         ...state,
-        admin: true,
+        error: null,
       };
     }
 
     case AuthActionType.AUTH_LOGOUT: {
-      localStorage.removeItem(USER_KEY);
-      localStorage.removeItem(ADMIN_KEY);
+      localStorage.removeItem(TOKEN_KEY);
       return {
         ...state,
         user: null,
-        admin: false,
       };
     }
     default: return state;

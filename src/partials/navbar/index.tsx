@@ -7,14 +7,14 @@ import StyledNavLink from '../../components/styled-navlink';
 import StyledHomeNavLink from '../../components/styled-home-navlink';
 import NavbarLoggedInMenu from './navbar-logged-in-menu';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
-import { selectAuthLoggedIn, selectAuthUser, selectAuthAdmin } from '../../store/features/auth/auth-selectors';
+import { selectAuthLoggedIn, selectAuthUser } from '../../store/features/auth/auth-selectors';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
 import NavbarDropDownMenu from './navbar-drop-down-menu';
 
 const NavBar: React.FC = () => {
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const user = useRootSelector(selectAuthUser);
-  const admin = useRootSelector(selectAuthAdmin);
+  const admin = 'placeholder';
   const dispatch = useRootDispatch();
 
   const logout = () => dispatch(authLogoutAction);

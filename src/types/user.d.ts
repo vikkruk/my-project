@@ -1,13 +1,16 @@
-import Favored from './favored';
+import FavoredArtist from './favored-artist';
 
 type User = {
   id: string,
-  nickname?: string,
   email: string,
+  nickname: string,
+  role: 'user' | 'admin',
   avatar?: string,
+  createdAt: string,
+  updatedAt: string,
   favored: {
-    actors: Favored[],
-    directors: Favored[],
+    actors: FavoredArtist[],
+    directors: FavoredArtist[],
   },
 };
 

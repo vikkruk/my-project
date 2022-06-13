@@ -7,11 +7,11 @@ import { useRootDispatch, useRootSelector } from '../store/hooks';
 import { createArtistsAddFavored, createArtistsDeleteFavored } from '../store/features/artists/artists-action-creators';
 import { selectActorsFavored, selectDirectorsFavored } from '../store/features/artists/artists-selectors';
 import { selectAuthLoggedIn } from '../store/features/auth/auth-selectors';
-import { ArtistsTypeType } from '../store/features/artists/artists-types';
+import { ArtistsPageType } from '../store/features/artists/artists-types';
 
 type PersonCardProps = Omit<Artist, 'gender'> & {
   profile: boolean
-  type: ArtistsTypeType,
+  type: ArtistsPageType,
 };
 
 const heartIconStyle = {

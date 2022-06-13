@@ -16,7 +16,9 @@ import ApiService from '../../services/api-service';
 import FilterButton from '../../components/filter-button';
 
 const USER_KEY_IN_LOCAL_STORAGE = process.env.REACT_APP_USER_KEY_IN_LOCAL_STORAGE;
-
+if (USER_KEY_IN_LOCAL_STORAGE === undefined) {
+  throw new Error('Please declare REACT_APP_USER_KEY_IN_LOCAL_STORAGE in/.env');
+}
 const ActorsPage: React.FC = () => {
   const dispatch = useRootDispatch();
   const allActors = useRootSelector(selectActorsAll);

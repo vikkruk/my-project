@@ -10,7 +10,7 @@ import MenuList from '@mui/material/MenuList';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
-import { selectAuthLoggedIn, selectAuthAdmin } from '../../store/features/auth/auth-selectors';
+import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
 
 const NavbarDropDownMenu: React.FC = () => {
@@ -19,7 +19,7 @@ const NavbarDropDownMenu: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useRootDispatch();
   const loggedIn = useRootSelector(selectAuthLoggedIn);
-  const admin = useRootSelector(selectAuthAdmin);
+  const admin = 'placeholder';
 
   const logout = () => dispatch(authLogoutAction);
 

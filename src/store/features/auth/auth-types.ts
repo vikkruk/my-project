@@ -1,10 +1,10 @@
 import { User } from '../../../types';
 
 export type AuthState = {
+  token: string | null,
   user: null | User,
   error: string | null,
   loading: boolean,
-  admin: boolean,
 };
 
 export enum AuthActionType {
@@ -33,7 +33,10 @@ export type AuthAdminLoginAction = {
 };
 export type AuthSuccessAction = {
   type: AuthActionType.AUTH_SUCCESS,
-  payload: { user: User },
+  payload: {
+    user: User,
+    token: string,
+  },
 };
 
 export type AuthFailureAction = {
