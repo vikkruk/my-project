@@ -10,6 +10,15 @@ export const isResponseError = (error: unknown | ResponseError): error is Respon
   && error.response.data.error,
 );
 
+export const handleError = (error: unknown): string => {
+  if (isResponseError(error)) {
+    return error.response.data.error;
+  } if (error instanceof Error) {
+    return error.message;
+  }
+  return error as string;
+};
+
 const API_SERVER = process.env.REACT_APP_API_SERVER;
 const API_BE_SERVER = process.env.REACT_APP_API_BE_SERVER;
 

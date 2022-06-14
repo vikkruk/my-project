@@ -1,5 +1,5 @@
 import { Credentials, User } from '../types';
-import ApiService, { ApiServiceBE, isResponseError } from './api-service';
+import ApiService, { ApiServiceBE, handleError, isResponseError } from './api-service';
 
 export type AuthResponseBody = {
   user: User,
@@ -13,10 +13,7 @@ namespace AuthService {
       const response = await ApiServiceBE.post<AuthResponseBody>('/api/auth/login', credentials);
       return response.data;
     } catch (error) {
-      if (isResponseError(error)) {
-        throw new Error(error.response.data.error);
-      }
-        throw (error);
+      throw new Error(handleError(error));
     }
   };
 
@@ -25,10 +22,7 @@ namespace AuthService {
       const response = await ApiServiceBE.post<AuthResponseBody>('/api/auth/register', credentials);
       return response.data;
     } catch (error) {
-      if (isResponseError(error)) {
-        throw new Error(error.response.data.error);
-      }
-        throw (error);
+      throw new Error(handleError(error));
     }
   };
 
@@ -42,10 +36,7 @@ namespace AuthService {
       });
       return response.data;
     } catch (error) {
-          if (isResponseError(error)) {
-        throw new Error(error.response.data.error);
-      }
-        throw (error);
+        throw new Error(handleError(error));
     }
   };
 
@@ -55,10 +46,7 @@ namespace AuthService {
       .get<{ available: boolean }>(`/api/auth/check-email?email=${email}`);
       return response.data.available;
     } catch (error) {
-       if (isResponseError(error)) {
-        throw new Error(error.response.data.error);
-      }
-        throw (error);
+       throw new Error(handleError(error));
     }
   };
 }
