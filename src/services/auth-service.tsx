@@ -18,32 +18,48 @@ namespace AuthService {
       }
         throw (error);
     }
-    // if (user.roles.includes(adminRoleId)) {
-    //   return {
-    //     id: user.id,
-    //     nickname: user.nickname,
-    //     email: user.email,
-    //     avatar: user.avatar,
-    //     roles: ['0'],
-    //     favored: user.favored,
-    //   };
-    // }
-    // return {
-    //   id: user.id,
-    //   nickname: user.nickname,
-    //   email: user.email,
-    //   avatar: user.avatar,
-    //   roles: [],
-    //   favored: user.favored,
-    // };
   };
 
   export const register = async (credentials: Credentials): Promise<AuthResponseBody> => {
-    throw new Error('Testuojames, neskubam');
+    try {
+      const response = await ApiServiceBE.post<AuthResponseBody>('/api/auth/register', credentials);
+      return response.data;
+    } catch (error) {
+      if (isResponseError(error)) {
+        throw new Error(error.response.data.error);
+      }
+        throw (error);
+    }
   };
 
   export const authenticate = async (token: string): Promise<AuthResponseBody> => {
-    throw new Error('Testuojames, neskubam');
+    try {
+      const response = await ApiServiceBE
+      .post<AuthResponseBody>('/api/auth/authenticate', {}, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      return response.data;
+    } catch (error) {
+          if (isResponseError(error)) {
+        throw new Error(error.response.data.error);
+      }
+        throw (error);
+    }
+  };
+
+  export const checkEmailAvailability = async (email: string): Promise<boolean> => {
+    try {
+      const response = await ApiServiceBE
+      .get<{ available: boolean }>(`/api/auth/check-email?email=${email}`);
+      return response.data.available;
+    } catch (error) {
+       if (isResponseError(error)) {
+        throw new Error(error.response.data.error);
+      }
+        throw (error);
+    }
   };
 }
 

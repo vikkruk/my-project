@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useRootDispatch, useRootSelector } from './store/hooks';
-import { selectAuthToken, selectAuthLoggedIn } from './store/features/auth/auth-selectors';
+import { selectAuthLoggedIn, selectAuth } from './store/features/auth/auth-selectors';
 import { createAuthenticateActionThunk } from './store/features/auth/auth-action-creators';
 import ActorsPage from './pages/actors-page';
 import AdminPage from './pages/admin-page';
@@ -15,17 +15,18 @@ import NavbarLayout from './layouts/navbar-layout';
 import RequireAdmin from './routing/require-admin';
 import RequireAuth from './routing/require-auth';
 import RequireVisitor from './routing/require-visitor';
+import FormLoadingAnimation from './components/loading-animation';
 
 const App: React.FC = () => {
   const dispatch = useRootDispatch();
   const loggedIn = useRootSelector(selectAuthLoggedIn);
-  const token = useRootSelector(selectAuthToken);
+  const { token, loading } = useRootSelector(selectAuth);
   if (token && !loggedIn) {
-    dispatch(createAuthenticateActionThunk(token));
+   if (!loading) {
+      dispatch(createAuthenticateActionThunk(token));
+    }
     return (
-      <>
-        Autentifikuojama...
-      </>
+      <FormLoadingAnimation />
 );
   }
   return (

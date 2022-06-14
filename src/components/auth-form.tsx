@@ -6,7 +6,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import FormLoadingAnimation from './form-loading-animation';
+import FormLoadingAnimation from './loading-animation';
 import { useRootSelector, useRootDispatch } from '../store/hooks';
 import { selectAuthError, selectAuthLoading } from '../store/features/auth/auth-selectors';
 import { authClearErrorAction } from '../store/features/auth/auth-action-creators';
