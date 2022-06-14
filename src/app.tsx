@@ -1,5 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+ Route,
+ Routes,
+ useLocation,
+} from 'react-router-dom';
 import { useRootDispatch, useRootSelector } from './store/hooks';
 import { selectAuthLoggedIn, selectAuth } from './store/features/auth/auth-selectors';
 import { createAuthenticateActionThunk } from './store/features/auth/auth-action-creators';
@@ -18,62 +22,62 @@ import RequireVisitor from './routing/require-visitor';
 import FormLoadingAnimation from './components/loading-animation';
 
 const App: React.FC = () => {
+  const location = useLocation();
   const dispatch = useRootDispatch();
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const { token, loading } = useRootSelector(selectAuth);
   if (token && !loggedIn) {
    if (!loading) {
-      dispatch(createAuthenticateActionThunk(token));
+      dispatch(createAuthenticateActionThunk(token, location.pathname));
     }
     return (
       <FormLoadingAnimation />
 );
   }
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<NavbarLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="actors" element={<ActorsPage />} />
-          <Route path="directors" element={<DirectorsPage />} />
-          <Route path="movies" element={<MoviesPage />} />
-          <Route
-            path="auth/login"
-            element={(
-              <RequireVisitor>
-                <LoginPage />
-              </RequireVisitor>
+
+    <Routes>
+      <Route path="/" element={<NavbarLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="actors" element={<ActorsPage />} />
+        <Route path="directors" element={<DirectorsPage />} />
+        <Route path="movies" element={<MoviesPage />} />
+        <Route
+          path="auth/login"
+          element={(
+            <RequireVisitor>
+              <LoginPage />
+            </RequireVisitor>
           )}
-          />
-          <Route
-            path="auth/register"
-            element={(
-              <RequireVisitor>
-                <RegisterPage />
-              </RequireVisitor>
+        />
+        <Route
+          path="auth/register"
+          element={(
+            <RequireVisitor>
+              <RegisterPage />
+            </RequireVisitor>
           )}
-          />
-          <Route
-            path="admin"
-            element={
+        />
+        <Route
+          path="admin"
+          element={
           (
             <RequireAdmin>
               <AdminPage />
             </RequireAdmin>
           )
           }
-          />
-          <Route
-            path="profile"
-            element={(
-              <RequireAuth>
-                <ProfilePage />
-              </RequireAuth>
+        />
+        <Route
+          path="profile"
+          element={(
+            <RequireAuth>
+              <ProfilePage />
+            </RequireAuth>
           )}
-          />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        />
+      </Route>
+    </Routes>
 
 );
 };

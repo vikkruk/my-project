@@ -3,7 +3,7 @@ import { Reducer } from 'redux';
 import { AuthAction, AuthActionType, AuthState } from './auth-types';
 import { setLocalStorage, getLocalStorage } from '../../../helpers/local-storage-helpers';
 
-const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY_IN_LOCAL_STORAGE;
+const TOKEN_KEY = process.env.REACT_APP_AUTH_TOKEN_IN_LOCAL_STORAGE;
 
 if (TOKEN_KEY === undefined) {
   throw new Error('Please declare REACT_APP_TOKEN_KEY_IN_LOCAL_STORAGE in/.env');
@@ -23,7 +23,6 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
         ...state,
         error: null,
         loading: true,
-        token: null,
       };
     }
     case AuthActionType.AUTH_SUCCESS: {

@@ -53,6 +53,8 @@ const artistsReducer: Reducer<ArtistsState, ArtistsAction> = (state = initialSta
           const newFavoredActor = {
             id: createId(),
             artistId: action.payload.artistId,
+            createdAt: 'sadda',
+            updatedAt: 'dsadsa',
           };
           return {
             ...state,
@@ -70,6 +72,8 @@ const artistsReducer: Reducer<ArtistsState, ArtistsAction> = (state = initialSta
           const newFavoredDirector = {
             id: createId(),
             artistId: action.payload.artistId,
+            createdAt: 'sadda',
+            updatedAt: 'dsadsa',
           };
           return {
             ...state,

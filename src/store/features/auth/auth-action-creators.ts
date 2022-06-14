@@ -43,26 +43,25 @@ export const createAuthFailureAction = (error: string): AuthFailureAction => ({
 export const authenticate = async (
   authMethod: () => Promise<AuthResponseBody>,
   dispatch: Dispatch<AppAction>,
-  next?: string,
+  next: string,
 ): Promise<void> => {
   try {
     dispatch(authLoadingAction);
     await pause(700);
     const authResponseBody = await authMethod();
-    if (next !== undefined) {
-      dispatch(createNavigationSetNextAction(next));
-    }
+    dispatch(createNavigationSetNextAction(next));
+
     dispatch(createAuthSuccessAction(authResponseBody));
     dispatch(authClearErrorAction);
   } catch (error) {
-    const errorMsg = error instanceof Error ? error.message : String(error);
-    dispatch(createAuthFailureAction(errorMsg));
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    dispatch(createAuthFailureAction(errorMessage));
   }
 };
-export const createAuthenticateActionThunk = (token: string) => async (
+export const createAuthenticateActionThunk = (token: string, next: string) => async (
   dispatch: Dispatch<AppAction>,
 ): Promise<void> => {
-  await authenticate(async () => AuthService.authenticate(token), dispatch);
+  await authenticate(async () => AuthService.authenticate(token), dispatch, next);
 };
 
 export const createLoginActionThunk = (credentials: Credentials, next: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {

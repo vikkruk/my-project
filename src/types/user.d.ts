@@ -5,13 +5,13 @@ type User = {
   email: string,
   nickname: string,
   role: 'user' | 'admin',
-  avatar?: string,
   createdAt: string,
   updatedAt: string,
   favored: {
     actors: FavoredArtist[],
     directors: FavoredArtist[],
   },
+  avatar?: string,
 };
 
 export default User;
