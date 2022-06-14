@@ -1,4 +1,4 @@
-import { RootState } from '../../types';
+import { RootState } from '../../redux-types';
 
 export const selectAuthError = (state: RootState) => state.auth.error;
 

@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { Artist, FavoredArtist, User } from '../../../types';
-import { AppAction } from '../../types';
+import { AppAction } from '../../redux-types';
 import {
   ArtistsActionType,
   ArtistsAddFavoredAction,

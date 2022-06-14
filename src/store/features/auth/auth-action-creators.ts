@@ -8,7 +8,7 @@ import {
   AuthLogoutAction,
   AuthSuccessAction,
 } from './auth-types';
-import { AppAction } from '../../types';
+import { AppAction } from '../../redux-types';
 import { Credentials } from '../../../types';
 import { createNavigationSetNextAction } from '../navigation/navigation-action-creators';
 import AuthService, { AuthResponseBody } from '../../../services/auth-service';

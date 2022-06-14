@@ -1,4 +1,4 @@
-import { RootState } from '../../types';
+import { RootState } from '../../redux-types';
 
 export const selectActorsFavored = (state: RootState) => state.artists.favoredActors;
 export const selectDirectorsFavored = (state: RootState) => state.artists.favoredDirectors;

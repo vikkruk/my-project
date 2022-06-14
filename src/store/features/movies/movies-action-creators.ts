@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { Movie } from '../../../types';
-import { AppAction } from '../../types';
+import { AppAction } from '../../redux-types';
 
 import ApiService from '../../../services/api-service';
 import {

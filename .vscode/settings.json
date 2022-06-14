@@ -5,4 +5,5 @@
 	"editor.wordWrap": "wordWrapColumn",
 	"editor.wordWrapColumn": 100,
   "files.eol": "\n",
+  "workbench.sideBar.location": "left",
 }
