@@ -7,7 +7,7 @@ import {
 import MovieCard from './movie-card';
 import { Movie } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { moviesFetchAction } from '../../store/features/movies/movies-action-creators';
+import { moviesFetchActionThunk } from '../../store/features/movies/movies-action-creators';
 import selectMoviesAll from '../../store/features/movies/movies-selectors';
 
 const MoviesPage: React.FC = () => {
@@ -16,7 +16,7 @@ const moviesAll = useRootSelector(selectMoviesAll);
 const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-      dispatch(moviesFetchAction);
+      dispatch(moviesFetchActionThunk());
     }, []);
 
   useEffect(() => {

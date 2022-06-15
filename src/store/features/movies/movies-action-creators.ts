@@ -8,6 +8,7 @@ import {
   MoviesFetchFailureAction,
   MoviesFetchSuccessAction,
 } from './movies-types';
+import MoviesService from '../../../services/movies-service';
 
 export const createMoviesFetchSuccess = (movies: Movie[]): MoviesFetchSuccessAction => ({
   type: MoviesActionType.MOVIES_FETCH_SUCCESS,
@@ -19,10 +20,11 @@ export const createMoviesFetchFailure = (error: string): MoviesFetchFailureActio
   payload: { error },
 });
 
-export const moviesFetchAction = async (dispatch: Dispatch<AppAction>): Promise<void> => {
+export const moviesFetchActionThunk = (genre?: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
-    const { data } = await ApiService.get<Movie[]>('/movies');
-    dispatch(createMoviesFetchSuccess(data));
+    const movies = await MoviesService.fetchMovies(genre);
+    console.log(movies);
+    dispatch(createMoviesFetchSuccess(movies));
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
     dispatch(createMoviesFetchFailure(errorMsg));

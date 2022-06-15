@@ -5,4 +5,5 @@ export * from './artist';
 export * from './artist-role';
 export * from './favored-artist';
 export * from './movie';
+export * from './genre';
 export * from './artist-data';

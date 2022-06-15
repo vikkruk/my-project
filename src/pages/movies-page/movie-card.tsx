@@ -97,8 +97,8 @@ const MovieCard: React.FC<Movie> = ({
               </Typography>
               <Box>
                 {directors.map((director) => (
-                  <Typography paragraph key={director}>
-                    {director}
+                  <Typography paragraph key={director.id}>
+                    {director.surname}
                   </Typography>
             ))}
               </Box>
@@ -109,8 +109,8 @@ const MovieCard: React.FC<Movie> = ({
               </Typography>
               <Box>
                 {actors.map((actor) => (
-                  <Typography paragraph key={actor}>
-                    {actor}
+                  <Typography paragraph key={actor.id}>
+                    {actor.surname}
                   </Typography>
             ))}
               </Box>
@@ -132,23 +132,23 @@ const MovieCard: React.FC<Movie> = ({
             <Typography paragraph>{directors.length > 1 ? 'Directors' : 'Director'}</Typography>
 
             {directors.map((director) => (
-              <Typography paragraph key={director}>
-                {director}
+              <Typography paragraph key={director.id}>
+                {`${director.name} ${director.surname}`}
               </Typography>
             ))}
             <Typography paragraph>{actors.length > 1 ? 'Actors' : 'Actor'}</Typography>
 
             {actors.map((actor) => (
-              <Typography paragraph key={actor}>
-                {actor}
+              <Typography paragraph key={actor.id}>
+                {actor.surname}
               </Typography>
             ))}
 
             <Typography paragraph>{genres.length > 1 ? 'Genres' : 'Genre'}</Typography>
 
             {genres.map((genre) => (
-              <Typography paragraph key={genre}>
-                {genre}
+              <Typography paragraph key={genre.id}>
+                {genre.name}
               </Typography>
             ))}
           </CardContent>
