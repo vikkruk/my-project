@@ -1,4 +1,4 @@
-import { Artist } from '../types';
+import { Artist, FavoredArtist } from '../types';
 import { ApiServiceBE, handleError } from './api-service';
 
 const fetchArtists = async (role: string): Promise<Artist[]> => {
@@ -10,8 +10,18 @@ const fetchArtists = async (role: string): Promise<Artist[]> => {
   }
 };
 
-const fetchFavoredArtists = async () => {
-  console.log('sadas');
+const fetchFavoredArtists = async (artistRole: string, token: string): Promise<FavoredArtist[]> => {
+  try {
+    const { data } = await ApiServiceBE
+      .get<{ favoredArtists: FavoredArtist[] }>(`/api/fav-artists/get-fav-artists?artistRole=${artistRole}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+    return data.favoredArtists;
+  } catch (error) {
+    throw new Error(handleError(error));
+  }
 };
 
 const ArtistsService = {

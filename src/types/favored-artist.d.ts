@@ -1,6 +1,8 @@
+import { Artist } from './artist';
+
 export type FavoredArtist = {
   id: string,
-  artistId: string,
+  artist: Artist,
   createdAt: string,
   updatedAt: string,
 };

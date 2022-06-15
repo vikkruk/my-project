@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Container,
@@ -7,49 +7,27 @@ import {
   Typography,
 } from '@mui/material';
 import PersonCard from '../../components/person-card';
-import { Artist } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { artistsFetchActionThunk, artistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
-import { selectAuthUser } from '../../store/features/auth/auth-selectors';
+import { artistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
+import { selectAuth } from '../../store/features/auth/auth-selectors';
 import {
  selectActorsFavored,
- selectActorsAll,
- selectDirectorsAll,
  selectDirectorsFavored,
 } from '../../store/features/artists/artists-selectors';
 
 const ProfilePage: React.FC = () => {
-  const [favoredActors, setFavoredActors] = useState<Artist[]>([]);
-  const [favoredDirectors, setFavoredDirectors] = useState<Artist[]>([]);
   const dispatch = useRootDispatch();
-  const user = useRootSelector(selectAuthUser);
-  const actors = useRootSelector(selectActorsAll);
-  const directors = useRootSelector(selectDirectorsAll);
-  const favoredActorsIds = useRootSelector(selectActorsFavored);
-  const favoredDirectorsIds = useRootSelector(selectDirectorsFavored);
+  const { user, token } = useRootSelector(selectAuth);
+  const favoredActors = useRootSelector(selectActorsFavored);
+  const favoredDirectors = useRootSelector(selectDirectorsFavored);
   useEffect(() => {
     (async () => {
-      await dispatch(artistsFetchActionThunk('actor'));
-      await dispatch(artistsFetchFavoredActionThunk('actor'));
-      await dispatch(artistsFetchActionThunk('director'));
-      await dispatch(artistsFetchFavoredActionThunk('director'));
+      if (token) {
+        await dispatch(artistsFetchFavoredActionThunk('actor', token));
+        await dispatch(artistsFetchFavoredActionThunk('director', token));
+      }
     })();
   }, []);
-
-  useEffect(() => {
-    const favActors = favoredActorsIds.map((fav) => {
-      const favActorData = actors.find((actor) => actor.id === fav.artistId);
-      if (favActorData !== undefined) { return favActorData; }
-      return null;
-    }).filter((x) => x) as Artist[];
-    setFavoredActors(favActors);
-    const favDirectors = favoredDirectorsIds.map((fav) => {
-      const favDirectorData = directors.find((director) => director.id === fav.artistId);
-      if (favDirectorData !== undefined) { return favDirectorData; }
-      return null;
-    }).filter((x) => x) as Artist[];
-    setFavoredDirectors(favDirectors);
-  }, [favoredActorsIds, favoredDirectorsIds]);
 
   return (
     <Container>
@@ -94,9 +72,9 @@ const ProfilePage: React.FC = () => {
               gap: { xl: 5 },
             }}
           >
-            {favoredActors.length > 0 ? favoredActors.map((actorProps) => (
+            {favoredActors.length > 0 ? favoredActors.map((favoredActor) => (
               <Grid
-                key={actorProps.id}
+                key={favoredActor.id}
                 item
                 xs={12}
                 sm={6}
@@ -107,7 +85,7 @@ const ProfilePage: React.FC = () => {
                   height: 300,
                 }}
               >
-                <PersonCard {...actorProps} profile type="actor" />
+                <PersonCard {...favoredActor} profile type="actor" />
               </Grid>
             ))
               : (<Typography component="h3" variant="h5">You have no favorite actors</Typography>)}
@@ -126,9 +104,9 @@ const ProfilePage: React.FC = () => {
               gap: { xl: 5 },
             }}
           >
-            {favoredDirectors.length > 0 ? favoredDirectors.map((directorProps) => (
+            {favoredDirectors.length > 0 ? favoredDirectors.map((favDirector) => (
               <Grid
-                key={directorProps.id}
+                key={favDirector.id}
                 item
                 xs={12}
                 sm={6}
@@ -139,7 +117,7 @@ const ProfilePage: React.FC = () => {
                   height: 300,
                 }}
               >
-                <PersonCard {...directorProps} profile type="director" />
+                <PersonCard {...favDirector} profile type="director" />
               </Grid>
             ))
               : (<Typography component="h3" variant="h5">You have no favorite directors</Typography>)}

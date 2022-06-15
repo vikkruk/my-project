@@ -2,7 +2,6 @@ import { Dispatch } from 'redux';
 import { Movie } from '../../../types';
 import { AppAction } from '../../redux-types';
 
-import ApiService from '../../../services/api-service';
 import {
   MoviesActionType,
   MoviesFetchFailureAction,
@@ -23,7 +22,6 @@ export const createMoviesFetchFailure = (error: string): MoviesFetchFailureActio
 export const moviesFetchActionThunk = (genre?: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
     const movies = await MoviesService.fetchMovies(genre);
-    console.log(movies);
     dispatch(createMoviesFetchSuccess(movies));
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);

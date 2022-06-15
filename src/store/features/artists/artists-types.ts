@@ -1,10 +1,10 @@
-import { Artist, FavoredArtist } from '../../../types';
+import { Artist } from '../../../types';
 
 export type ArtistsState = {
   actors: Artist[],
   directors: Artist[],
-  favoredActors: FavoredArtist[],
-  favoredDirectors: FavoredArtist[],
+  favoredActors: Artist[],
+  favoredDirectors: Artist[],
   error: string | null,
 };
 
@@ -30,7 +30,7 @@ export type ArtistsFetchFailureAction = {
 
 export type ArtistsFavoredFetchSuccessAction = {
   type: ArtistsActionType.ARTISTS_FAVORED_FETCH_SUCCESS,
-  payload: { favoredArtists: FavoredArtist[], type: ArtistsPageType }
+  payload: { favoredArtists: Artist[], type: ArtistsPageType }
 };
 
 export type ArtistsAddFavoredAction = {

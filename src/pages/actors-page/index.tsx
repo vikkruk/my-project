@@ -7,65 +7,35 @@ import {
 } from '@mui/material';
 import PersonCard from '../../components/person-card';
 import FilterButton from '../../components/filter-button';
-import { Artist, User } from '../../types';
-import ApiService from '../../services/api-service';
+import { Artist, FavoredArtist } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
+import { selectAuthLoggedIn, selectAuthToken } from '../../store/features/auth/auth-selectors';
 import { artistsFetchFavoredActionThunk, artistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectActorsAll, selectActorsFavored } from '../../store/features/artists/artists-selectors';
-import { getLocalStorage, setLocalStorage } from '../../helpers/local-storage-helpers';
 
-const USER_KEY_IN_LOCAL_STORAGE = process.env.REACT_APP_USER_KEY_IN_LOCAL_STORAGE;
-if (USER_KEY_IN_LOCAL_STORAGE === undefined) {
-  throw new Error('Please declare REACT_APP_USER_KEY_IN_LOCAL_STORAGE in/.env');
-}
 const ActorsPage: React.FC = () => {
   const dispatch = useRootDispatch();
-  const allActors = useRootSelector(selectActorsAll);
+  const token = useRootSelector(selectAuthToken);
   const loggedIn = useRootSelector(selectAuthLoggedIn);
-  const favoredActorsIds = useRootSelector(selectActorsFavored);
+  const allActors = useRootSelector(selectActorsAll);
+  const favoredActors = useRootSelector(selectActorsFavored);
   const [actors, setActors] = useState<Artist[]>(allActors);
   const [showFavored, setShowFavored] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(artistsFetchActionThunk('actor'));
-    if (loggedIn) {
-      dispatch(artistsFetchFavoredActionThunk('actor'));
+    if (loggedIn && token) {
+      dispatch(artistsFetchFavoredActionThunk('actor', token));
     }
   }, [loggedIn]);
 
   useEffect(() => {
-    const currentUser = getLocalStorage<User>(USER_KEY_IN_LOCAL_STORAGE);
-    if (loggedIn && currentUser) {
-      setLocalStorage(USER_KEY_IN_LOCAL_STORAGE, {
-        ...currentUser,
-        favored: {
-          ...currentUser.favored,
-          actors: favoredActorsIds,
-        },
-      });
-      if (currentUser !== null) {
-        ApiService.patch(`users/${currentUser.id}`, {
-          favored: {
-            ...currentUser.favored,
-            actors: favoredActorsIds,
-          },
-
-        });
-      }
-    }
-
     if (showFavored) {
-      const favoredActors = favoredActorsIds.map((fav) => {
-        const favActorData = allActors.find((actor) => actor.id === fav.artistId);
-        if (favActorData !== undefined) { return favActorData; }
-        return null;
-      }).filter((x) => x) as Artist[];
       setActors(favoredActors);
     } else {
       setActors(allActors);
     }
-  }, [showFavored, allActors, favoredActorsIds]);
+  }, [showFavored, allActors, favoredActors]);
 
   return (
     <Container sx={{ mt: 4 }}>

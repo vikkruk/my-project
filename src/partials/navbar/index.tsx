@@ -64,7 +64,7 @@ const NavBar: React.FC = () => {
               <>
                 <Typography fontWeight={600}>{user?.email}</Typography>
                 <Avatar>{user?.email.slice(0, 2)}</Avatar>
-                <StyledHomeNavLink sx={{ display: { xs: 'none', md: 'block' } }} to="/auth/login" onClick={logout}>Logout</StyledHomeNavLink>
+                <StyledHomeNavLink sx={{ display: { xs: 'none', md: 'block' } }} to="/" onClick={logout}>Logout</StyledHomeNavLink>
               </>
             )))
             || (<StyledNavLink to="/auth/login">Login</StyledNavLink>)}

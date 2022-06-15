@@ -10,7 +10,7 @@ import FilterButton from '../../components/filter-button';
 import { Artist, User } from '../../types';
 import ApiService from '../../services/api-service';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
+import { selectAuthLoggedIn, selectAuthToken } from '../../store/features/auth/auth-selectors';
 import { artistsFetchFavoredActionThunk, artistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectDirectorsAll, selectDirectorsFavored } from '../../store/features/artists/artists-selectors';
 import { getLocalStorage, setLocalStorage } from '../../helpers/local-storage-helpers';
@@ -24,6 +24,7 @@ const DirectorsPage: React.FC = () => {
   const dispatch = useRootDispatch();
   const allDirectors = useRootSelector(selectDirectorsAll);
   const loggedIn = useRootSelector(selectAuthLoggedIn);
+  const token = useRootSelector(selectAuthToken);
   const favoredDirectorsIds = useRootSelector(selectDirectorsFavored);
   const [directors, setDirectors] = useState<Artist[]>(allDirectors);
   const [showFavored, setShowFavored] = useState<boolean>(false);
@@ -32,8 +33,8 @@ const DirectorsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(artistsFetchActionThunk(type));
-    if (loggedIn) {
-      dispatch(artistsFetchFavoredActionThunk(type));
+    if (loggedIn && token) {
+      dispatch(artistsFetchFavoredActionThunk(type, token));
     }
   }, [loggedIn]);
 
@@ -60,7 +61,7 @@ const DirectorsPage: React.FC = () => {
 
     if (showFavored) {
       const favoredDirectors = favoredDirectorsIds.map((fav) => {
-        const favDirectorData = allDirectors.find((director) => director.id === fav.artistId);
+        const favDirectorData = allDirectors.find((director) => director.id === fav.id);
         if (favDirectorData !== undefined) { return favDirectorData; }
         return null;
       }).filter((x) => x) as Artist[];

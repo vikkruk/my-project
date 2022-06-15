@@ -41,7 +41,7 @@ const PersonCard: React.FC<PersonCardProps> = ({
     dispatch(createArtistsDeleteFavored(artistId, type));
   };
 
-  const isFavored = favored.find((fav) => fav.artistId === id);
+  const isFavored = favored.find((fav) => fav.id === id);
   return (
     <Paper sx={(theme) => theme.mixins.paper}>
 
