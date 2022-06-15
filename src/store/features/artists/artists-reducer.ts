@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Reducer } from 'redux';
-import { v4 as createId } from 'uuid';
 import { ArtistsState, ArtistsAction, ArtistsActionType } from './artists-types';
 
 const initialState: ArtistsState = {
