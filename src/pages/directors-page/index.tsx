@@ -11,7 +11,7 @@ import { Artist, User } from '../../types';
 import ApiService from '../../services/api-service';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
-import { artistsFetchFavoredAction, artistsFetchAction } from '../../store/features/artists/artists-action-creators';
+import { artistsFetchFavoredActionThunk, artistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectDirectorsAll, selectDirectorsFavored } from '../../store/features/artists/artists-selectors';
 import { getLocalStorage, setLocalStorage } from '../../helpers/local-storage-helpers';
 
@@ -31,9 +31,9 @@ const DirectorsPage: React.FC = () => {
   const type = 'director';
 
   useEffect(() => {
-    dispatch(artistsFetchAction(type));
+    dispatch(artistsFetchActionThunk(type));
     if (loggedIn) {
-      dispatch(artistsFetchFavoredAction(type));
+      dispatch(artistsFetchFavoredActionThunk(type));
     }
   }, [loggedIn]);
 

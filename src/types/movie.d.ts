@@ -1,4 +1,4 @@
-type Movie = {
+export type Movie = {
   id: string,
   title: string,
   year: string,
@@ -7,5 +7,3 @@ type Movie = {
   actors: string[],
   genres: string[]
 };
-
-export default Movie;

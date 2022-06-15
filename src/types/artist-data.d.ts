@@ -1,8 +1,6 @@
-type PersonData = {
+export type ArtistData = {
   name: string,
   surname: string,
   img: string,
   gender: string,
 };
-
-export default PersonData;

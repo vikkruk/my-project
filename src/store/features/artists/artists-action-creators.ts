@@ -10,8 +10,8 @@ import {
   ArtistsFavoredFetchSuccessAction,
   ArtistsPageType,
 } from './artists-types';
-import ApiService from '../../../services/api-service';
 import { getLocalStorage } from '../../../helpers/local-storage-helpers';
+import ArtistsService from '../../../services/artists-service';
 
 export const createArtistsFetchSuccess = (artists: Artist[], type: ArtistsPageType): ArtistsFetchSuccessAction => ({
   type: ArtistsActionType.ARTISTS_FETCH_SUCCESS,
@@ -38,28 +38,17 @@ export const createArtistsDeleteFavored = (artistId: string, type: ArtistsPageTy
   payload: { artistId, type },
 });
 
-export const artistsFetchAction = (type: ArtistsPageType) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+export const artistsFetchActionThunk = (type: ArtistsPageType) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
-    switch (type) {
-      case ('actor'): {
-        const { data } = await ApiService.get<Artist[]>('/people?roles_like=3');
-        dispatch(createArtistsFetchSuccess(data, type));
-        break;
-      }
-      case ('director'): {
-        const { data } = await ApiService.get<Artist[]>('/people?roles_like=1');
-        dispatch(createArtistsFetchSuccess(data, type));
-        break;
-      }
-      default: break;
-    }
+    const artists = await ArtistsService.fetchArtists(type);
+    dispatch(createArtistsFetchSuccess(artists, type));
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
     dispatch(createArtistsFetchFailure(errorMsg, type));
   }
 };
 
-export const artistsFetchFavoredAction = (type: ArtistsPageType) => (dispatch: Dispatch<AppAction>): void => {
+export const artistsFetchFavoredActionThunk = (type: ArtistsPageType) => (dispatch: Dispatch<AppAction>): void => {
   const user = getLocalStorage<User>('user');
   if (user !== null) {
     switch (type) {

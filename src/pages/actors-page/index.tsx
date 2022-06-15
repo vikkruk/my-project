@@ -11,7 +11,7 @@ import { Artist, User } from '../../types';
 import ApiService from '../../services/api-service';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
-import { artistsFetchFavoredAction, artistsFetchAction } from '../../store/features/artists/artists-action-creators';
+import { artistsFetchFavoredActionThunk, artistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectActorsAll, selectActorsFavored } from '../../store/features/artists/artists-selectors';
 import { getLocalStorage, setLocalStorage } from '../../helpers/local-storage-helpers';
 
@@ -28,9 +28,9 @@ const ActorsPage: React.FC = () => {
   const [showFavored, setShowFavored] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(artistsFetchAction('actor'));
+    dispatch(artistsFetchActionThunk('actor'));
     if (loggedIn) {
-      dispatch(artistsFetchFavoredAction('actor'));
+      dispatch(artistsFetchFavoredActionThunk('actor'));
     }
   }, [loggedIn]);
 

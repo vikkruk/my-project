@@ -3,12 +3,12 @@ import { FormikConfig, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
 import AuthForm from '../../components/auth-form';
-import { PersonData } from '../../types';
+import { ArtistData } from '../../types';
 import { useRootSelector } from '../../store/hooks';
 import AdminAddDataService from '../../services/admin-add-data-service';
 import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
 
-type AddPersonDataValues = PersonData;
+type AddPersonDataValues = ArtistData;
 
 type RegisterFormikConfig = FormikConfig<AddPersonDataValues>;
 

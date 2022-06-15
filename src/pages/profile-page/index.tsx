@@ -9,7 +9,7 @@ import {
 import PersonCard from '../../components/person-card';
 import { Artist } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { artistsFetchAction, artistsFetchFavoredAction } from '../../store/features/artists/artists-action-creators';
+import { artistsFetchActionThunk, artistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectAuthUser } from '../../store/features/auth/auth-selectors';
 import {
  selectActorsFavored,
@@ -29,10 +29,10 @@ const ProfilePage: React.FC = () => {
   const favoredDirectorsIds = useRootSelector(selectDirectorsFavored);
   useEffect(() => {
     (async () => {
-      await dispatch(artistsFetchAction('actor'));
-      await dispatch(artistsFetchFavoredAction('actor'));
-      await dispatch(artistsFetchAction('director'));
-      await dispatch(artistsFetchFavoredAction('director'));
+      await dispatch(artistsFetchActionThunk('actor'));
+      await dispatch(artistsFetchFavoredActionThunk('actor'));
+      await dispatch(artistsFetchActionThunk('director'));
+      await dispatch(artistsFetchFavoredActionThunk('director'));
     })();
   }, []);
 
