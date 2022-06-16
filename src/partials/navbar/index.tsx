@@ -14,12 +14,12 @@ import StyledHomeNavLink from '../../components/styled-home-navlink';
 import { User } from '../../types';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
-import { selectAuthLoggedIn, selectAuthUser } from '../../store/features/auth/auth-selectors';
+import { selectAuthLoggedIn, selectAuthRole, selectAuthUser } from '../../store/features/auth/auth-selectors';
 
 const NavBar: React.FC = () => {
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const user = useRootSelector(selectAuthUser);
-  const admin = 'placeholder';
+  const role = useRootSelector(selectAuthRole);
   const dispatch = useRootDispatch();
 
   const logout = () => dispatch(authLogoutAction);
@@ -37,7 +37,7 @@ const NavBar: React.FC = () => {
             <StyledHomeNavLink to="/">GMW</StyledHomeNavLink>
           </Typography>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'space-around', gap: 2 }}>
-            {admin && <StyledNavLink to="/admin">Admin</StyledNavLink>}
+            {role === 'admin' && <StyledNavLink to="/admin">Admin</StyledNavLink>}
             {loggedIn && <StyledNavLink to="/profile">Profile</StyledNavLink>}
             <StyledNavLink to="/actors">Actors</StyledNavLink>
             <StyledNavLink to="/directors">Directors</StyledNavLink>

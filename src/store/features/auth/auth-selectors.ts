@@ -10,4 +10,6 @@ export const selectAuthUser = (state: RootState) => state.auth.user;
 
 export const selectAuthToken = (state: RootState) => state.auth.token;
 
+export const selectAuthRole = (state: RootState) => state.auth.user?.role;
+
 export const selectAuth = (state: RootState) => state.auth;

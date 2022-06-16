@@ -41,7 +41,7 @@ const ProfilePage: React.FC = () => {
       >
         <Box
           component="img"
-          src={user?.avatar}
+          src={user?.avatar ?? '/no-avatar.png'}
           sx={{
             width: 150,
             height: 150,
@@ -64,29 +64,24 @@ const ProfilePage: React.FC = () => {
             My Favorite Actors:
           </Typography>
           <Grid
+            className="LOLO"
             container
             sx={{
               textAlign: 'center',
-              justifyContent: { xs: 'center', md: 'flex-start' },
+              justifyContent: { xs: 'center', sm: 'flex-start' },
               m: 'auto',
-              gap: { xl: 5 },
+              gap: { sm: 5 },
             }}
           >
             {favoredActors.length > 0 ? favoredActors.map((favoredActor) => (
-              <Grid
+              <Box
                 key={favoredActor.id}
-                item
-                xs={12}
-                sm={6}
-                md={3}
-                xl={2}
                 sx={{
-                  transform: 'scale(0.7)',
-                  height: 300,
-                }}
+                transform: { xs: 'scale(0.9)', sm: 'scale(1)' },
+              }}
               >
                 <PersonCard {...favoredActor} profile type="actor" />
-              </Grid>
+              </Box>
             ))
               : (<Typography component="h3" variant="h5">You have no favorite actors</Typography>)}
           </Grid>
@@ -99,26 +94,20 @@ const ProfilePage: React.FC = () => {
             container
             sx={{
               textAlign: 'center',
-              justifyContent: { xs: 'center', md: 'flex-start' },
+              justifyContent: { xs: 'center', sm: 'flex-start' },
               m: 'auto',
-              gap: { xl: 5 },
+              gap: { sm: 5 },
             }}
           >
             {favoredDirectors.length > 0 ? favoredDirectors.map((favDirector) => (
-              <Grid
+              <Box
                 key={favDirector.id}
-                item
-                xs={12}
-                sm={6}
-                md={3}
-                xl={2}
                 sx={{
-                  transform: 'scale(0.7)',
-                  height: 300,
-                }}
+                transform: { xs: 'scale(0.9)', sm: 'scale(1)' },
+              }}
               >
                 <PersonCard {...favDirector} profile type="director" />
-              </Grid>
+              </Box>
             ))
               : (<Typography component="h3" variant="h5">You have no favorite directors</Typography>)}
           </Grid>

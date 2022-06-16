@@ -11,7 +11,7 @@ import MenuList from '@mui/material/MenuList';
 import { Box } from '@mui/material';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
-import { selectAuthLoggedIn } from '../../store/features/auth/auth-selectors';
+import { selectAuthLoggedIn, selectAuthRole } from '../../store/features/auth/auth-selectors';
 
 const NavbarDropDownMenu: React.FC = () => {
   const [open, setOpen] = React.useState(false);
@@ -19,7 +19,7 @@ const NavbarDropDownMenu: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useRootDispatch();
   const loggedIn = useRootSelector(selectAuthLoggedIn);
-  const admin = 'placeholder';
+  const role = useRootSelector(selectAuthRole);
 
   const logout = () => dispatch(authLogoutAction);
 
@@ -38,11 +38,12 @@ const NavbarDropDownMenu: React.FC = () => {
     setOpen(false);
   };
 
-  // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
+      if (anchorRef.current) {
+        anchorRef.current.focus();
+      }
     }
 
     prevOpen.current = open;
@@ -83,7 +84,7 @@ const NavbarDropDownMenu: React.FC = () => {
                 <MenuList
                   autoFocusItem={open}
                 >
-                  {admin && (
+                  {role === 'admin' && (
                   <MenuItem onClick={(e) => {
                     handleClose(e);
                     navigate('/admin');
