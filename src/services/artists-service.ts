@@ -1,5 +1,5 @@
 import { ArtistsPageType } from '../store/features/artists/artists-types';
-import { Artist, FavoredArtist } from '../types';
+import { AddPersonDataServerValues, Artist, FavoredArtist } from '../types';
 import ApiService, { handleError } from './api-service';
 
 const fetchArtists = async (role: string): Promise<Artist[]> => {
@@ -20,6 +20,18 @@ const fetchFavoredArtists = async (artistRole: ArtistsPageType, token: string): 
         },
       });
     return data.favoredArtists;
+  } catch (error) {
+    throw new Error(handleError(error));
+  }
+};
+
+const createArtist = async (artistData: AddPersonDataServerValues, token: string): Promise<void> => {
+  try {
+    await ApiService.post('/api/artists', JSON.stringify(artistData), {
+      headers: {
+        Authorization: token,
+      },
+    });
   } catch (error) {
     throw new Error(handleError(error));
   }
@@ -57,6 +69,7 @@ const removeFavoredArtist = async (artistId: string, type: ArtistsPageType, toke
 const ArtistsService = {
   fetchArtists,
   fetchFavoredArtists,
+  createArtist,
   addFavoredArtist,
   removeFavoredArtist,
 };

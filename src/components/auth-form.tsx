@@ -33,13 +33,14 @@ const AuthForm: React.FC<AuthFormProps> = ({
     <Paper
       elevation={4}
       sx={(theme) => ({
-        maxWidth: 600,
+        maxWidth: { xs: 280, sm: 600 },
         margin: 'auto',
-        mt: 20,
-        p: { xs: 2, md: 10 },
+        mt: 10,
+        p: { xs: 2, md: 8 },
         color: theme.palette.primary.main,
         backgroundColor: theme.palette.common.white,
         position: 'relative',
+
       })}
     >
       {error && (
