@@ -27,7 +27,7 @@ const ActorsPage: React.FC = () => {
     if (loggedIn && token) {
       dispatch(artistsFetchFavoredActionThunk('actor', token));
     }
-  }, [loggedIn]);
+  }, [loggedIn, favoredActors]);
 
   useEffect(() => {
     if (showFavored) {

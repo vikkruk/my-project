@@ -7,25 +7,18 @@ import {
 } from '@mui/material';
 import PersonCard from '../../components/person-card';
 import FilterButton from '../../components/filter-button';
-import { Artist, User } from '../../types';
-import ApiService from '../../services/api-service';
+import { Artist } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectAuthLoggedIn, selectAuthToken } from '../../store/features/auth/auth-selectors';
 import { artistsFetchFavoredActionThunk, artistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectDirectorsAll, selectDirectorsFavored } from '../../store/features/artists/artists-selectors';
-import { getLocalStorage, setLocalStorage } from '../../helpers/local-storage-helpers';
-
-const USER_KEY_IN_LOCAL_STORAGE = process.env.REACT_APP_USER_KEY_IN_LOCAL_STORAGE;
-if (USER_KEY_IN_LOCAL_STORAGE === undefined) {
-  throw new Error('Please declare REACT_APP_USER_KEY_IN_LOCAL_STORAGE in/.env');
-}
 
 const DirectorsPage: React.FC = () => {
   const dispatch = useRootDispatch();
   const allDirectors = useRootSelector(selectDirectorsAll);
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const token = useRootSelector(selectAuthToken);
-  const favoredDirectorsIds = useRootSelector(selectDirectorsFavored);
+  const favoredDirectors = useRootSelector(selectDirectorsFavored);
   const [directors, setDirectors] = useState<Artist[]>(allDirectors);
   const [showFavored, setShowFavored] = useState<boolean>(false);
 
@@ -36,40 +29,15 @@ const DirectorsPage: React.FC = () => {
     if (loggedIn && token) {
       dispatch(artistsFetchFavoredActionThunk(type, token));
     }
-  }, [loggedIn]);
+  }, [loggedIn, favoredDirectors]);
 
   useEffect(() => {
-    const currentUser = getLocalStorage<User>(USER_KEY_IN_LOCAL_STORAGE);
-    if (loggedIn && currentUser) {
-      setLocalStorage(USER_KEY_IN_LOCAL_STORAGE, {
-        ...currentUser,
-        favored: {
-          ...currentUser.favored,
-          directors: favoredDirectorsIds,
-        },
-      });
-      if (currentUser !== null) {
-        ApiService.patch(`users/${currentUser.id}`, {
-          favored: {
-            ...currentUser.favored,
-            directors: favoredDirectorsIds,
-          },
-
-        });
-      }
-    }
-
     if (showFavored) {
-      const favoredDirectors = favoredDirectorsIds.map((fav) => {
-        const favDirectorData = allDirectors.find((director) => director.id === fav.id);
-        if (favDirectorData !== undefined) { return favDirectorData; }
-        return null;
-      }).filter((x) => x) as Artist[];
       setDirectors(favoredDirectors);
     } else {
       setDirectors(allDirectors);
     }
-  }, [showFavored, allDirectors, favoredDirectorsIds]);
+  }, [showFavored, allDirectors]);
 
   return (
     <Container sx={{ mt: 4 }}>

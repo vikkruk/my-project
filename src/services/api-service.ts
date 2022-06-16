@@ -20,9 +20,8 @@ export const handleError = (error: unknown): string => {
 };
 
 const API_SERVER = process.env.REACT_APP_API_SERVER;
-const API_BE_SERVER = process.env.REACT_APP_API_BE_SERVER;
 
-if (API_BE_SERVER === undefined) {
+if (API_SERVER === undefined) {
   throw new Error('Please declare REACT_APP_API_BE_SERVER value in /.env');
 }
 
@@ -36,11 +35,3 @@ const ApiService = axios.create({
 });
 
 export default ApiService;
-
-export const ApiServiceBE = axios.create({
-  baseURL: API_BE_SERVER,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  timeout: 5000,
-});

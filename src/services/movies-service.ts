@@ -1,9 +1,9 @@
 import { Movie } from '../types';
-import { ApiServiceBE, handleError } from './api-service';
+import ApiService, { handleError } from './api-service';
 
 const fetchMovies = async (genre = 'all'): Promise<Movie[]> => {
   try {
-    const { data } = await ApiServiceBE.get(`/api/movies?genre=${genre}`);
+    const { data } = await ApiService.get(`/api/movies?genre=${genre}`);
     return data.movies;
   } catch (error) {
     throw new Error(handleError(error));

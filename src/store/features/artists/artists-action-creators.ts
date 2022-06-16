@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { Artist, FavoredArtist, User } from '../../../types';
+import { Artist } from '../../../types';
 import { AppAction } from '../../redux-types';
 import {
   ArtistsActionType,
@@ -10,9 +10,7 @@ import {
   ArtistsFavoredFetchSuccessAction,
   ArtistsPageType,
 } from './artists-types';
-import { getLocalStorage } from '../../../helpers/local-storage-helpers';
 import ArtistsService from '../../../services/artists-service';
-import { ApiServiceBE } from '../../../services/api-service';
 
 export const createArtistsFetchSuccess = (artists: Artist[], type: ArtistsPageType): ArtistsFetchSuccessAction => ({
   type: ArtistsActionType.ARTISTS_FETCH_SUCCESS,
@@ -54,6 +52,24 @@ export const artistsFetchFavoredActionThunk = (type: ArtistsPageType, token: str
     const favoredArtists = await ArtistsService.fetchFavoredArtists(type, token);
     const favoredArtistsPure = favoredArtists.map((favoredArtist) => favoredArtist.artist);
     dispatch(createArtistsFavoredFetchSuccess(favoredArtistsPure, type));
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    dispatch(createArtistsFetchFailure(errorMessage, type));
+  }
+};
+
+export const artistsAddFavoredThunk = (artistId: string, type: ArtistsPageType, token: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+  try {
+    await ArtistsService.addFavoredArtist(artistId, type, token);
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    dispatch(createArtistsFetchFailure(errorMessage, type));
+  }
+};
+
+export const artistsRemoveFavoredThunk = (artistId: string, type: ArtistsPageType, token: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+  try {
+    await ArtistsService.removeFavoredArtist(artistId, type, token);
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     dispatch(createArtistsFetchFailure(errorMessage, type));
