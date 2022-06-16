@@ -1,5 +1,5 @@
 import { Credentials, User } from '../types';
-import ApiService, { handleError, isResponseError } from './api-service';
+import ApiService, { handleError } from './api-service';
 
 export type AuthResponseBody = {
   user: User,
@@ -29,24 +29,24 @@ namespace AuthService {
   export const authenticate = async (token: string): Promise<AuthResponseBody> => {
     try {
       const response = await ApiService
-      .post<AuthResponseBody>('/api/auth/authenticate', {}, {
-        headers: {
-          Authorization: token,
-        },
-      });
+        .post<AuthResponseBody>('/api/auth/authenticate', {}, {
+          headers: {
+            Authorization: token,
+          },
+        });
       return response.data;
     } catch (error) {
-        throw new Error(handleError(error));
+      throw new Error(handleError(error));
     }
   };
 
   export const checkEmailAvailability = async (email: string): Promise<boolean> => {
     try {
       const response = await ApiService
-      .get<{ available: boolean }>(`/api/auth/check-email?email=${email}`);
+        .get<{ available: boolean }>(`/api/auth/check-email?email=${email}`);
       return response.data.available;
     } catch (error) {
-       throw new Error(handleError(error));
+      throw new Error(handleError(error));
     }
   };
 }

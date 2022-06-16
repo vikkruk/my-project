@@ -5,7 +5,7 @@ import { TextField } from '@mui/material';
 import AuthForm from '../../components/auth-form';
 import { ArtistData } from '../../types';
 import { useRootSelector } from '../../store/hooks';
-import AdminAddDataService from '../../services/admin-add-data-service';
+import AdminService from '../../services/admin-service';
 import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
 
 type AddPersonDataValues = ArtistData;
@@ -37,7 +37,7 @@ const AdminPage: React.FC = () => {
   const handleAddData: RegisterFormikConfig['onSubmit'] = async ({
     name, surname, img, gender,
   }, { resetForm }) => {
-    await AdminAddDataService.addPersonData({
+    await AdminService.addPersonData({
       name, surname, img, gender,
     }, 'people');
     resetForm();

@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import PersonCard from '../../components/person-card';
 import FilterButton from '../../components/filter-button';
-import { Artist, FavoredArtist } from '../../types';
+import { Artist } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectAuthLoggedIn, selectAuthToken } from '../../store/features/auth/auth-selectors';
 import { artistsFetchFavoredActionThunk, artistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';

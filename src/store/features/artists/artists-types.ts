@@ -33,14 +33,4 @@ export type ArtistsFavoredFetchSuccessAction = {
   payload: { favoredArtists: Artist[], type: ArtistsPageType }
 };
 
-export type ArtistsAddFavoredAction = {
-  type: ArtistsActionType.ARTISTS_ADD_FAVORED,
-  payload: { artistId: string, type: ArtistsPageType },
-};
-
-export type ArtistsDeleteFavoredAction = {
-  type: ArtistsActionType.ARTISTS_DELETE_FAVORED,
-  payload: { artistId: string, type: ArtistsPageType }
-};
-
-export type ArtistsAction = ArtistsFetchSuccessAction | ArtistsFetchFailureAction | ArtistsAddFavoredAction | ArtistsDeleteFavoredAction | ArtistsFavoredFetchSuccessAction;
+export type ArtistsAction = ArtistsFetchSuccessAction | ArtistsFetchFailureAction | ArtistsFavoredFetchSuccessAction;

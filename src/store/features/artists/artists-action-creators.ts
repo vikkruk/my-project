@@ -3,8 +3,6 @@ import { Artist } from '../../../types';
 import { AppAction } from '../../redux-types';
 import {
   ArtistsActionType,
-  ArtistsAddFavoredAction,
-  ArtistsDeleteFavoredAction,
   ArtistsFetchFailureAction,
   ArtistsFetchSuccessAction,
   ArtistsFavoredFetchSuccessAction,
@@ -25,16 +23,6 @@ export const createArtistsFetchFailure = (error: string, type: ArtistsPageType):
 export const createArtistsFavoredFetchSuccess = (favoredArtists: Artist[], type: ArtistsPageType): ArtistsFavoredFetchSuccessAction => ({
   type: ArtistsActionType.ARTISTS_FAVORED_FETCH_SUCCESS,
   payload: { favoredArtists, type },
-});
-
-export const createArtistsAddFavored = (artistId: string, type: ArtistsPageType): ArtistsAddFavoredAction => ({
-  type: ArtistsActionType.ARTISTS_ADD_FAVORED,
-  payload: { artistId, type },
-});
-
-export const createArtistsDeleteFavored = (artistId: string, type: ArtistsPageType): ArtistsDeleteFavoredAction => ({
-  type: ArtistsActionType.ARTISTS_DELETE_FAVORED,
-  payload: { artistId, type },
 });
 
 export const artistsFetchActionThunk = (type: ArtistsPageType) => async (dispatch: Dispatch<AppAction>): Promise<void> => {

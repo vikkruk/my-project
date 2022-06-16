@@ -13,8 +13,8 @@ const addPersonData = async ({
   }
 };
 
-const AdminAddDataService = {
+const AdminService = {
   addPersonData,
 };
 
-export default AdminAddDataService;
+export default AdminService;

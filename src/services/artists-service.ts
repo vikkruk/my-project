@@ -4,7 +4,7 @@ import ApiService, { handleError } from './api-service';
 
 const fetchArtists = async (role: string): Promise<Artist[]> => {
   try {
-    const { data } = await ApiService.get(`/api/artists?role=${role}`);
+    const { data } = await ApiService.get<{ artists: Artist[] }>(`/api/artists?role=${role}`);
     return data.artists;
   } catch (error) {
     throw new Error(handleError(error));

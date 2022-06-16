@@ -5,9 +5,7 @@ import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import { Artist } from '../types';
 import { ArtistsPageType } from '../store/features/artists/artists-types';
 import { useRootDispatch, useRootSelector } from '../store/hooks';
-import {
- artistsAddFavoredThunk, artistsFetchFavoredActionThunk, artistsRemoveFavoredThunk, createArtistsAddFavored, createArtistsDeleteFavored,
-} from '../store/features/artists/artists-action-creators';
+import { artistsAddFavoredThunk, artistsRemoveFavoredThunk } from '../store/features/artists/artists-action-creators';
 import { selectActorsFavored, selectDirectorsFavored } from '../store/features/artists/artists-selectors';
 import { selectAuthLoggedIn, selectAuthToken } from '../store/features/auth/auth-selectors';
 
