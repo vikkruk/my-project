@@ -4,12 +4,14 @@ export type AuthState = {
   token: string | null,
   user: null | User,
   error: string | null,
+  success: string | null,
   loading: boolean,
 };
 
 export enum AuthActionType {
   AUTH_LOADING = 'AUTH_LOADING',
   AUTH_CLEAR_ERROR = 'AUTH_CLEAR_ERROR',
+  AUTH_CLEAR_SUCCESS = 'AUTH_CLEAR_SUCCESS',
   AUTH_LOGOUT = 'AUTH_LOGOUT',
   AUTH_ADMIN_LOGIN = 'AUTH_ADMIN_LOGIN',
   AUTH_SUCCESS = 'AUTH_SUCCESS',
@@ -22,6 +24,10 @@ export type AuthLoadingAction = {
 
 export type AuthClearErrorAction = {
   type: AuthActionType.AUTH_CLEAR_ERROR,
+};
+
+export type AuthClearSuccessAction = {
+  type: AuthActionType.AUTH_CLEAR_SUCCESS,
 };
 
 export type AuthLogoutAction = {
@@ -44,4 +50,4 @@ export type AuthFailureAction = {
   payload: { error: string },
 };
 
-export type AuthAction = AuthLoadingAction | AuthSuccessAction | AuthFailureAction | AuthClearErrorAction | AuthLogoutAction | AuthAdminLoginAction;
+export type AuthAction = AuthLoadingAction | AuthSuccessAction | AuthFailureAction | AuthClearErrorAction | AuthClearSuccessAction | AuthLogoutAction | AuthAdminLoginAction;

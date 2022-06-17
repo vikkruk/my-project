@@ -5,8 +5,8 @@ import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import { Artist } from '../types';
 import { ArtistsPageType } from '../store/features/artists/artists-types';
 import { useRootDispatch, useRootSelector } from '../store/hooks';
-import { artistsAddFavoredThunk, artistsRemoveFavoredThunk } from '../store/features/artists/artists-action-creators';
-import { selectActorsFavored, selectDirectorsFavored } from '../store/features/artists/artists-selectors';
+import { createArtistsAddFavoredThunk, createArtistsRemoveFavoredThunk } from '../store/features/artists/artists-action-creators';
+import { selectArtistsActorsFavored, selectArtistsDirectorsFavored } from '../store/features/artists/artists-selectors';
 import { selectAuthLoggedIn, selectAuthToken } from '../store/features/auth/auth-selectors';
 
 type PersonCardProps = Omit<Artist, 'gender'> & {
@@ -31,18 +31,18 @@ const PersonCard: React.FC<PersonCardProps> = ({
   id, name, surname, img, profile, type,
 }) => {
   const dispatch = useRootDispatch();
-  const favored = type === 'actor' ? useRootSelector(selectActorsFavored) : useRootSelector(selectDirectorsFavored);
+  const favored = type === 'actor' ? useRootSelector(selectArtistsActorsFavored) : useRootSelector(selectArtistsDirectorsFavored);
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const token = useRootSelector(selectAuthToken);
   const addToFavored = (artistId: string): void => {
     if (token) {
-      dispatch(artistsAddFavoredThunk(artistId, type, token));
+      dispatch(createArtistsAddFavoredThunk(artistId, type, token));
     }
   };
 
   const deleteFromFavored = (artistId: string): void => {
     if (token) {
-      dispatch(artistsRemoveFavoredThunk(artistId, type, token));
+      dispatch(createArtistsRemoveFavoredThunk(artistId, type, token));
     }
   };
 

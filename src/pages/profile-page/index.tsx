@@ -8,23 +8,20 @@ import {
 } from '@mui/material';
 import PersonCard from '../../components/person-card';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { artistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
+import { createArtistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectAuth } from '../../store/features/auth/auth-selectors';
-import {
- selectActorsFavored,
- selectDirectorsFavored,
-} from '../../store/features/artists/artists-selectors';
+import { selectArtistsActorsFavored, selectArtistsDirectorsFavored } from '../../store/features/artists/artists-selectors';
 
 const ProfilePage: React.FC = () => {
   const dispatch = useRootDispatch();
   const { user, token } = useRootSelector(selectAuth);
-  const favoredActors = useRootSelector(selectActorsFavored);
-  const favoredDirectors = useRootSelector(selectDirectorsFavored);
+  const favoredActors = useRootSelector(selectArtistsActorsFavored);
+  const favoredDirectors = useRootSelector(selectArtistsDirectorsFavored);
   useEffect(() => {
     (async () => {
       if (token) {
-        await dispatch(artistsFetchFavoredActionThunk('actor', token));
-        await dispatch(artistsFetchFavoredActionThunk('director', token));
+        await dispatch(createArtistsFetchFavoredActionThunk('actor', token));
+        await dispatch(createArtistsFetchFavoredActionThunk('director', token));
       }
     })();
   }, []);
@@ -53,18 +50,23 @@ const ProfilePage: React.FC = () => {
         <Typography
           variant="h5"
           sx={{
-            m: 5,
+            mt: 1,
+            mb: 4,
+            fontWeight: 600,
           }}
         >
           {user?.nickname || user?.email}
         </Typography>
 
         <Box sx={{ width: '100%' }}>
-          <Typography variant="h5" fontWeight={600}>
+          <Typography
+            variant="h5"
+            fontWeight={600}
+            sx={{ mb: 1 }}
+          >
             My Favorite Actors:
           </Typography>
           <Grid
-            className="LOLO"
             container
             sx={{
               textAlign: 'center',
@@ -87,7 +89,11 @@ const ProfilePage: React.FC = () => {
           </Grid>
         </Box>
         <Box sx={{ width: '100%', mt: 6 }}>
-          <Typography variant="h5" fontWeight={600}>
+          <Typography
+            variant="h5"
+            fontWeight={600}
+            sx={{ mb: 1 }}
+          >
             My Favorite Directors:
           </Typography>
           <Grid

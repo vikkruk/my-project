@@ -8,10 +8,33 @@ const initialState: ArtistsState = {
   favoredActors: [],
   favoredDirectors: [],
   error: null,
+  success: null,
+  loading: false,
 };
 
 const artistsReducer: Reducer<ArtistsState, ArtistsAction> = (state = initialState, action) => {
   switch (action.type) {
+    case ArtistsActionType.ARTISTS_LOADING: {
+      return {
+        ...state,
+        error: null,
+        success: null,
+        loading: true,
+      };
+    }
+    case ArtistsActionType.ARTISTS_CLEAR_ERROR: {
+      return {
+        ...state,
+        error: null,
+      };
+    }
+    case ArtistsActionType.ARTISTS_CLEAR_SUCCESS: {
+      return {
+        ...state,
+        success: null,
+      };
+    }
+
     case ArtistsActionType.ARTISTS_FETCH_SUCCESS: {
       if (action.payload.type === 'actor') {
         return {
@@ -43,6 +66,22 @@ const artistsReducer: Reducer<ArtistsState, ArtistsAction> = (state = initialSta
         favoredDirectors: action.payload.favoredArtists,
       };
     }
+
+    case ArtistsActionType.ARTISTS_CREATE_FAILURE: {
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+    }
+
+    case ArtistsActionType.ARTISTS_CREATE_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        success: action.payload.success,
+      };
+    }
+
     default: return state;
   }
 };

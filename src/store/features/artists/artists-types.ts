@@ -6,17 +6,33 @@ export type ArtistsState = {
   favoredActors: Artist[],
   favoredDirectors: Artist[],
   error: string | null,
+  success: string | null,
+  loading: boolean,
 };
 
 export type ArtistsPageType = 'actor' | 'director';
 
 export enum ArtistsActionType {
+  ARTISTS_LOADING = 'ARTISTS_LOADING',
   ARTISTS_FETCH_SUCCESS = 'ARTISTS_FETCH_SUCCESS',
   ARTISTS_FETCH_FAILURE = 'ARTISTS_FETCH_FAILURE',
   ARTISTS_FAVORED_FETCH_SUCCESS = 'ARTISTS_FAVORED_FETCH_SUCCESS',
-  ARTISTS_ADD_FAVORED = 'ARTISTS_ADD_FAVORED',
-  ARTISTS_DELETE_FAVORED = 'ARTISTS_DELETE_FAVORED',
+  ARTISTS_CREATE_SUCCESS = 'ARTISTS_CREATE_SUCCESS',
+  ARTISTS_CREATE_FAILURE = 'ARTISTS_CREATE_FAILURE',
+  ARTISTS_CLEAR_SUCCESS = 'ARTISTS_CLEAR_SUCCESS',
+  ARTISTS_CLEAR_ERROR = 'ARTISTS_CLEAR_ERROR',
 }
+
+export type ArtistsLoadingAction = {
+  type: ArtistsActionType.ARTISTS_LOADING,
+};
+export type ArtistsClearErrorAction = {
+  type: ArtistsActionType.ARTISTS_CLEAR_ERROR,
+};
+
+export type ArtistsClearSuccessAction = {
+  type: ArtistsActionType.ARTISTS_CLEAR_SUCCESS,
+};
 
 export type ArtistsFetchSuccessAction = {
   type: ArtistsActionType.ARTISTS_FETCH_SUCCESS,
@@ -33,4 +49,14 @@ export type ArtistsFavoredFetchSuccessAction = {
   payload: { favoredArtists: Artist[], type: ArtistsPageType }
 };
 
-export type ArtistsAction = ArtistsFetchSuccessAction | ArtistsFetchFailureAction | ArtistsFavoredFetchSuccessAction;
+export type ArtistsCreateSuccessAction = {
+  type: ArtistsActionType.ARTISTS_CREATE_SUCCESS,
+  payload: { success: string }
+};
+
+export type ArtistsCreateFailureAction = {
+  type: ArtistsActionType.ARTISTS_CREATE_FAILURE,
+  payload: { error: string }
+};
+
+export type ArtistsAction = ArtistsLoadingAction | ArtistsClearErrorAction | ArtistsClearSuccessAction | ArtistsFetchSuccessAction | ArtistsFetchFailureAction | ArtistsFavoredFetchSuccessAction | ArtistsCreateSuccessAction | ArtistsCreateFailureAction;

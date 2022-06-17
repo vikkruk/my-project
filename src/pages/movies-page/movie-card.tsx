@@ -30,7 +30,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 const MovieCard: React.FC<Movie> = ({
- id,
  title,
  year,
  poster,
@@ -46,13 +45,11 @@ const MovieCard: React.FC<Movie> = ({
 
   return (
     <Container sx={{ p: 2 }}>
-      <Card sx={{ width: '100%' }}>
-        <Box sx={{
+      <Card>
+        <Box
+          sx={{
           display: 'flex',
           flexDirection: { xs: 'column', lg: 'row' },
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%',
         }}
         >
           <CardMedia>

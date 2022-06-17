@@ -3,6 +3,7 @@ import {
   AuthActionType,
   AuthAdminLoginAction,
   AuthClearErrorAction,
+  AuthClearSuccessAction,
   AuthFailureAction,
   AuthLoadingAction,
   AuthLogoutAction,
@@ -20,6 +21,10 @@ export const authLoadingAction: AuthLoadingAction = {
 
 export const authClearErrorAction: AuthClearErrorAction = {
   type: AuthActionType.AUTH_CLEAR_ERROR,
+};
+
+export const authClearSuccessAction: AuthClearSuccessAction = {
+  type: AuthActionType.AUTH_CLEAR_SUCCESS,
 };
 
 export const authLogoutAction: AuthLogoutAction = {

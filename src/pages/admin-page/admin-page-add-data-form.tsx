@@ -6,32 +6,35 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import FormLoadingAnimation from './loading-animation';
-import { useRootSelector, useRootDispatch } from '../store/hooks';
-import { selectAuth } from '../store/features/auth/auth-selectors';
-import { authClearErrorAction } from '../store/features/auth/auth-action-creators';
+import FormLoadingAnimation from '../../components/loading-animation';
 
-type AuthFormProps = {
+type AddDataFormProps = {
   formTitle: string,
   buttonTitle: string,
   buttonActive: boolean,
+  error: string | null,
+  success: string | null,
+  loading: boolean,
   onSubmit?: React.FormEventHandler<HTMLFormElement>,
+  clearError: () => void,
+  clearSuccess: () => void,
 };
 
-const AuthForm: React.FC<AuthFormProps> = ({
-  children, formTitle, buttonTitle, buttonActive, onSubmit,
-}) => {
-  const { error, success, loading } = useRootSelector(selectAuth);
-  const dispatch = useRootDispatch();
-
-  const clearError = () => {
-    dispatch(authClearErrorAction);
-  };
-
-  return (
-    <Paper
-      elevation={4}
-      sx={(theme) => ({
+const AdminPageAddDataForm: React.FC<AddDataFormProps> = ({
+  children,
+  formTitle,
+  buttonTitle,
+  buttonActive,
+  error,
+  success,
+  loading,
+  onSubmit,
+  clearError,
+  clearSuccess,
+}) => (
+  <Paper
+    elevation={4}
+    sx={(theme) => ({
         maxWidth: { xs: 280, sm: 600 },
         margin: 'auto',
         mt: 10,
@@ -41,8 +44,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
         position: 'relative',
 
       })}
-    >
-      {error && (
+  >
+    {error && (
       <Alert
         sx={{
           position: 'absolute',
@@ -57,7 +60,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         {error}
       </Alert>
       )}
-      {
+    {
         success && (
           <Alert
             sx={{
@@ -66,7 +69,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           top: 0,
           left: 0,
         }}
-            onClose={clearError}
+            onClose={clearSuccess}
             color="success"
             severity="success"
           >
@@ -75,35 +78,34 @@ const AuthForm: React.FC<AuthFormProps> = ({
           </Alert>
         )
       }
-      {loading && (<FormLoadingAnimation />)}
-      <Box
-        component="form"
-        sx={{
+    {loading && (<FormLoadingAnimation />)}
+    <Box
+      component="form"
+      sx={{
           display: 'flex',
           flexDirection: 'column',
           gap: 3,
         }}
-        onSubmit={onSubmit}
-      >
-        <Typography component="h1" variant="h3">{formTitle}</Typography>
-        {children}
-        <Button
-          type="submit"
-          color="primary"
-          sx={{
+      onSubmit={onSubmit}
+    >
+      <Typography component="h1" variant="h3">{formTitle}</Typography>
+      {children}
+      <Button
+        type="submit"
+        color="primary"
+        sx={{
             fontSize: 20,
             fontWeight: 600,
             maxWidth: 200,
             alignSelf: 'center',
           }}
-          disabled={!buttonActive || loading}
-        >
-          {buttonTitle}
-        </Button>
+        disabled={!buttonActive || loading}
+      >
+        {buttonTitle}
+      </Button>
 
-      </Box>
-    </Paper>
+    </Box>
+  </Paper>
   );
-};
 
-export default AuthForm;
+export default AdminPageAddDataForm;

@@ -10,25 +10,27 @@ import FilterButton from '../../components/filter-button';
 import { Artist } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectAuthLoggedIn, selectAuthToken } from '../../store/features/auth/auth-selectors';
-import { artistsFetchFavoredActionThunk, artistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';
-import { selectActorsAll, selectActorsFavored } from '../../store/features/artists/artists-selectors';
+import { createArtistsFetchFavoredActionThunk, createArtistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';
+import { selectArtistsActorsAll, selectArtistsActorsFavored } from '../../store/features/artists/artists-selectors';
 
 const ActorsPage: React.FC = () => {
   const dispatch = useRootDispatch();
   const token = useRootSelector(selectAuthToken);
   const loggedIn = useRootSelector(selectAuthLoggedIn);
-  const allActors = useRootSelector(selectActorsAll);
-  const favoredActors = useRootSelector(selectActorsFavored);
+  const allActors = useRootSelector(selectArtistsActorsAll);
+  const favoredActors = useRootSelector(selectArtistsActorsFavored);
   const [actors, setActors] = useState<Artist[]>(allActors);
   const [showFavored, setShowFavored] = useState<boolean>(false);
 
+  const type = 'actor';
+
   useEffect(() => {
-    dispatch(artistsFetchActionThunk('actor'));
+    dispatch(createArtistsFetchActionThunk(type));
   }, []);
 
   useEffect(() => {
    if (loggedIn && token) {
-      dispatch(artistsFetchFavoredActionThunk('actor', token));
+      dispatch(createArtistsFetchFavoredActionThunk(type, token));
     }
   }, [favoredActors]);
 

@@ -23,7 +23,6 @@ const NavBar: React.FC = () => {
   const dispatch = useRootDispatch();
 
   const logout = () => dispatch(authLogoutAction);
-
   return (
     <AppBar position="fixed" sx={(theme) => ({ bgcolor: theme.palette.primary.main })}>
       <Container sx={{ px: { xs: 0, sm: 0 } }}>

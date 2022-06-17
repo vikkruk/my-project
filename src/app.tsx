@@ -31,7 +31,10 @@ const App: React.FC = () => {
       dispatch(createAuthenticateActionThunk(token, location.pathname));
     }
     return (
-      <FormLoadingAnimation />
+      <>
+        <NavbarLayout />
+        <FormLoadingAnimation />
+      </>
 );
   }
   return (

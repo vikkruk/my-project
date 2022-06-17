@@ -13,6 +13,7 @@ const initialValues: AuthState = {
   token: getLocalStorage(TOKEN_KEY),
   user: null,
   error: null,
+  success: null,
   loading: false,
 };
 
@@ -49,6 +50,13 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
       return {
         ...state,
         error: null,
+      };
+    }
+
+    case AuthActionType.AUTH_CLEAR_SUCCESS: {
+      return {
+        ...state,
+        success: null,
       };
     }
 
