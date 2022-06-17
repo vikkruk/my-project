@@ -1,5 +1,5 @@
 import { ArtistsPageType } from '../store/features/artists/artists-types';
-import { AddPersonDataServerValues, Artist, FavoredArtist } from '../types';
+import { AddPersonDataValues, Artist, FavoredArtist } from '../types';
 import ApiService, { handleError } from './api-service';
 
 const fetchArtists = async (role: string): Promise<Artist[]> => {
@@ -25,9 +25,9 @@ const fetchFavoredArtists = async (artistRole: ArtistsPageType, token: string): 
   }
 };
 
-const createArtist = async (artistData: AddPersonDataServerValues, token: string): Promise<void> => {
+const createArtist = async (artistData: AddPersonDataValues, token: string): Promise<void> => {
   try {
-    await ApiService.post('/api/artists', JSON.stringify(artistData), {
+    await ApiService.post('/api/artists', artistData, {
       headers: {
         Authorization: token,
       },

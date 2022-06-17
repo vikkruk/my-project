@@ -26,10 +26,13 @@ const DirectorsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(artistsFetchActionThunk(type));
-    if (loggedIn && token) {
+  }, []);
+
+  useEffect(() => {
+ if (loggedIn && token) {
       dispatch(artistsFetchFavoredActionThunk(type, token));
     }
-  }, [loggedIn, favoredDirectors]);
+  }, [favoredDirectors]);
 
   useEffect(() => {
     if (showFavored) {

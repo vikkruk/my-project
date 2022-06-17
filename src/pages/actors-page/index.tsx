@@ -24,10 +24,13 @@ const ActorsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(artistsFetchActionThunk('actor'));
-    if (loggedIn && token) {
+  }, []);
+
+  useEffect(() => {
+   if (loggedIn && token) {
       dispatch(artistsFetchFavoredActionThunk('actor', token));
     }
-  }, [loggedIn, favoredActors]);
+  }, [favoredActors]);
 
   useEffect(() => {
     if (showFavored) {

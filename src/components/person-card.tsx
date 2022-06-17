@@ -47,6 +47,7 @@ const PersonCard: React.FC<PersonCardProps> = ({
   };
 
   const isFavored = favored.find((fav) => fav.id === id);
+
   return (
     <Paper sx={(theme) => theme.mixins.paper}>
 

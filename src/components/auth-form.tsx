@@ -36,7 +36,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         maxWidth: { xs: 280, sm: 600 },
         margin: 'auto',
         mt: 10,
-        p: { xs: 2, md: 8 },
+        p: { xs: 2, md: 10 },
         color: theme.palette.primary.main,
         backgroundColor: theme.palette.common.white,
         position: 'relative',

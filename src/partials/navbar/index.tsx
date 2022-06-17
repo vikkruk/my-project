@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
   const logout = () => dispatch(authLogoutAction);
 
   return (
-    <AppBar position="static" sx={(theme) => ({ bgcolor: theme.palette.primary.main })}>
+    <AppBar position="fixed" sx={(theme) => ({ bgcolor: theme.palette.primary.main })}>
       <Container sx={{ px: { xs: 0, sm: 0 } }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
           <NavbarDropDownMenu />
