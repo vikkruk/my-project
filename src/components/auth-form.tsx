@@ -36,6 +36,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         margin: 'auto',
         mt: 10,
         p: { xs: 2, md: 10 },
+        pt: { xs: 8, sm: 6 },
         color: theme.palette.primary.main,
         backgroundColor: theme.palette.common.white,
         position: 'relative',

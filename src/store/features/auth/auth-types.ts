@@ -16,6 +16,7 @@ export enum AuthActionType {
   AUTH_ADMIN_LOGIN = 'AUTH_ADMIN_LOGIN',
   AUTH_SUCCESS = 'AUTH_SUCCESS',
   AUTH_FAILURE = 'AUTH_FAILURE',
+  AUTH_UPDATE_USER = 'AUTH_UPDATE_USER',
 }
 
 export type AuthLoadingAction = {
@@ -50,4 +51,12 @@ export type AuthFailureAction = {
   payload: { error: string },
 };
 
-export type AuthAction = AuthLoadingAction | AuthSuccessAction | AuthFailureAction | AuthClearErrorAction | AuthClearSuccessAction | AuthLogoutAction | AuthAdminLoginAction;
+export type AuthUpdateUserAction = {
+  type: AuthActionType.AUTH_UPDATE_USER,
+  payload: {
+    user: User,
+    token: string,
+  },
+};
+
+export type AuthAction = AuthLoadingAction | AuthSuccessAction | AuthFailureAction | AuthClearErrorAction | AuthClearSuccessAction | AuthLogoutAction | AuthAdminLoginAction | AuthUpdateUserAction;

@@ -1,8 +1,8 @@
 import React from 'react';
-import AdminPageAddArtistForm from './admin-page-add-artist-form';
+import AdminPageAddArtist from './admin-page-add-artist';
 
 const AdminPage: React.FC = () => (
-  <AdminPageAddArtistForm />
+  <AdminPageAddArtist />
   );
 
 export default AdminPage;

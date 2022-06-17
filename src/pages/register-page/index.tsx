@@ -30,7 +30,7 @@ const validationSchema = Yup.object({
         if (!email) return false;
         if (!validator.isEmail(email)) return false;
         try {
-          const emailIsAvailable = await AuthService.checkEmailAvailability(email);
+          const emailIsAvailable = await AuthService.checkAvailability(email, 'email');
           return emailIsAvailable;
         } catch (error) {
           throw context.createError({

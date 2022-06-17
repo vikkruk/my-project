@@ -1,4 +1,4 @@
-import FavoredArtist from './favored-artist';
+import { FavoredArtist } from './favored-artist';
 
 export type User = {
   id: string,

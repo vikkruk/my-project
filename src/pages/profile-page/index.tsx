@@ -11,10 +11,14 @@ import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { createArtistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectAuth } from '../../store/features/auth/auth-selectors';
 import { selectArtistsActorsFavored, selectArtistsDirectorsFavored } from '../../store/features/artists/artists-selectors';
+import ProfilePageForm from './profile-page-form';
 
 const ProfilePage: React.FC = () => {
   const dispatch = useRootDispatch();
   const { user, token } = useRootSelector(selectAuth);
+  if (user === null) {
+    throw new Error('You have to be logged in');
+  }
   const favoredActors = useRootSelector(selectArtistsActorsFavored);
   const favoredDirectors = useRootSelector(selectArtistsDirectorsFavored);
   useEffect(() => {
@@ -38,7 +42,7 @@ const ProfilePage: React.FC = () => {
       >
         <Box
           component="img"
-          src={user?.avatar ?? '/no-avatar.png'}
+          src={user.avatar ?? '/no-avatar.png'}
           sx={{
             width: 150,
             height: 150,
@@ -55,8 +59,10 @@ const ProfilePage: React.FC = () => {
             fontWeight: 600,
           }}
         >
-          {user?.nickname || user?.email}
+          {user.nickname}
         </Typography>
+
+        <ProfilePageForm />
 
         <Box sx={{ width: '100%' }}>
           <Typography

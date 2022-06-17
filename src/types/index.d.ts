@@ -7,3 +7,4 @@ export * from './favored-artist';
 export * from './movie';
 export * from './genre';
 export * from './add-artist-data';
+export * from './user-update-values';

@@ -1,4 +1,4 @@
-import { Credentials, User } from '../types';
+import { Credentials, User, UserUpdateValues } from '../types';
 import ApiService, { handleError } from './api-service';
 
 export type AuthResponseBody = {
@@ -40,11 +40,24 @@ namespace AuthService {
     }
   };
 
-  export const checkEmailAvailability = async (email: string): Promise<boolean> => {
+  export const checkAvailability = async (value: string, type: string): Promise<boolean> => {
     try {
       const response = await ApiService
-        .get<{ available: boolean }>(`/api/auth/check-email?email=${email}`);
+        .get<{ available: boolean }>(`/api/auth/check-availability?value=${value}&type=${type}`);
       return response.data.available;
+    } catch (error) {
+      throw new Error(handleError(error));
+    }
+  };
+
+  export const updateUser = async (updateValues: UserUpdateValues, token: string): Promise<AuthResponseBody> => {
+    try {
+      const response = await ApiService.patch<AuthResponseBody>('/api/auth/update-user', updateValues, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      return response.data;
     } catch (error) {
       throw new Error(handleError(error));
     }

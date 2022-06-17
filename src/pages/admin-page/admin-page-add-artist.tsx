@@ -27,7 +27,7 @@ const validationSchema = Yup.object({
   .required('Enter artist\'s surname'),
   img: Yup.string()
   .required('Enter a link to artist\'s photo')
-  .url(),
+  .url('This should be a url'),
   gender: Yup.string()
   .required('Enter artist\'s gender')
   .matches(/male/ || /female/, 'It\'s "male" or "female", dummy'),
@@ -37,7 +37,7 @@ const validationSchema = Yup.object({
   .required('Don\'t forget about these boxes, mate'),
 });
 
-const AdminPageAddArtistForm: React.FC = () => {
+const AdminPageAddArtist: React.FC = () => {
   const { token } = useRootSelector(selectAuth);
   const { error, success, loading } = useRootSelector(selectArtists);
   const dispatch = useRootDispatch();
@@ -151,4 +151,4 @@ const AdminPageAddArtistForm: React.FC = () => {
   );
 };
 
-export default AdminPageAddArtistForm;
+export default AdminPageAddArtist;

@@ -9,9 +9,9 @@ import {
   AuthLogoutAction,
   AuthSuccessAction,
 } from './auth-types';
-import { AppAction } from '../../redux-types';
-import { Credentials } from '../../../types';
-import { createNavigationSetNextAction } from '../navigation/navigation-action-creators';
+import { AppAction, RootState } from '../../redux-types';
+import { Credentials, UserUpdateValues } from '../../../types';
+import { createNavigationSetNextAction, navigationClearNextAction } from '../navigation/navigation-action-creators';
 import AuthService, { AuthResponseBody } from '../../../services/auth-service';
 import pause from '../../../helpers/pause';
 
@@ -48,16 +48,20 @@ export const createAuthFailureAction = (error: string): AuthFailureAction => ({
 export const authenticate = async (
   authMethod: () => Promise<AuthResponseBody>,
   dispatch: Dispatch<AppAction>,
-  next: string,
+  next?: string,
 ): Promise<void> => {
   try {
     dispatch(authLoadingAction);
     await pause(700);
     const authResponseBody = await authMethod();
-    dispatch(createNavigationSetNextAction(next));
+    if (next) {
+      dispatch(createNavigationSetNextAction(next));
+    }
 
     dispatch(createAuthSuccessAction(authResponseBody));
-    dispatch(authClearErrorAction);
+    if (next) {
+      dispatch(navigationClearNextAction);
+    }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     dispatch(createAuthFailureAction(errorMessage));
@@ -75,4 +79,14 @@ export const createLoginActionThunk = (credentials: Credentials, next: string) =
 
 export const createRegisterActionThunk = (credentials: Credentials, next: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   await authenticate(async () => AuthService.register(credentials), dispatch, next);
+};
+
+export const createAuthUpdateUserActionThunk = (updateValues: UserUpdateValues) => async (
+  dispatch: Dispatch<AppAction>,
+  getState: () => RootState,
+): Promise<void> => {
+  const { token } = getState().auth;
+  if (token !== null) {
+    await authenticate(async () => AuthService.updateUser(updateValues, token), dispatch);
+  }
 };
