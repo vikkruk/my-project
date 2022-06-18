@@ -14,8 +14,8 @@ const FormLoadingAnimation: React.FC = () => (
       color="primary"
       sx={{
         ...loadinAnimationStyle,
-        top: { xs: 25, md: 70 },
-        right: { xs: 35, md: 110 },
+        top: { xs: 15, md: 20 },
+        right: { xs: 25, md: 40 },
       }}
     />
     <CircularProgress
@@ -23,8 +23,8 @@ const FormLoadingAnimation: React.FC = () => (
       color="secondary"
       sx={{
         ...loadinAnimationStyle,
-        top: { xs: 35, md: 80 },
-        right: { xs: 45, md: 120 },
+        top: { xs: 25, md: 30 },
+        right: { xs: 35, md: 50 },
       }}
     />
   </>

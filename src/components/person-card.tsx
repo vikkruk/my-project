@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Paper } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import { Artist } from '../types';
 import { ArtistsPageType } from '../store/features/artists/artists-types';
 import { useRootDispatch, useRootSelector } from '../store/hooks';
@@ -57,10 +56,12 @@ const PersonCard: React.FC<PersonCardProps> = ({
       {(loggedIn && !profile)
         && (isFavored
           ? (
-            <HeartBrokenIcon
-              color="secondary"
+            <FavoriteIcon
+              color="error"
               sx={{
+                color: '#BA0021',
                 ...heartIconStyle,
+
               }}
               onClick={() => deleteFromFavored(id)}
             />

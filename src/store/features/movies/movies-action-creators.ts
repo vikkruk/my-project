@@ -19,7 +19,7 @@ export const createMoviesFetchFailure = (error: string): MoviesFetchFailureActio
   payload: { error },
 });
 
-export const moviesFetchActionThunk = (genre?: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+export const createMoviesFetchActionThunk = (genre?: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
     const movies = await MoviesService.fetchMovies(genre);
     dispatch(createMoviesFetchSuccess(movies));

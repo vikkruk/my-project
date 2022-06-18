@@ -110,6 +110,7 @@ const ProfilePageForm: React.FC = () => {
     <AuthForm
       formTitle="User Info"
       buttonTitle="Update"
+      margin="0px"
       onSubmit={handleSubmit}
       buttonActive={dirty && isValid}
     >

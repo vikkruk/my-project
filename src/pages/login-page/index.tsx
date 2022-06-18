@@ -66,6 +66,7 @@ const LoginPage: React.FC = () => {
       formTitle="Login"
       buttonTitle="Login"
       buttonActive={dirty && isValid}
+      margin="auto"
       onSubmit={handleSubmit}
     >
       <TextField

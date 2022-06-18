@@ -6,7 +6,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import FormLoadingAnimation from '../../components/loading-animation';
+import FormLoadingAnimation from '../../components/animations/form-loading-animation';
 
 type AddDataFormProps = {
   formTitle: string,
@@ -15,7 +15,7 @@ type AddDataFormProps = {
   error: string | null,
   success: string | null,
   loading: boolean,
-  onSubmit?: React.FormEventHandler<HTMLFormElement>,
+  onSubmit: React.FormEventHandler<HTMLFormElement>,
   clearError: () => void,
   clearSuccess: () => void,
 };

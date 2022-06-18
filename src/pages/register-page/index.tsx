@@ -79,6 +79,7 @@ const RegisterPage: React.FC = () => {
     <AuthForm
       formTitle="Register"
       buttonTitle="Register"
+      margin="auto"
       onSubmit={handleSubmit}
       buttonActive={dirty && isValid}
     >

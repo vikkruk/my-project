@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormikConfig, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Checkbox, FormControlLabel, TextField } from '@mui/material';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectAuth } from '../../store/features/auth/auth-selectors';
-import { artistRolesFetchActionThunk } from '../../store/features/artist-roles/artist-roles-creators';
+import { artistRolesFetchActionThunk } from '../../store/features/artist-roles/artist-roles-action-creators';
 import selectArtistRoles from '../../store/features/artist-roles/artist-roles-selectors';
 import { AddArtistData } from '../../types';
 import { createDataAdditionThunk, artistsClearErrorAction, artistsClearSuccessAction } from '../../store/features/artists/artists-action-creators';
@@ -44,7 +44,7 @@ const AdminPageAddArtist: React.FC = () => {
   const artistRoles = useRootSelector(selectArtistRoles);
 
   useEffect(() => {
-    dispatch(artistRolesFetchActionThunk());
+    dispatch(artistRolesFetchActionThunk);
   }, []);
 
   const handleAddData: RegisterFormikConfig['onSubmit'] = async (submittedValues, { resetForm }) => {

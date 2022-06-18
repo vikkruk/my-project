@@ -6,20 +6,21 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import FormLoadingAnimation from './loading-animation';
 import { useRootSelector, useRootDispatch } from '../store/hooks';
 import { selectAuth } from '../store/features/auth/auth-selectors';
-import { authClearErrorAction } from '../store/features/auth/auth-action-creators';
+import { authClearErrorAction, authClearSuccessAction } from '../store/features/auth/auth-action-creators';
+import FormLoadingAnimation from './animations/form-loading-animation';
 
 type AuthFormProps = {
   formTitle: string,
   buttonTitle: string,
   buttonActive: boolean,
+  margin: string,
   onSubmit?: React.FormEventHandler<HTMLFormElement>,
 };
 
 const AuthForm: React.FC<AuthFormProps> = ({
-  children, formTitle, buttonTitle, buttonActive, onSubmit,
+  children, formTitle, buttonTitle, buttonActive, margin, onSubmit,
 }) => {
   const { error, success, loading } = useRootSelector(selectAuth);
   const dispatch = useRootDispatch();
@@ -28,15 +29,17 @@ const AuthForm: React.FC<AuthFormProps> = ({
     dispatch(authClearErrorAction);
   };
 
+  const clearSuccess = () => {
+    dispatch(authClearSuccessAction);
+  };
+
   return (
     <Paper
       elevation={4}
       sx={(theme) => ({
         maxWidth: { xs: 280, sm: 600 },
-        margin: 'auto',
+        margin: { margin },
         mt: 10,
-        p: { xs: 2, md: 10 },
-        pt: { xs: 8, sm: 6 },
         color: theme.palette.primary.main,
         backgroundColor: theme.palette.common.white,
         position: 'relative',
@@ -67,7 +70,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           top: 0,
           left: 0,
         }}
-            onClose={clearError}
+            onClose={clearSuccess}
             color="success"
             severity="success"
           >
@@ -83,6 +86,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
           display: 'flex',
           flexDirection: 'column',
           gap: 3,
+          p: { xs: 2, md: 10 },
+          pt: { xs: 10 },
         }}
         onSubmit={onSubmit}
       >

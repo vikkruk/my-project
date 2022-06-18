@@ -6,12 +6,13 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import ProfilePageForm from './profile-page-form';
 import PersonCard from '../../components/person-card';
+import CustomDivider from '../../components/custom-divider';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { createArtistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectAuth } from '../../store/features/auth/auth-selectors';
 import { selectArtistsActorsFavored, selectArtistsDirectorsFavored } from '../../store/features/artists/artists-selectors';
-import ProfilePageForm from './profile-page-form';
 
 const ProfilePage: React.FC = () => {
   const dispatch = useRootDispatch();
@@ -40,30 +41,48 @@ const ProfilePage: React.FC = () => {
         alignItems: 'center',
       }}
       >
-        <Box
-          component="img"
-          src={user.avatar ?? '/no-avatar.png'}
-          sx={{
+        <CustomDivider />
+        <Box sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: 'center',
+          justifyContent: 'space-around',
+          mb: 4,
+          width: '100%',
+         }}
+        >
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          >
+            <Box
+              component="img"
+              src={user.avatar ?? '/no-avatar.png'}
+              sx={{
             width: 150,
             height: 150,
             m: 2,
             objectFit: 'cover',
             borderRadius: '100%',
           }}
-        />
-        <Typography
-          variant="h5"
-          sx={{
+            />
+            <Typography
+              variant="h5"
+              sx={{
             mt: 1,
             mb: 4,
             fontWeight: 600,
           }}
-        >
-          {user.nickname}
-        </Typography>
+            >
+              {user.nickname}
+            </Typography>
+          </Box>
 
-        <ProfilePageForm />
-
+          <ProfilePageForm />
+        </Box>
+        <CustomDivider />
         <Box sx={{ width: '100%' }}>
           <Typography
             variant="h5"

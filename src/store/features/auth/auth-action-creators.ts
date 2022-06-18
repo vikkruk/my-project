@@ -8,6 +8,7 @@ import {
   AuthLoadingAction,
   AuthLogoutAction,
   AuthSuccessAction,
+  AuthUpdateUserSuccessAction,
 } from './auth-types';
 import { AppAction, RootState } from '../../redux-types';
 import { Credentials, UserUpdateValues } from '../../../types';
@@ -17,6 +18,10 @@ import pause from '../../../helpers/pause';
 
 export const authLoadingAction: AuthLoadingAction = {
   type: AuthActionType.AUTH_LOADING,
+};
+
+export const authUpdateUserSuccessAction: AuthUpdateUserSuccessAction = {
+  type: AuthActionType.AUTH_UPDATE_USER_SUCCESS,
 };
 
 export const authClearErrorAction: AuthClearErrorAction = {
@@ -37,7 +42,9 @@ export const authAdminLogin: AuthAdminLoginAction = {
 
 export const createAuthSuccessAction = (authResponseBody: AuthResponseBody): AuthSuccessAction => ({
   type: AuthActionType.AUTH_SUCCESS,
-  payload: authResponseBody,
+  payload: {
+    ...authResponseBody,
+  },
 });
 
 export const createAuthFailureAction = (error: string): AuthFailureAction => ({
@@ -52,7 +59,7 @@ export const authenticate = async (
 ): Promise<void> => {
   try {
     dispatch(authLoadingAction);
-    await pause(700);
+    await pause(1000);
     const authResponseBody = await authMethod();
     if (next) {
       dispatch(createNavigationSetNextAction(next));
@@ -88,5 +95,6 @@ export const createAuthUpdateUserActionThunk = (updateValues: UserUpdateValues) 
   const { token } = getState().auth;
   if (token !== null) {
     await authenticate(async () => AuthService.updateUser(updateValues, token), dispatch);
+    dispatch(authUpdateUserSuccessAction);
   }
 };

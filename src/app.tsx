@@ -4,6 +4,7 @@ import {
  Routes,
  useLocation,
 } from 'react-router-dom';
+import { Typography } from '@mui/material';
 import { useRootDispatch, useRootSelector } from './store/hooks';
 import { selectAuthLoggedIn, selectAuth } from './store/features/auth/auth-selectors';
 import { createAuthenticateActionThunk } from './store/features/auth/auth-action-creators';
@@ -19,7 +20,7 @@ import NavbarLayout from './layouts/navbar-layout';
 import RequireAdmin from './routing/require-admin';
 import RequireAuth from './routing/require-auth';
 import RequireVisitor from './routing/require-visitor';
-import FormLoadingAnimation from './components/loading-animation';
+import AuthenticateAnimation from './components/animations/authenticate-animation';
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -33,7 +34,8 @@ const App: React.FC = () => {
     return (
       <>
         <NavbarLayout />
-        <FormLoadingAnimation />
+        <Typography variant="h4" sx={{ mt: 50, mb: 2, textAlign: 'center' }}>Authenticating...</Typography>
+        <AuthenticateAnimation />
       </>
 );
   }

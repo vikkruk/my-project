@@ -23,9 +23,18 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
       return {
         ...state,
         error: null,
+        success: null,
         loading: true,
       };
     }
+
+    case AuthActionType.AUTH_UPDATE_USER_SUCCESS: {
+      return {
+        ...state,
+        success: 'Everything went smoothly',
+      };
+    }
+
     case AuthActionType.AUTH_SUCCESS: {
       setLocalStorage(TOKEN_KEY, action.payload.token);
       return {
@@ -41,6 +50,7 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = initialValues, acti
       return {
         ...state,
         error: action.payload.error,
+        success: null,
         user: null,
         token: null,
         loading: false,

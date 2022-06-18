@@ -10,6 +10,7 @@ export type AuthState = {
 
 export enum AuthActionType {
   AUTH_LOADING = 'AUTH_LOADING',
+  AUTH_UPDATE_USER_SUCCESS = 'AUTH_UPDATE_USER_SUCCESS',
   AUTH_CLEAR_ERROR = 'AUTH_CLEAR_ERROR',
   AUTH_CLEAR_SUCCESS = 'AUTH_CLEAR_SUCCESS',
   AUTH_LOGOUT = 'AUTH_LOGOUT',
@@ -21,6 +22,10 @@ export enum AuthActionType {
 
 export type AuthLoadingAction = {
   type: AuthActionType.AUTH_LOADING,
+};
+
+export type AuthUpdateUserSuccessAction = {
+  type: AuthActionType.AUTH_UPDATE_USER_SUCCESS,
 };
 
 export type AuthClearErrorAction = {
@@ -59,4 +64,4 @@ export type AuthUpdateUserAction = {
   },
 };
 
-export type AuthAction = AuthLoadingAction | AuthSuccessAction | AuthFailureAction | AuthClearErrorAction | AuthClearSuccessAction | AuthLogoutAction | AuthAdminLoginAction | AuthUpdateUserAction;
+export type AuthAction = AuthLoadingAction | AuthUpdateUserSuccessAction | AuthSuccessAction | AuthFailureAction | AuthClearErrorAction | AuthClearSuccessAction | AuthLogoutAction | AuthAdminLoginAction | AuthUpdateUserAction;

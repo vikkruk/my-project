@@ -18,7 +18,7 @@ export const createArtistRolesFetchFailure = (error: string): ArtistRolesFetchFa
   payload: { error },
 });
 
-export const artistRolesFetchActionThunk = () => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+export const artistRolesFetchActionThunk = async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
     const artistRoles = await ArtistRolesService.fetchArtistRoles();
     dispatch(createArtistRolesFetchSuccess(artistRoles));
