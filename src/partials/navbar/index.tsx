@@ -14,12 +14,14 @@ import StyledHomeNavLink from '../../components/styled-home-navlink';
 import { User } from '../../types';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
-import { selectAuthLoggedIn, selectAuthRole, selectAuthUser } from '../../store/features/auth/auth-selectors';
+import {
+ selectAuthLoggedIn, selectAuthRole, selectAuthUser, selectAuth,
+} from '../../store/features/auth/auth-selectors';
 
 const NavBar: React.FC = () => {
   const loggedIn = useRootSelector(selectAuthLoggedIn);
-  const user = useRootSelector(selectAuthUser);
   const role = useRootSelector(selectAuthRole);
+  const { user, loading } = useRootSelector(selectAuth);
   const dispatch = useRootDispatch();
 
   const logout = () => dispatch(authLogoutAction);
@@ -43,7 +45,7 @@ const NavBar: React.FC = () => {
             <StyledNavLink to="/movies">Movies</StyledNavLink>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-            {(loggedIn && ((user && user.avatar) ? (
+            {loggedIn && ((user && user.avatar) ? (
               <>
                 <NavbarLoggedInMenu
                   avatar={`${(user as User).avatar}`}
@@ -65,8 +67,8 @@ const NavBar: React.FC = () => {
                 <Avatar>{user?.email.slice(0, 2)}</Avatar>
                 <StyledHomeNavLink sx={{ display: { xs: 'none', md: 'block' } }} to="/" onClick={logout}>Logout</StyledHomeNavLink>
               </>
-            )))
-            || (<StyledNavLink to="/auth/login">Login</StyledNavLink>)}
+            ))}
+            {!loggedIn && !loading && (<StyledNavLink to="/auth/login">Login</StyledNavLink>)}
 
           </Box>
 

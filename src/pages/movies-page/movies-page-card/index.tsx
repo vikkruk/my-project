@@ -43,12 +43,13 @@ const MoviesPageCard: React.FC<Movie> = ({
   };
 
   return (
-    <Container sx={{ p: 2 }}>
+    <Container sx={{ p: 2, width: { xs: '100%', sm: 548, md: '100%' } }}>
       <Card>
         <Box
           sx={{
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
+
         }}
         >
           <MoviesPageCardMedia poster={poster} />

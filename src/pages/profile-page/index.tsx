@@ -9,6 +9,7 @@ import {
 import ProfilePageForm from './profile-page-form';
 import PersonCard from '../../components/person-card';
 import CustomDivider from '../../components/custom-divider';
+import noAvatar from './images/no-avatar.png';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { createArtistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectAuth } from '../../store/features/auth/auth-selectors';
@@ -59,7 +60,7 @@ const ProfilePage: React.FC = () => {
           >
             <Box
               component="img"
-              src={user.avatar ?? '/no-avatar.png'}
+              src={user.avatar ?? noAvatar}
               sx={{
             width: 150,
             height: 150,

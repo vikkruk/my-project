@@ -15,7 +15,14 @@ const MoviesPageCardArtistsSection: React.FC<MoviesPageCardArtistsSectionProps> 
   const artistHeader = `${artistRole.toUpperCase().slice(0, 1)}${artistRole.slice(1)}`;
   return (
     <Box sx={{ mt: 2 }}>
-      <Typography variant="h5" color="primary">
+      <Typography
+        variant="h5"
+        color="primary"
+        sx={{
+        mb: 2,
+        fontWeight: 600,
+      }}
+      >
         {artistsCollection.length > 1 ? `${artistHeader}s` : artistHeader}
       </Typography>
       <Box sx={{
