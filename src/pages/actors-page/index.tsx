@@ -26,13 +26,10 @@ const ActorsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(createArtistsFetchActionThunk(type));
+    if (loggedIn && token) {
+       dispatch(createArtistsFetchFavoredActionThunk(type, token));
+     }
   }, []);
-
-  useEffect(() => {
-   if (loggedIn && token) {
-      dispatch(createArtistsFetchFavoredActionThunk(type, token));
-    }
-  }, [favoredActors]);
 
   useEffect(() => {
     if (showFavored) {
@@ -40,7 +37,7 @@ const ActorsPage: React.FC = () => {
     } else {
       setActors(allActors);
     }
-  }, [showFavored, allActors, favoredActors]);
+  }, [showFavored, favoredActors]);
 
   return (
     <Container sx={{ mt: 4 }}>
