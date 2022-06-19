@@ -8,7 +8,11 @@ import MovieImg from './images/movie.svg';
 
 const HomePageHeader: React.FC = () => (
   <Container sx={{
-    textAlign: 'center', mb: 2, display: 'flex', flexDirection: 'column', gap: 3,
+    textAlign: 'center',
+    mb: 2,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 3,
   }}
   >
     <Typography
@@ -24,14 +28,6 @@ const HomePageHeader: React.FC = () => (
 
     </Typography>
     <Box component="img" src={MovieImg} sx={{ height: 200 }} />
-    <Typography
-      component="h2"
-      variant="h4"
-      sx={(theme) => ({ color: theme.palette.info.main })}
-    >
-      Cause we&apos;re boring like that
-
-    </Typography>
 
   </Container>
 );

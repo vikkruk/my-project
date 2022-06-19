@@ -1,11 +1,11 @@
 import React from 'react';
 import HomePageHeader from './home-page-header';
-import HomePageMovieReel from './home-page-question';
+import HomePageMovieFrame from './home-page-movie-frame';
 
 const HomePage: React.FC = () => (
   <>
     <HomePageHeader />
-    <HomePageMovieReel />
+    <HomePageMovieFrame />
   </>
 );
 

@@ -37,7 +37,7 @@ const ActorsPage: React.FC = () => {
     } else {
       setActors(allActors);
     }
-  }, [showFavored, favoredActors]);
+  }, [showFavored, favoredActors, allActors]);
 
   return (
     <Container sx={{ mt: 4 }}>

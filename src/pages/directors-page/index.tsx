@@ -37,7 +37,7 @@ const DirectorsPage: React.FC = () => {
     } else {
       setDirectors(allDirectors);
     }
-  }, [showFavored, favoredDirectors]);
+  }, [showFavored, favoredDirectors, allDirectors]);
 
   return (
     <Container sx={{ mt: 4 }}>
