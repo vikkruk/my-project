@@ -11,7 +11,7 @@ const baseTheme = createTheme({
     info: createColor('#826F66'),
     common: {
       white: '#fbfbfb',
-      black: '#C69B7B',
+      black: '#100c08',
     },
     background: {
       default: '#F7CCAC',

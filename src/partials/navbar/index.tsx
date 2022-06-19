@@ -9,8 +9,8 @@ import {
 } from '@mui/material';
 import NavbarLoggedInMenu from './navbar-logged-in-menu';
 import NavbarDropDownMenu from './navbar-drop-down-menu';
-import StyledNavLink from '../../components/styled-navlink';
-import StyledHomeNavLink from '../../components/styled-home-navlink';
+import StyledNavLink from '../../components/styled-navlinks/styled-navlink';
+import StyledHomeNavLink from '../../components/styled-navlinks/styled-home-navlink';
 import { User } from '../../types';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';

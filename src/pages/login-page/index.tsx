@@ -4,7 +4,7 @@ import { FormikConfig, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Typography } from '@mui/material';
 import AuthForm from '../../components/auth-form';
-import StyledHomeNavLink from '../../components/styled-home-navlink';
+import StyledHomeNavLink from '../../components/styled-navlinks/styled-home-navlink';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { createLoginActionThunk } from '../../store/features/auth/auth-action-creators';
 import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
   const [searchParams] = useSearchParams();
 
   const handleLogin: LoginFormikConfig['onSubmit'] = ({ email, password }) => {
-    const next = searchParams.get('next') ?? '/actors';
+    const next = searchParams.get('next') ?? '/';
     dispatch(createLoginActionThunk({ email, password }, next));
   };
 

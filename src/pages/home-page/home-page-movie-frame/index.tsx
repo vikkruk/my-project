@@ -1,26 +1,40 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import movieFrame from './images/movie-frame.png';
+import { useRootSelector } from '../../../store/hooks';
+import { selectAuthLoggedIn } from '../../../store/features/auth/auth-selectors';
+import HomePageStyledLoginNavlink from '../home-page-styled-login-navlink';
+import HomePageMovieFrameImage from './home-page-movie-frame-image';
 
-const HomePageMovieFrame: React.FC = () => (
-  <Box sx={{
-    position: 'relative',
-    display: 'block',
+const HomePageMovieFrame: React.FC = () => {
+  const loggedIn = useRootSelector(selectAuthLoggedIn);
+
+  return (
+    <Box sx={{
+      display: 'flex',
+      position: 'relative',
+      justifyContent: 'center',
+      alignItems: 'center',
       width: {
         xs: 295,
         sm: 550,
         md: 700,
         lg: 740,
       },
-      height: { xs: 'auto' },
+      height: {
+        xs: 210,
+        sm: 380,
+        md: 480,
+        lg: 500,
+},
       mx: 'auto',
-      mt: 3,
+      mt: 7,
   }}
-  >
-    <Box
-      component="img"
-      src={movieFrame}
-      sx={{
+    >
+      <Box
+        component="img"
+        src={movieFrame}
+        sx={{
       display: 'block',
       position: 'absolute',
       width: {
@@ -30,41 +44,14 @@ const HomePageMovieFrame: React.FC = () => (
         xs: 'auto',
       },
     }}
-    />
-    <Box
-      sx={{
-      position: 'absolute',
-      display: 'block',
-      backgroundImage: 'url(https://footeandfriendsonfilm.com/wp-content/uploads/2020/02/The-Godfather-I.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: '50% 50%',
-      top: {
-        xs: 16,
-        sm: 30,
-        md: 35,
-        lg: 42,
-      },
-      left: {
-        xs: 14,
-        sm: 26,
-        md: 33,
-        lg: 35,
-      },
-      width: {
-        xs: 268,
-        sm: 500,
-        md: 640,
-        lg: 680,
-      },
-      height: {
-        xs: 190,
-        sm: 350,
-        md: 450,
-        lg: 475,
-      },
-    }}
-    />
-  </Box>
+      />
+      {loggedIn
+        ? (
+          <HomePageMovieFrameImage />
+)
+    : (<HomePageStyledLoginNavlink to="/auth/login">Login</HomePageStyledLoginNavlink>)}
+    </Box>
   );
+};
 
 export default HomePageMovieFrame;
