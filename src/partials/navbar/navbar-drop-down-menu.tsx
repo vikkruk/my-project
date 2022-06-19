@@ -1,4 +1,8 @@
-import React from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -14,8 +18,9 @@ import { authLogoutAction } from '../../store/features/auth/auth-action-creators
 import { selectAuthLoggedIn, selectAuthRole } from '../../store/features/auth/auth-selectors';
 
 const NavbarDropDownMenu: React.FC = () => {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState<boolean>(false);
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  const anchorRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
   const dispatch = useRootDispatch();
   const loggedIn = useRootSelector(selectAuthLoggedIn);
@@ -23,6 +28,9 @@ const NavbarDropDownMenu: React.FC = () => {
 
   const logout = () => dispatch(authLogoutAction);
 
+  window.addEventListener('resize', () => {
+    setWindowWidth(window.innerWidth);
+  });
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -38,8 +46,8 @@ const NavbarDropDownMenu: React.FC = () => {
     setOpen(false);
   };
 
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
+  const prevOpen = useRef(open);
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       if (anchorRef.current) {
         anchorRef.current.focus();
@@ -48,6 +56,12 @@ const NavbarDropDownMenu: React.FC = () => {
 
     prevOpen.current = open;
   }, [open]);
+
+ useEffect(() => {
+  if (windowWidth > 900) {
+    setOpen(false);
+  }
+ }, [windowWidth]);
 
   return (
 

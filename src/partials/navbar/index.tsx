@@ -15,7 +15,9 @@ import { User } from '../../types';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
 import {
- selectAuthLoggedIn, selectAuthRole, selectAuthUser, selectAuth,
+ selectAuthLoggedIn,
+ selectAuthRole,
+ selectAuth,
 } from '../../store/features/auth/auth-selectors';
 
 const NavBar: React.FC = () => {

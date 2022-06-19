@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -37,13 +37,32 @@ const MoviesPageCard: React.FC<Movie> = ({
  genres,
 }) => {
   const [expanded, setExpanded] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  window.addEventListener('resize', () => {
+    setWindowWidth(window.innerWidth);
+  });
+
+  useEffect(() => {
+    if (windowWidth > 900) {
+      setExpanded(false);
+    }
+  }, [windowWidth]);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Container sx={{ p: 2, width: { xs: '100%', sm: 548, md: '100%' } }}>
+    <Container sx={{
+      p: 2,
+      width: {
+        xs: '100%',
+        sm: 548,
+        md: '100%',
+      },
+    }}
+    >
       <Card>
         <Box
           sx={{
@@ -53,7 +72,14 @@ const MoviesPageCard: React.FC<Movie> = ({
         }}
         >
           <MoviesPageCardMedia poster={poster} />
-          <CardContent sx={{ m: 'auto', display: { xs: 'none', md: 'initial' } }}>
+          <CardContent sx={{
+            m: 'auto',
+            display: {
+              xs: 'none',
+              md: 'initial',
+            },
+          }}
+          >
             <Typography
               variant="h4"
               color="primary"
