@@ -12,28 +12,32 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
-import { Box } from '@mui/material';
+import {
+  Box,
+  Theme,
+  useMediaQuery,
+} from '@mui/material';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
 import { selectAuthLoggedIn, selectAuthRole } from '../../store/features/auth/auth-selectors';
 
 const NavbarDropDownMenu: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
   const dispatch = useRootDispatch();
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const role = useRootSelector(selectAuthRole);
 
+  const isMedium = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
+
   const logout = () => dispatch(authLogoutAction);
 
-  window.addEventListener('resize', () => {
-    setWindowWidth(window.innerWidth);
-  });
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+
+  const prevOpen = useRef(open);
 
   const handleClose = (event: Event | React.SyntheticEvent) => {
     if (
@@ -46,26 +50,26 @@ const NavbarDropDownMenu: React.FC = () => {
     setOpen(false);
   };
 
-  const prevOpen = useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
       if (anchorRef.current) {
         anchorRef.current.focus();
       }
     }
-
     prevOpen.current = open;
   }, [open]);
 
- useEffect(() => {
-  if (windowWidth > 900) {
-    setOpen(false);
-  }
- }, [windowWidth]);
+  useEffect(() => {
+    if (isMedium) {
+      setOpen(false);
+    }
+  }, [isMedium]);
+
+  if (isMedium) return <Box />;
 
   return (
 
-    <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+    <Box>
       <Button
         sx={(theme) => ({
           color: theme.palette.secondary.main,
@@ -79,7 +83,6 @@ const NavbarDropDownMenu: React.FC = () => {
       <Popper
         open={open}
         anchorEl={anchorRef.current}
-        role={undefined}
         placement="bottom-start"
         transition
         disablePortal
@@ -90,7 +93,7 @@ const NavbarDropDownMenu: React.FC = () => {
             {...TransitionProps}
             style={{
               transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+                placement === 'bottom-start' ? 'left top' : 'left bottom',
             }}
           >
             <Paper sx={(theme) => ({ backgroundColor: theme.palette.common.white })}>
@@ -99,22 +102,22 @@ const NavbarDropDownMenu: React.FC = () => {
                   autoFocusItem={open}
                 >
                   {role === 'admin' && (
-                  <MenuItem onClick={(e) => {
-                    handleClose(e);
-                    navigate('/admin');
-                  }}
-                  >
-                    Admin
-                  </MenuItem>
+                    <MenuItem onClick={(e) => {
+                      handleClose(e);
+                      navigate('/admin');
+                    }}
+                    >
+                      Admin
+                    </MenuItem>
                   )}
                   {loggedIn && (
-                  <MenuItem onClick={(e) => {
-                    handleClose(e);
-                    navigate('/profile');
-                  }}
-                  >
-                    Profile
-                  </MenuItem>
+                    <MenuItem onClick={(e) => {
+                      handleClose(e);
+                      navigate('/profile');
+                    }}
+                    >
+                      Profile
+                    </MenuItem>
                   )}
 
                   <MenuItem onClick={(e) => {

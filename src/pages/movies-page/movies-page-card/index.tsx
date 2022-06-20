@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, Theme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -7,7 +7,11 @@ import Collapse from '@mui/material/Collapse';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import MovieIcon from '@mui/icons-material/Movie';
 import Typography from '@mui/material/Typography';
-import { Box, Container } from '@mui/material';
+import {
+  Box,
+  Container,
+  useMediaQuery,
+} from '@mui/material';
 import { Movie } from '../../../types';
 import CustomDivider from '../../../components/custom-divider';
 import MoviesPageCardArtistsSection from './movies-page-card-artists-section';
@@ -29,29 +33,26 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 const MoviesPageCard: React.FC<Movie> = ({
- title,
- year,
- poster,
- directors,
- actors,
- genres,
+  title,
+  year,
+  poster,
+  directors,
+  actors,
+  genres,
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  window.addEventListener('resize', () => {
-    setWindowWidth(window.innerWidth);
-  });
-
-  useEffect(() => {
-    if (windowWidth > 900) {
-      setExpanded(false);
-    }
-  }, [windowWidth]);
+  const isMedium = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  useEffect(() => {
+    if (isMedium) {
+      setExpanded(false);
+    }
+  }, [isMedium]);
 
   return (
     <Container sx={{
@@ -66,10 +67,10 @@ const MoviesPageCard: React.FC<Movie> = ({
       <Card>
         <Box
           sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
 
-        }}
+          }}
         >
           <MoviesPageCardMedia poster={poster} />
           <CardContent sx={{
@@ -148,8 +149,8 @@ const MoviesPageCard: React.FC<Movie> = ({
                 color="primary"
                 fontWeight="600"
                 sx={{
-                mb: 2,
-              }}
+                  mb: 2,
+                }}
               >
                 {genres.length > 1 ? 'Genres' : 'Genre'}
               </Typography>

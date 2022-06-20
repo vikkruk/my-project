@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { FormikConfig, useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Checkbox, FormControlLabel, TextField } from '@mui/material';
+import {
+  Checkbox,
+  FormControlLabel,
+  TextField,
+} from '@mui/material';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectAuth } from '../../store/features/auth/auth-selectors';
 import { artistRolesFetchActionThunk } from '../../store/features/artist-roles/artist-roles-action-creators';
 import selectArtistRoles from '../../store/features/artist-roles/artist-roles-selectors';
 import { AddArtistData } from '../../types';
-import { createDataAdditionThunk, artistsClearErrorAction, artistsClearSuccessAction } from '../../store/features/artists/artists-action-creators';
+import {
+  createDataAdditionThunk,
+  artistsClearErrorAction,
+  artistsClearSuccessAction,
+} from '../../store/features/artists/artists-action-creators';
 import AdminPageAddDataForm from './admin-page-add-data-form';
 import { selectArtists } from '../../store/features/artists/artists-selectors';
 
@@ -22,19 +30,19 @@ const initialValues: AddArtistData = {
 };
 const validationSchema = Yup.object({
   name: Yup.string()
-  .required('Enter artist\'s name'),
+    .required('Enter artist\'s name'),
   surname: Yup.string()
-  .required('Enter artist\'s surname'),
+    .required('Enter artist\'s surname'),
   img: Yup.string()
-  .required('Enter a link to artist\'s photo')
-  .url('This should be a url'),
+    .required('Enter a link to artist\'s photo')
+    .url('This should be a url'),
   gender: Yup.string()
-  .required('Enter artist\'s gender')
-  .matches(/male/ || /female/, 'It\'s "male" or "female", dummy'),
+    .required('Enter artist\'s gender')
+    .matches(/male/ || /female/, 'It\'s "male" or "female", dummy'),
   roles: Yup.array()
-  .of(Yup.string())
-  .min(1)
-  .required('Don\'t forget about these boxes, mate'),
+    .of(Yup.string())
+    .min(1)
+    .required('Don\'t forget about these boxes, mate'),
 });
 
 const AdminPageAddArtist: React.FC = () => {
@@ -63,6 +71,7 @@ const AdminPageAddArtist: React.FC = () => {
     handleSubmit,
     handleChange,
     handleBlur,
+    setFieldValue,
   } = useFormik({
     initialValues,
     validationSchema,
@@ -132,20 +141,24 @@ const AdminPageAddArtist: React.FC = () => {
             key={artistRole.id}
             control={(
               <Checkbox
+                checked={values.roles.includes(artistRole.id)}
                 inputProps={{ type: 'checkbox' }}
+                value={artistRole.id}
+                name="roles"
                 onChange={(e) => {
-                if (e.target.checked === true) {
-                  values.roles.push(artistRole.id);
-                } else values.roles = values.roles.filter((role) => role !== artistRole.id);
-                handleChange(e);
-              }}
+                  if (e.target.checked) {
+                    setFieldValue('roles', [...values.roles, artistRole.id]);
+                  } else {
+                    setFieldValue('roles', values.roles.filter((role) => role !== artistRole.id));
+                  }
+                }}
               />
-)}
+            )}
             label={artistRole.title.slice(0, 1).toUpperCase() + artistRole.title.slice(1)}
-            name={artistRole.title}
           />
         ))
       }
+
     </AdminPageAddDataForm>
 
   );
