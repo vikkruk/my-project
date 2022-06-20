@@ -53,9 +53,9 @@ export const createArtistsCreateFailureAction = (error: string): ArtistsCreateFa
   payload: { error },
 });
 
-export const createArtistsFetchActionThunk = (type: ArtistsPageType) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+export const createArtistsFetchActionThunk = (type: ArtistsPageType, gender?: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
-    const artists = await ArtistsService.fetchArtists(type);
+    const artists = await ArtistsService.fetchArtists(type, gender);
     dispatch(createArtistsFetchSuccessAction(artists, type));
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
@@ -63,9 +63,9 @@ export const createArtistsFetchActionThunk = (type: ArtistsPageType) => async (d
   }
 };
 
-export const createArtistsFetchFavoredActionThunk = (type: ArtistsPageType, token: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+export const createArtistsFetchFavoredActionThunk = (type: ArtistsPageType, token: string, gender?: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
-    const favoredArtists = await ArtistsService.fetchFavoredArtists(type, token);
+    const favoredArtists = await ArtistsService.fetchFavoredArtists(type, token, gender);
     const favoredArtistsPure = favoredArtists.map((favoredArtist) => favoredArtist.artist);
     dispatch(createArtistsFavoredFetchSuccessAction(favoredArtistsPure, type));
   } catch (error) {

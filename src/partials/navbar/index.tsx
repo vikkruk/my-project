@@ -15,9 +15,9 @@ import { User } from '../../types';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { authLogoutAction } from '../../store/features/auth/auth-action-creators';
 import {
- selectAuthLoggedIn,
- selectAuthRole,
- selectAuth,
+  selectAuthLoggedIn,
+  selectAuthRole,
+  selectAuth,
 } from '../../store/features/auth/auth-selectors';
 
 const NavBar: React.FC = () => {
@@ -28,7 +28,11 @@ const NavBar: React.FC = () => {
 
   const logout = () => dispatch(authLogoutAction);
   return (
-    <AppBar position="fixed" sx={(theme) => ({ bgcolor: theme.palette.primary.main })}>
+    <AppBar
+      position="fixed"
+      sx={(theme) => ({ bgcolor: theme.palette.primary.main })}
+      id="top"
+    >
       <Container sx={{ px: { xs: 0, sm: 0 } }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
           <NavbarDropDownMenu />

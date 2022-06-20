@@ -2,23 +2,30 @@ import { ArtistsPageType } from '../store/features/artists/artists-types';
 import { AddArtistData, Artist, FavoredArtist } from '../types';
 import ApiService, { handleError } from './api-service';
 
-const fetchArtists = async (role: string): Promise<Artist[]> => {
+const fetchArtists = async (role: string, gender?: string): Promise<Artist[]> => {
+  const fetchUrl = (gender !== 'all' && gender !== undefined)
+    ? `/api/artists?role=${role}&gender=${gender}`
+    : `/api/artists?role=${role}`;
   try {
-    const { data } = await ApiService.get<{ artists: Artist[] }>(`/api/artists?role=${role}`);
+    const { data } = await ApiService.get<{ artists: Artist[] }>(fetchUrl);
     return data.artists;
   } catch (error) {
     throw new Error(handleError(error));
   }
 };
 
-const fetchFavoredArtists = async (artistRole: ArtistsPageType, token: string): Promise<FavoredArtist[]> => {
+const fetchFavoredArtists = async (artistRole: ArtistsPageType, token: string, gender?: string): Promise<FavoredArtist[]> => {
+  const fetchUrl = (gender !== 'all' && gender !== undefined)
+    ? `/api/fav-artists/get-fav-artists?artistRole=${artistRole}&gender=${gender}`
+    : `/api/fav-artists/get-fav-artists?artistRole=${artistRole}`;
   try {
     const { data } = await ApiService
-      .get<{ favoredArtists: FavoredArtist[] }>(`/api/fav-artists/get-fav-artists?artistRole=${artistRole}`, {
+      .get<{ favoredArtists: FavoredArtist[] }>(fetchUrl, {
         headers: {
           Authorization: token,
         },
       });
+
     return data.favoredArtists;
   } catch (error) {
     throw new Error(handleError(error));

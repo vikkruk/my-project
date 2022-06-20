@@ -6,18 +6,21 @@ import {
   Typography,
 } from '@mui/material';
 import PersonCard from '../../components/person-card';
-import FilterButton from '../../components/filter-button';
+import FilterButton from '../../components/buttons/filter-button';
 import { Artist } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { selectAuthLoggedIn, selectAuthToken } from '../../store/features/auth/auth-selectors';
 import { createArtistsFetchFavoredActionThunk, createArtistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectArtistsDirectorsAll, selectArtistsDirectorsFavored } from '../../store/features/artists/artists-selectors';
+import BackToTopButton from '../../components/buttons/back-to-top-button';
+import ArtistsPagesFilter from '../../components/artists-pages-filter';
 
 const DirectorsPage: React.FC = () => {
   const dispatch = useRootDispatch();
   const allDirectors = useRootSelector(selectArtistsDirectorsAll);
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const token = useRootSelector(selectAuthToken);
+  const [gender, setGender] = useState<string | undefined>(undefined);
   const favoredDirectors = useRootSelector(selectArtistsDirectorsFavored);
   const [directors, setDirectors] = useState<Artist[]>(allDirectors);
   const [showFavored, setShowFavored] = useState<boolean>(false);
@@ -25,11 +28,11 @@ const DirectorsPage: React.FC = () => {
   const type = 'director';
 
   useEffect(() => {
-    dispatch(createArtistsFetchActionThunk(type));
+    dispatch(createArtistsFetchActionThunk(type, gender));
     if (loggedIn && token) {
-       dispatch(createArtistsFetchFavoredActionThunk(type, token));
-     }
-  }, []);
+      dispatch(createArtistsFetchFavoredActionThunk(type, token, gender));
+    }
+  }, [gender]);
 
   useEffect(() => {
     if (showFavored) {
@@ -57,6 +60,7 @@ const DirectorsPage: React.FC = () => {
           loggedIn={!loggedIn}
         />
       </Box>
+      <ArtistsPagesFilter handleChange={setGender} />
       <Grid
         container
         spacing={2}
@@ -87,6 +91,7 @@ const DirectorsPage: React.FC = () => {
             </Typography>
           )}
       </Grid>
+      <BackToTopButton />
     </Container>
   );
 };

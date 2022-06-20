@@ -14,6 +14,7 @@ import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { createArtistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectAuth } from '../../store/features/auth/auth-selectors';
 import { selectArtistsActorsFavored, selectArtistsDirectorsFavored } from '../../store/features/artists/artists-selectors';
+import BackToTopButton from '../../components/buttons/back-to-top-button';
 
 const ProfilePage: React.FC = () => {
   const dispatch = useRootDispatch();
@@ -50,7 +51,7 @@ const ProfilePage: React.FC = () => {
           justifyContent: 'space-around',
           mb: 4,
           width: '100%',
-         }}
+        }}
         >
           <Box sx={{
             display: 'flex',
@@ -62,20 +63,20 @@ const ProfilePage: React.FC = () => {
               component="img"
               src={user.avatar ?? noAvatar}
               sx={{
-            width: 150,
-            height: 150,
-            m: 2,
-            objectFit: 'cover',
-            borderRadius: '100%',
-          }}
+                width: 150,
+                height: 150,
+                m: 2,
+                objectFit: 'cover',
+                borderRadius: '100%',
+              }}
             />
             <Typography
               variant="h5"
               sx={{
-            mt: 1,
-            mb: 4,
-            fontWeight: 600,
-          }}
+                mt: 1,
+                mb: 4,
+                fontWeight: 600,
+              }}
             >
               {user.nickname}
             </Typography>
@@ -105,8 +106,8 @@ const ProfilePage: React.FC = () => {
               <Box
                 key={favoredActor.id}
                 sx={{
-                transform: { xs: 'scale(0.9)', sm: 'scale(1)' },
-              }}
+                  transform: { xs: 'scale(0.9)', sm: 'scale(1)' },
+                }}
               >
                 <PersonCard {...favoredActor} profile type="actor" />
               </Box>
@@ -135,8 +136,8 @@ const ProfilePage: React.FC = () => {
               <Box
                 key={favDirector.id}
                 sx={{
-                transform: { xs: 'scale(0.9)', sm: 'scale(1)' },
-              }}
+                  transform: { xs: 'scale(0.9)', sm: 'scale(1)' },
+                }}
               >
                 <PersonCard {...favDirector} profile type="director" />
               </Box>
@@ -145,6 +146,7 @@ const ProfilePage: React.FC = () => {
           </Grid>
         </Box>
       </Paper>
+      <BackToTopButton />
     </Container>
   );
 };
