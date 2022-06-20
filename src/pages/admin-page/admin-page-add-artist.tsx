@@ -12,7 +12,7 @@ import { artistRolesFetchActionThunk } from '../../store/features/artist-roles/a
 import selectArtistRoles from '../../store/features/artist-roles/artist-roles-selectors';
 import { AddArtistData } from '../../types';
 import {
-  createDataAdditionThunk,
+  createArtistsCreateThunk,
   artistsClearErrorAction,
   artistsClearSuccessAction,
 } from '../../store/features/artists/artists-action-creators';
@@ -57,7 +57,7 @@ const AdminPageAddArtist: React.FC = () => {
 
   const handleAddData: RegisterFormikConfig['onSubmit'] = async (submittedValues, { resetForm }) => {
     if (token) {
-      dispatch(createDataAdditionThunk(submittedValues, token));
+      dispatch(createArtistsCreateThunk(submittedValues, token));
     }
     resetForm();
   };

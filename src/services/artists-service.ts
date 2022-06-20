@@ -46,6 +46,18 @@ const createArtist = async (artistData: AddArtistData, token: string): Promise<{
   }
 };
 
+const deleteArtist = async (artistId: string, token: string): Promise<void> => {
+  try {
+    await ApiService.delete(`/api/artists/${artistId}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+  } catch (error) {
+    throw new Error(handleError(error));
+  }
+};
+
 const addFavoredArtist = async (artistId: string, type: ArtistsPageType, token: string): Promise<void> => {
   try {
     await ApiService.post(`/api/fav-artists/add-fav-artist?artistRole=${type}`, {
@@ -79,6 +91,7 @@ const ArtistsService = {
   fetchArtists,
   fetchFavoredArtists,
   createArtist,
+  deleteArtist,
   addFavoredArtist,
   removeFavoredArtist,
 };

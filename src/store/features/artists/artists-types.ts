@@ -17,10 +17,12 @@ export enum ArtistsActionType {
   ARTISTS_FETCH_SUCCESS = 'ARTISTS_FETCH_SUCCESS',
   ARTISTS_FETCH_FAILURE = 'ARTISTS_FETCH_FAILURE',
   ARTISTS_FAVORED_FETCH_SUCCESS = 'ARTISTS_FAVORED_FETCH_SUCCESS',
-  ARTISTS_CREATE_SUCCESS = 'ARTISTS_CREATE_SUCCESS',
-  ARTISTS_CREATE_FAILURE = 'ARTISTS_CREATE_FAILURE',
   ARTISTS_CLEAR_SUCCESS = 'ARTISTS_CLEAR_SUCCESS',
   ARTISTS_CLEAR_ERROR = 'ARTISTS_CLEAR_ERROR',
+  ARTISTS_CREATE_SUCCESS = 'ARTISTS_CREATE_SUCCESS',
+  ARTISTS_CREATE_FAILURE = 'ARTISTS_CREATE_FAILURE',
+  ARTISTS_DELETE_SUCCESS = 'ARTISTS_DELETE_SUCCESS',
+  ARTISTS_DELETE_FAILURE = 'ARTISTS_DELETE_FAILURE',
 }
 
 export type ArtistsLoadingAction = {
@@ -59,4 +61,14 @@ export type ArtistsCreateFailureAction = {
   payload: { error: string }
 };
 
-export type ArtistsAction = ArtistsLoadingAction | ArtistsClearErrorAction | ArtistsClearSuccessAction | ArtistsFetchSuccessAction | ArtistsFetchFailureAction | ArtistsFavoredFetchSuccessAction | ArtistsCreateSuccessAction | ArtistsCreateFailureAction;
+export type ArtistsDeleteSuccessAction = {
+  type: ArtistsActionType.ARTISTS_DELETE_SUCCESS,
+  payload: { success: string }
+};
+
+export type ArtistsDeleteFailureAction = {
+  type: ArtistsActionType.ARTISTS_DELETE_FAILURE,
+  payload: { error: string }
+};
+
+export type ArtistsAction = ArtistsLoadingAction | ArtistsClearErrorAction | ArtistsClearSuccessAction | ArtistsFetchSuccessAction | ArtistsFetchFailureAction | ArtistsFavoredFetchSuccessAction | ArtistsCreateSuccessAction | ArtistsCreateFailureAction | ArtistsDeleteSuccessAction | ArtistsDeleteFailureAction;

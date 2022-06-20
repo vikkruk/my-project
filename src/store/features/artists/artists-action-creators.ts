@@ -12,6 +12,8 @@ import {
   ArtistsLoadingAction,
   ArtistsClearErrorAction,
   ArtistsClearSuccessAction,
+  ArtistsDeleteSuccessAction,
+  ArtistsDeleteFailureAction,
 } from './artists-types';
 import ArtistsService from '../../../services/artists-service';
 import pause from '../../../helpers/pause';
@@ -53,6 +55,16 @@ export const createArtistsCreateFailureAction = (error: string): ArtistsCreateFa
   payload: { error },
 });
 
+export const createArtistsDeleteSuccessAction = (success: string): ArtistsDeleteSuccessAction => ({
+  type: ArtistsActionType.ARTISTS_DELETE_SUCCESS,
+  payload: { success },
+});
+
+export const createArtistsDeleteFailureAction = (error: string): ArtistsDeleteFailureAction => ({
+  type: ArtistsActionType.ARTISTS_DELETE_FAILURE,
+  payload: { error },
+});
+
 export const createArtistsFetchActionThunk = (type: ArtistsPageType, gender?: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   try {
     const artists = await ArtistsService.fetchArtists(type, gender);
@@ -60,6 +72,16 @@ export const createArtistsFetchActionThunk = (type: ArtistsPageType, gender?: st
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     dispatch(createArtistsFetchFailureAction(errorMessage, type));
+  }
+};
+
+export const createArtistsDeleteActionThunk = (artistId: string, token: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+  try {
+    await ArtistsService.deleteArtist(artistId, token);
+    dispatch(createArtistsDeleteSuccessAction);
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    dispatch(createArtistsDeleteFailureAction(errorMessage));
   }
 };
 
@@ -92,7 +114,7 @@ export const createArtistsRemoveFavoredThunk = (artistId: string, type: ArtistsP
   }
 };
 
-export const createDataAdditionThunk = (submittedValues: AddArtistData, token: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
+export const createArtistsCreateThunk = (submittedValues: AddArtistData, token: string) => async (dispatch: Dispatch<AppAction>): Promise<void> => {
   dispatch(artistsLoadingAction);
   try {
     const { artist } = await ArtistsService.createArtist(submittedValues, token);
