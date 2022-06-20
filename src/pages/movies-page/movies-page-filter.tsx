@@ -1,9 +1,9 @@
 import {
- Box,
- FormControl,
- InputLabel,
- MenuItem,
- Select,
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { genresFetchActionThunk } from '../../store/features/genres/genres-action-creators';
@@ -26,14 +26,15 @@ const MoviesPageFilter: React.FC<MoviesPageFilterProps> = ({ handleChange }) => 
   return (
     <Box sx={{ maxWidth: 380, mx: 'auto', mt: 5 }}>
       <FormControl fullWidth>
-        <InputLabel>Genre</InputLabel>
+        <InputLabel sx={{ fontWeight: 600 }}>Genre</InputLabel>
         <Select
           value={genreValue}
           label="Genre"
           onChange={(e) => {
             setGenreValue(e.target.value);
             handleChange(e.target.value);
-}}
+          }}
+          sx={{ fontWeight: 600 }}
         >
           <MenuItem value="all">All genres</MenuItem>
           {genres.map((genre) => (

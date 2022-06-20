@@ -23,7 +23,7 @@ const ArtistsPagesFilter: React.FC<ArtistPagesFilterProps> = ({ handleChange }) 
     }}
     >
       <FormControl fullWidth>
-        <InputLabel>Gender</InputLabel>
+        <InputLabel sx={{ fontWeight: 600 }}>Gender</InputLabel>
         <Select
           value={genderValue}
           label="Gender"
@@ -31,6 +31,7 @@ const ArtistsPagesFilter: React.FC<ArtistPagesFilterProps> = ({ handleChange }) 
             setGenderValue(e.target.value);
             handleChange(e.target.value);
           }}
+          sx={{ fontWeight: 600 }}
         >
           <MenuItem value="all">All genders</MenuItem>
           <MenuItem value="female">Female</MenuItem>
