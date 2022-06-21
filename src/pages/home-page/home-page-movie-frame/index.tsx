@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import HomePageMovieFrameImage from './home-page-movie-frame-image';
+import HomePageStyledLoginNavlink from '../home-page-styled-login-navlink';
 import movieFrame from './images/movie-frame.png';
 import { useRootSelector } from '../../../store/hooks';
 import { selectAuthLoggedIn } from '../../../store/features/auth/auth-selectors';
-import HomePageStyledLoginNavlink from '../home-page-styled-login-navlink';
-import HomePageMovieFrameImage from './home-page-movie-frame-image';
 
 const HomePageMovieFrame: React.FC = () => {
   const loggedIn = useRootSelector(selectAuthLoggedIn);
@@ -26,30 +26,30 @@ const HomePageMovieFrame: React.FC = () => {
         sm: 380,
         md: 480,
         lg: 500,
-},
+      },
       mx: 'auto',
       mt: 7,
-  }}
+    }}
     >
       <Box
         component="img"
         src={movieFrame}
         sx={{
-      display: 'block',
-      position: 'absolute',
-      width: {
-        xs: '100%',
-      },
-      height: {
-        xs: 'auto',
-      },
-    }}
+          display: 'block',
+          position: 'absolute',
+          width: {
+            xs: '100%',
+          },
+          height: {
+            xs: 'auto',
+          },
+        }}
       />
       {loggedIn
         ? (
           <HomePageMovieFrameImage />
-)
-    : (<HomePageStyledLoginNavlink to="/auth/login">Login</HomePageStyledLoginNavlink>)}
+        )
+        : (<HomePageStyledLoginNavlink to="/auth/login">Login</HomePageStyledLoginNavlink>)}
     </Box>
   );
 };

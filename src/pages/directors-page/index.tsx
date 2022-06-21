@@ -7,13 +7,13 @@ import {
 } from '@mui/material';
 import PersonCard from '../../components/person-card';
 import FilterButton from '../../components/buttons/filter-button';
+import ArtistsPagesFilter from '../../components/artists-pages-filter';
+import BackToTopButton from '../../components/buttons/back-to-top-button';
 import { Artist } from '../../types';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { selectAuthLoggedIn, selectAuthToken } from '../../store/features/auth/auth-selectors';
 import { createArtistsFetchFavoredActionThunk, createArtistsFetchActionThunk } from '../../store/features/artists/artists-action-creators';
+import { selectAuthLoggedIn, selectAuthToken } from '../../store/features/auth/auth-selectors';
 import { selectArtistsDirectorsAll, selectArtistsDirectorsFavored } from '../../store/features/artists/artists-selectors';
-import BackToTopButton from '../../components/buttons/back-to-top-button';
-import ArtistsPagesFilter from '../../components/artists-pages-filter';
 
 const DirectorsPage: React.FC = () => {
   const dispatch = useRootDispatch();

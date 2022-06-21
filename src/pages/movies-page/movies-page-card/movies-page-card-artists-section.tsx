@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material';
 import React from 'react';
+import { Box, Typography } from '@mui/material';
 import { Artist } from '../../../types';
 
 type MoviesPageCardArtistsSectionProps = {
@@ -10,7 +10,7 @@ type MoviesPageCardArtistsSectionProps = {
 };
 
 const MoviesPageCardArtistsSection: React.FC<MoviesPageCardArtistsSectionProps> = ({
- artistRole, artistsCollection, height, width,
+  artistRole, artistsCollection, height, width,
 }) => {
   const artistHeader = `${artistRole.toUpperCase().slice(0, 1)}${artistRole.slice(1)}`;
   return (
@@ -19,9 +19,9 @@ const MoviesPageCardArtistsSection: React.FC<MoviesPageCardArtistsSectionProps> 
         variant="h5"
         color="primary"
         sx={{
-        mb: 2,
-        fontWeight: 600,
-      }}
+          mb: 2,
+          fontWeight: 600,
+        }}
       >
         {artistsCollection.length > 1 ? `${artistHeader}s` : artistHeader}
       </Typography>
@@ -30,20 +30,20 @@ const MoviesPageCardArtistsSection: React.FC<MoviesPageCardArtistsSectionProps> 
         flexWrap: 'wrap',
         justifyContent: 'center',
         gap: 1,
-       }}
+      }}
       >
         {artistsCollection.map((artist) => (
           <Box
             component="img"
             src={artist.img}
             sx={{
-            height: { height },
-            width: { width },
-            objectFit: 'cover',
-}}
+              height: { height },
+              width: { width },
+              objectFit: 'cover',
+            }}
             key={artist.id}
           />
-         ))}
+        ))}
       </Box>
     </Box>
   );

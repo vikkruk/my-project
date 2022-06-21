@@ -6,18 +6,18 @@ import {
   FormControlLabel,
   TextField,
 } from '@mui/material';
-import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import { selectAuth } from '../../store/features/auth/auth-selectors';
-import { artistRolesFetchActionThunk } from '../../store/features/artist-roles/artist-roles-action-creators';
-import selectArtistRoles from '../../store/features/artist-roles/artist-roles-selectors';
 import { AddArtistData } from '../../types';
+import AdminPageAddDataForm from './admin-page-add-data-form';
+import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import {
   createArtistsCreateThunk,
   artistsClearErrorAction,
   artistsClearSuccessAction,
 } from '../../store/features/artists/artists-action-creators';
-import AdminPageAddDataForm from './admin-page-add-data-form';
+import { artistRolesFetchActionThunk } from '../../store/features/artist-roles/artist-roles-action-creators';
+import { selectAuth } from '../../store/features/auth/auth-selectors';
 import { selectArtists } from '../../store/features/artists/artists-selectors';
+import selectArtistRoles from '../../store/features/artist-roles/artist-roles-selectors';
 
 type RegisterFormikConfig = FormikConfig<AddArtistData>;
 

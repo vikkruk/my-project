@@ -1,6 +1,9 @@
 import React from 'react';
 import {
-  Box, Fab, Fade, useScrollTrigger,
+  Box,
+  Fab,
+  Fade,
+  useScrollTrigger,
 } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 

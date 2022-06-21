@@ -9,12 +9,12 @@ import {
 import ProfilePageForm from './profile-page-form';
 import PersonCard from '../../components/person-card';
 import CustomDivider from '../../components/custom-divider';
+import BackToTopButton from '../../components/buttons/back-to-top-button';
 import noAvatar from './images/no-avatar.png';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { createArtistsFetchFavoredActionThunk } from '../../store/features/artists/artists-action-creators';
 import { selectAuth } from '../../store/features/auth/auth-selectors';
 import { selectArtistsActorsFavored, selectArtistsDirectorsFavored } from '../../store/features/artists/artists-selectors';
-import BackToTopButton from '../../components/buttons/back-to-top-button';
 
 const ProfilePage: React.FC = () => {
   const dispatch = useRootDispatch();

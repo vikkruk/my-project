@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Reducer } from 'redux';
-import { NavigationAction, NavigationActionType, NavigationState } from './navigation-types';
+import {
+  NavigationAction,
+  NavigationActionType,
+  NavigationState,
+} from './navigation-types';
 
 const initialValues: NavigationState = {
   next: null,

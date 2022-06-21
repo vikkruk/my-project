@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   FormControl,
@@ -5,10 +6,9 @@ import {
   MenuItem,
   Select,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { genresFetchActionThunk } from '../../store/features/genres/genres-action-creators';
 import selectGenres from '../../store/features/genres/genres-selectors';
-import { useRootDispatch, useRootSelector } from '../../store/hooks';
 
 type MoviesPageFilterProps = {
   handleChange: (genre: string) => void

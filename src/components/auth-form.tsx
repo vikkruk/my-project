@@ -20,7 +20,12 @@ type AuthFormProps = {
 };
 
 const AuthForm: React.FC<AuthFormProps> = ({
-  children, formTitle, buttonTitle, buttonActive, margin, onSubmit,
+  children,
+  formTitle,
+  buttonTitle,
+  buttonActive,
+  margin,
+  onSubmit,
 }) => {
   const { error, success, loading } = useRootSelector(selectAuth);
   const dispatch = useRootDispatch();
@@ -47,29 +52,29 @@ const AuthForm: React.FC<AuthFormProps> = ({
       })}
     >
       {error && (
-      <Alert
-        sx={{
-          position: 'absolute',
-          width: '100%',
-          top: 0,
-          left: 0,
-        }}
-        onClose={clearError}
-        severity="error"
-        color="error"
-      >
-        {error}
-      </Alert>
+        <Alert
+          sx={{
+            position: 'absolute',
+            width: '100%',
+            top: 0,
+            left: 0,
+          }}
+          onClose={clearError}
+          severity="error"
+          color="error"
+        >
+          {error}
+        </Alert>
       )}
       {
         success && (
           <Alert
             sx={{
-          position: 'absolute',
-          width: '100%',
-          top: 0,
-          left: 0,
-        }}
+              position: 'absolute',
+              width: '100%',
+              top: 0,
+              left: 0,
+            }}
             onClose={clearSuccess}
             color="success"
             severity="success"

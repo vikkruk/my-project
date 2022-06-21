@@ -1,13 +1,11 @@
 import React from 'react';
 import {
- Route,
- Routes,
- useLocation,
+  Route,
+  Routes,
+  useLocation,
 } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import { useRootDispatch, useRootSelector } from './store/hooks';
-import { selectAuthLoggedIn, selectAuth } from './store/features/auth/auth-selectors';
-import { createAuthenticateActionThunk } from './store/features/auth/auth-action-creators';
+import AuthenticateAnimation from './components/animations/authenticate-animation';
 import AdminPage from './pages/admin-page';
 import HomePage from './pages/home-page';
 import ActorsPage from './pages/actors-page';
@@ -20,7 +18,9 @@ import NavbarLayout from './layouts/navbar-layout';
 import RequireAdmin from './routing/require-admin';
 import RequireAuth from './routing/require-auth';
 import RequireVisitor from './routing/require-visitor';
-import AuthenticateAnimation from './components/animations/authenticate-animation';
+import { useRootDispatch, useRootSelector } from './store/hooks';
+import { createAuthenticateActionThunk } from './store/features/auth/auth-action-creators';
+import { selectAuthLoggedIn, selectAuth } from './store/features/auth/auth-selectors';
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -28,7 +28,7 @@ const App: React.FC = () => {
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const { token, loading } = useRootSelector(selectAuth);
   if (token && !loggedIn) {
-   if (!loading) {
+    if (!loading) {
       dispatch(createAuthenticateActionThunk(token, location.pathname));
     }
     return (
@@ -37,7 +37,7 @@ const App: React.FC = () => {
         <Typography variant="h4" sx={{ mt: 50, mb: 2, textAlign: 'center' }}>Authenticating...</Typography>
         <AuthenticateAnimation />
       </>
-);
+    );
   }
   return (
 
@@ -66,11 +66,11 @@ const App: React.FC = () => {
         <Route
           path="admin"
           element={
-          (
-            <RequireAdmin>
-              <AdminPage />
-            </RequireAdmin>
-          )
+            (
+              <RequireAdmin>
+                <AdminPage />
+              </RequireAdmin>
+            )
           }
         />
         <Route
@@ -84,7 +84,7 @@ const App: React.FC = () => {
       </Route>
     </Routes>
 
-);
+  );
 };
 
 export default App;

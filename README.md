@@ -1,18 +1,39 @@
-# Demo Movie-website
+# Demo Movie-website - Frontend (client)
 
 ## System requirements
   * Node.js
 
 ## Project configuration
-  * Rename .env.local-example file to .env.local
+  * Declare environment variables in .env-example file and rename it to .env
 
-## Instalation
+## Installation
   * npm i
 
 ## Project scripts
   * npm start - launches development server
-  * npm run server - launches demo server
   * npm build - compile app
 
 ## Users credentials for demo viewing
-  * All users' and admin's emails and passwords can be found in db.json file
+  * Admin credentials:
+   email: god@god.god
+   password: God12345
+  * Basic user can be created through registration process
+
+## Backend 
+  * Backend (server) repository is located at: https://github.com/vikkruk/my-project-backend
+
+### Backend system requirements
+  * Node.js
+
+### General backend requirements
+  * MongoDB Atlas database connection
+
+### Backend configuration
+  * Declare environment variables in /src/config/.env-example file and rename it to .env
+
+### Backend installation
+  * npm i
+
+### Backend scripts
+  * npm start - launches server connection
+  * npm build - compile

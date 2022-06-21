@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Box,
   FormControl,
@@ -5,7 +6,6 @@ import {
   MenuItem,
   Select,
 } from '@mui/material';
-import React, { useState } from 'react';
 
 type ArtistPagesFilterProps = {
   handleChange: (genre: string) => void

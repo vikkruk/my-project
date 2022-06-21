@@ -1,4 +1,4 @@
-import { Artist, FavoredArtist, Movie } from '../../../types';
+import { Movie } from '../../../types';
 
 export type MoviesState = {
   movies: Movie[],

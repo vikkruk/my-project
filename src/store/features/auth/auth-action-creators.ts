@@ -12,8 +12,8 @@ import {
 } from './auth-types';
 import { AppAction, RootState } from '../../redux-types';
 import { Credentials, UserUpdateValues } from '../../../types';
-import { createNavigationSetNextAction, navigationClearNextAction } from '../navigation/navigation-action-creators';
 import AuthService, { AuthResponseBody } from '../../../services/auth-service';
+import { createNavigationSetNextAction, navigationClearNextAction } from '../navigation/navigation-action-creators';
 import pause from '../../../helpers/pause';
 
 export const authLoadingAction: AuthLoadingAction = {
@@ -59,7 +59,7 @@ export const authenticate = async (
 ): Promise<void> => {
   try {
     dispatch(authLoadingAction);
-    await pause(1000);
+    await pause(300);
     const authResponseBody = await authMethod();
     if (next) {
       dispatch(createNavigationSetNextAction(next));

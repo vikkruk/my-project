@@ -1,4 +1,8 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios,
+{
+  AxiosError,
+  AxiosResponse,
+} from 'axios';
 
 export type ResponseError = Omit<AxiosError<{ error: string }>, 'response'> & {
   response: AxiosResponse<{ error: string }>

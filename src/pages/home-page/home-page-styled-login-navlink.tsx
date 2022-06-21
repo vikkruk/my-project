@@ -9,10 +9,10 @@ const HomePageStyledLoginNavlink = styled(NavLink)(({ theme }) => ({
   [theme.breakpoints.up('xs')]: {
     fontSize: 60,
   },
-   [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up('sm')]: {
     fontSize: 80,
   },
-   [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('lg')]: {
     fontSize: 100,
   },
   lineHeight: '50px',

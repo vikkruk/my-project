@@ -5,10 +5,10 @@ import validator from 'validator';
 import { TextField } from '@mui/material';
 import AuthForm from '../../components/auth-form';
 import { UserRegistration } from '../../types';
+import AuthService from '../../services/auth-service';
 import { useRootSelector, useRootDispatch } from '../../store/hooks';
 import { createRegisterActionThunk } from '../../store/features/auth/auth-action-creators';
 import { selectAuthLoading } from '../../store/features/auth/auth-selectors';
-import AuthService from '../../services/auth-service';
 
 type RegisterValues = UserRegistration;
 
@@ -34,7 +34,7 @@ const validationSchema = Yup.object({
           return emailIsAvailable;
         } catch (error) {
           throw context.createError({
-          message: error instanceof Error ? error.message : error as string,
+            message: error instanceof Error ? error.message : error as string,
           });
         }
       },

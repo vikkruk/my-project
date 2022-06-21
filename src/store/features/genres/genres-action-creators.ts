@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
+import { GenresActionType, GenresFetchFailureAction, GenresFetchSuccessAction } from './genres-types';
 import { Genre } from '../../../types';
 import { AppAction } from '../../redux-types';
-import { GenresActionType, GenresFetchFailureAction, GenresFetchSuccessAction } from './genres-types';
 import GenresService from '../../../services/genres-service';
 
 export const createGenresFetchSuccess = (genres: Genre[]): GenresFetchSuccessAction => ({

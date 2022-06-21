@@ -4,13 +4,13 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import MoviesPageCard from './movies-page-card';
 import { Movie } from '../../types';
+import MoviesPageCard from './movies-page-card';
+import MoviesPageFilter from './movies-page-filter';
+import BackToTopButton from '../../components/buttons/back-to-top-button';
 import { useRootDispatch, useRootSelector } from '../../store/hooks';
 import { createMoviesFetchActionThunk } from '../../store/features/movies/movies-action-creators';
 import selectMoviesAll from '../../store/features/movies/movies-selectors';
-import MoviesPageFilter from './movies-page-filter';
-import BackToTopButton from '../../components/buttons/back-to-top-button';
 
 const MoviesPage: React.FC = () => {
   const dispatch = useRootDispatch();

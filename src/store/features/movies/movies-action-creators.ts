@@ -1,12 +1,11 @@
 import { Dispatch } from 'redux';
-import { Movie } from '../../../types';
-import { AppAction } from '../../redux-types';
-
 import {
   MoviesActionType,
   MoviesFetchFailureAction,
   MoviesFetchSuccessAction,
 } from './movies-types';
+import { AppAction } from '../../redux-types';
+import { Movie } from '../../../types';
 import MoviesService from '../../../services/movies-service';
 
 export const createMoviesFetchSuccess = (movies: Movie[]): MoviesFetchSuccessAction => ({

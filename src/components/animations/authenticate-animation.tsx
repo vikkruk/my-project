@@ -23,7 +23,7 @@ const AuthenticateAnimation: React.FC = () => {
 
   return (
     <Box sx={{
-     width: '50%', mx: 'auto',
+      width: '50%', mx: 'auto',
     }}
     >
       <LinearProgress variant="determinate" value={progress} color="primary" />

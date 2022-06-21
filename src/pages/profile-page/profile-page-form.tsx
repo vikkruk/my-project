@@ -3,12 +3,12 @@ import { FormikConfig, useFormik } from 'formik';
 import * as Yup from 'yup';
 import validator from 'validator';
 import { TextField } from '@mui/material';
-import { selectAuth } from '../../store/features/auth/auth-selectors';
-import { useRootDispatch, useRootSelector } from '../../store/hooks';
-import AuthService from '../../services/auth-service';
-import { createAuthUpdateUserActionThunk } from '../../store/features/auth/auth-action-creators';
 import { UserUpdateValues } from '../../types';
 import AuthForm from '../../components/auth-form';
+import AuthService from '../../services/auth-service';
+import { useRootDispatch, useRootSelector } from '../../store/hooks';
+import { createAuthUpdateUserActionThunk } from '../../store/features/auth/auth-action-creators';
+import { selectAuth } from '../../store/features/auth/auth-selectors';
 
 type UserUpdateFormikValues = {
   emailInit: string,
@@ -35,7 +35,7 @@ const validationSchema = Yup.object({
           return emailIsAvailable;
         } catch (error) {
           throw context.createError({
-          message: error instanceof Error ? error.message : error as string,
+            message: error instanceof Error ? error.message : error as string,
           });
         }
       },
@@ -53,7 +53,7 @@ const validationSchema = Yup.object({
           return nicknameIsAvailable;
         } catch (error) {
           throw context.createError({
-          message: error instanceof Error ? error.message : error as string,
+            message: error instanceof Error ? error.message : error as string,
           });
         }
       },
@@ -65,13 +65,13 @@ const validationSchema = Yup.object({
 });
 
 const ProfilePageForm: React.FC = () => {
-   const { loading, user } = useRootSelector(selectAuth);
-   if (user === null) {
+  const { loading, user } = useRootSelector(selectAuth);
+  if (user === null) {
     throw new Error('You have to be logged in');
-   }
+  }
   const dispatch = useRootDispatch();
 
-    const updateUser : RegisterFormikConfig['onSubmit'] = (values: UserUpdateFormikValues) => {
+  const updateUser: RegisterFormikConfig['onSubmit'] = (values: UserUpdateFormikValues) => {
     const userUpdateValues: UserUpdateValues = {};
 
     Object.entries(values).forEach(([key, value]) => {

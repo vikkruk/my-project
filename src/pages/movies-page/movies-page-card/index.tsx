@@ -5,13 +5,13 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import MovieIcon from '@mui/icons-material/Movie';
 import Typography from '@mui/material/Typography';
 import {
   Box,
   Container,
   useMediaQuery,
 } from '@mui/material';
+import MovieIcon from '@mui/icons-material/Movie';
 import { Movie } from '../../../types';
 import CustomDivider from '../../../components/custom-divider';
 import MoviesPageCardArtistsSection from './movies-page-card-artists-section';
