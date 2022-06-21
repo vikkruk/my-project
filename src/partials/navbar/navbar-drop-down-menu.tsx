@@ -65,7 +65,7 @@ const NavbarDropDownMenu: React.FC = () => {
     }
   }, [isMedium]);
 
-  if (isMedium) return <Box />;
+  if (isMedium) return null;
 
   return (
 

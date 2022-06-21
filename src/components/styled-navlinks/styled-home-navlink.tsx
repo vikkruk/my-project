@@ -5,6 +5,7 @@ const StyledHomeNavLink = styled(NavLink)(({ theme }) => ({
   textDecoration: 'none',
   color: theme.palette.common.white,
   transition: 'all 0.3s ease-in-out',
+  m: 0,
 
   '&:hover': {
     color: theme.palette.secondary.main,

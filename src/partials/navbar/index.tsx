@@ -31,7 +31,6 @@ const NavBar: React.FC = () => {
     <AppBar
       position="fixed"
       sx={(theme) => ({ bgcolor: theme.palette.primary.main })}
-      id="top"
     >
       <Container sx={{ px: { xs: 0, sm: 0 } }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
