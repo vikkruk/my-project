@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Paper } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import BackspaceIcon from '@mui/icons-material/Backspace';
 import { Artist } from '../types';
 import { ArtistsPageType } from '../store/features/artists/artists-types';
 import { useRootDispatch, useRootSelector } from '../store/hooks';
@@ -12,9 +12,7 @@ import {
   createArtistsFetchFavoredActionThunk,
   createArtistsRemoveFavoredThunk,
 } from '../store/features/artists/artists-action-creators';
-import {
-  selectArtistsActorsFavored, selectArtistsDirectorsFavored, selectArtistsActorsAll, selectArtistsDirectorsAll,
-} from '../store/features/artists/artists-selectors';
+import { selectArtistsActorsFavored, selectArtistsDirectorsFavored } from '../store/features/artists/artists-selectors';
 import {
   selectAuthLoggedIn,
   selectAuthRole,
@@ -53,7 +51,6 @@ const PersonCard: React.FC<PersonCardProps> = ({
   const loggedIn = useRootSelector(selectAuthLoggedIn);
   const token = useRootSelector(selectAuthToken);
   const role = useRootSelector(selectAuthRole);
-  const artists = type === 'actor' ? useRootSelector(selectArtistsActorsAll) : useRootSelector(selectArtistsDirectorsAll);
 
   const addToFavored = async (artistId: string): Promise<void> => {
     if (token) {
@@ -77,10 +74,6 @@ const PersonCard: React.FC<PersonCardProps> = ({
   };
 
   const isFavored = favored.find((fav) => fav.id === id);
-
-  useEffect(() => {
-
-  }, [artists]);
 
   return (
     <Paper sx={(theme) => theme.mixins.paper}>
@@ -109,13 +102,13 @@ const PersonCard: React.FC<PersonCardProps> = ({
           ))}
       {role === 'admin' && !profile
         ? (
-          <DeleteForeverIcon
+          <BackspaceIcon
             color="error"
             sx={{
               fontSize: 40,
               position: 'absolute',
               bottom: 45,
-              right: 0,
+              right: 5,
               transition: 'all 0.3s linear',
 
               ':hover': {
