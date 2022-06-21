@@ -15,25 +15,25 @@
 
 ## Users credentials for demo viewing
   * Admin credentials:
-   email: god@god.god
-   password: God12345
-  * Basic user can be created through registration process
+   * email: god@god.god
+   * password: God12345
+  * Basic user can be created through the registration process
 
-## Backend 
+# Backend 
   * Backend (server) repository is located at: https://github.com/vikkruk/my-project-backend
 
-### Backend system requirements
+## Backend system requirements
   * Node.js
 
-### General backend requirements
+## General backend requirements
   * MongoDB Atlas database connection
 
-### Backend configuration
+## Backend configuration
   * Declare environment variables in /src/config/.env-example file and rename it to .env
 
-### Backend installation
+## Backend installation
   * npm i
 
-### Backend scripts
+## Backend scripts
   * npm start - launches server connection
   * npm build - compile
